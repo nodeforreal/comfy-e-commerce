@@ -25,6 +25,8 @@ import Loading from "./Loading";
 import FilterBar from "./FilterBar";
 import ProductsSection from "./ProductsSection";
 
+import CartSection from './CartSection';
+
 export {
   NavBar,
   CartButtons,
@@ -48,4 +50,5 @@ export {
   Loading,
   FilterBar,
   ProductsSection,
+  CartSection
 };
