@@ -11,7 +11,6 @@ const ProductsSection = () => {
       <ViewBar />
       {isGridView && <GridView />}
       {isListView && <ListView />}
-      <GridView />
     </Wrapper>
   );
 };
@@ -20,4 +19,3 @@ const Wrapper = styled.section`
   flex-basis: 100%;
 `;
 export default ProductsSection;
-
