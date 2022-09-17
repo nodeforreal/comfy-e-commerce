@@ -1,17 +1,16 @@
 import React from "react";
 import styled from "styled-components";
-import { HiMinusSm } from "react-icons/hi";
-import { GrFormAdd } from "react-icons/gr";
+import { FaMinus, FaPlus } from "react-icons/fa";
 
 const ProductQuantity = () => {
   return (
     <Wrapper>
       <button className="quantity-btn">
-        <HiMinusSm className="icon" />
+        <FaMinus className="icon" />
       </button>
-      <h2>{1}</h2>
+      <h2 className="product-quantity">{1}</h2>
       <button className="quantity-btn">
-        <GrFormAdd className="icon" />
+        <FaPlus className="icon" />
       </button>
     </Wrapper>
   );
@@ -33,9 +32,10 @@ const Wrapper = styled.div`
   }
 
   .icon {
-    width: 1.5rem;
-    height: 1.5rem;
+    width: 1.1rem;
+    height: 1.1rem;
     color: var(--clr-grey-2);
   }
 `;
+
 export default ProductQuantity;
