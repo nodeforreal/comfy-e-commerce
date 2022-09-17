@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 const categories = [
@@ -12,6 +12,7 @@ const categories = [
 ];
 
 const Category = () => {
+  const [selection, setSelection] = useState("All");
   return (
     <Wrapper>
       <h5 className="filter-title">category</h5>
@@ -19,7 +20,14 @@ const Category = () => {
         {categories.map((category, index) => {
           return (
             <li key={index}>
-              <button className="selected filter-text-secondary">{category}</button>
+              <button
+                className={`${
+                  selection === category && "selected"
+                } filter-text-secondary`}
+                onClick={() => setSelection(category)}
+              >
+                {category}
+              </button>
             </li>
           );
         })}
