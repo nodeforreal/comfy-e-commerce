@@ -1,0 +1,30 @@
+import React from "react";
+import styled from "styled-components";
+
+const Shipping = () => {
+  return (
+    <Wrapper>
+      <p>
+        <label for="shipping-filter">free shipping</label>
+      </p>
+      <input id="shipping-filter" type="checkbox" />
+    </Wrapper>
+  );
+};
+const Wrapper = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  
+  p {
+    margin: 0;
+    text-transform: capitalize;
+    section: none;
+  }
+  
+  input {
+    height: 1rem;
+    width: 1rem;f
+  }
+`;
+export default Shipping;
