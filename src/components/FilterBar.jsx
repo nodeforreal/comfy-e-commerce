@@ -24,7 +24,6 @@ const FilterBar = () => {
 };
 
 const Wrapper = styled.aside`
-  padding-top: 1rem;
   display: flex;
   flex-direction: column;
   gap: 1.6rem;
