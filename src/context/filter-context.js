@@ -1,6 +1,7 @@
 // basic setup
 import { createContext, useReducer, useContext } from "react";
 import filterReducer from "../reducer/filter-reducer";
+import { useProductsContext } from "../context/product-context";
 
 import {
   GET_SEARCH,
@@ -30,7 +31,13 @@ const initialState = {
 };
 
 const FilterContextProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(filterReducer, initialState);
+  const { products } = useProductsContext();
+  console.log(products);
+  const [state, dispatch] = useReducer(filterReducer, {
+    ...initialState,
+    products,
+  });
+
   return (
     <FilterContext.Provider value={{ ...state }}>
       {children}
