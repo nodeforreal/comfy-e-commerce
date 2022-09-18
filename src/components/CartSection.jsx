@@ -13,6 +13,9 @@ const CartSection = () => {
       </div>
       <hr />
       <CartItem />
+      <CartItem />
+      <CartItem />
+      <CartItem />
     </Wrapper>
   );
 };
