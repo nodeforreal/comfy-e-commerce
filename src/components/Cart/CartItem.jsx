@@ -46,6 +46,10 @@ const Wrapper = styled.div`
       height: 75px;
       border-radius: var(--radius);
     }
+    .name{
+      margin: 0;
+    }
+
   }
 `;
 export default CartItem;
