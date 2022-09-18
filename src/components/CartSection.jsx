@@ -60,7 +60,7 @@ const Wrapper = styled.div`
   .shopping-btns-container {
     margin: 1.2rem 0 0;
     display: flex;
-    justify-items: space-between;
+    justify-content: space-between;
   }
 
   @media screen and (max-width: 760px) {
