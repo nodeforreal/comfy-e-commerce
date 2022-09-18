@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import ProductQuantity from "./ProductQuantity";
+import ProductQuantity from "../ProductQuantity";
 import { MdDelete } from "react-icons/md";
 
 const CartItem = () => {
@@ -39,6 +39,7 @@ const Wrapper = styled.div`
 
   .product {
     display: flex;
+    align-items: center;
     gap: 1rem;
 
     img {
