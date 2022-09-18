@@ -10,10 +10,13 @@ import {
   SORT_NAME_ASC,
   SORT_NAME_DESC,
   SET_FILTER_CLEAR,
+  SET_PRODUCTS,
 } from "../actions";
 
 const filterReducer = (state, { type, payload }) => {
   switch (type) {
+    case SET_PRODUCTS:
+      return { ...state, products: payload };
     case GET_SEARCH:
       return { ...state, searchQuery: payload };
 
