@@ -58,6 +58,7 @@ const Wrapper = styled.div`
   }
 
   .shopping-btn-container {
+    margin: 1.2rem 0 0;
     display: flex;
     justify-items: space-between;
   }
