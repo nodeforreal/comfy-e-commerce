@@ -11,11 +11,12 @@ const CartSection = () => {
         <p className="head-subtotal">subtotal</p>
         <p></p>
       </div>
-      <hr />
+      <hr className="table-top-hr" />
       <CartItem />
       <CartItem />
       <CartItem />
       <CartItem />
+      <hr className="table-bottom-hr" />
     </Wrapper>
   );
 };
