@@ -6,9 +6,9 @@ const CartSection = () => {
     <Wrapper className="section-center">
       <div className="cart-table-head table-column-grid">
         <p>item</p>
-        <p>price</p>
+        <p className="head-price">price</p>
         <p>quantity</p>
-        <p>subtotal</p>
+        <p className="head-subtotal">subtotal</p>
         <p></p>
       </div>
       <hr />
@@ -34,6 +34,16 @@ const Wrapper = styled.div`
       text-transform: capitalize;
       color: var(--clr-grey-6);
       letter-spacing: var(--spacing);
+    }
+  }
+
+  @media screen and (max-width: 760px) {
+    .table-column-grid {
+      grid-template-columns: auto auto auto;
+    }
+    .head-price,
+    .head-subtotal {
+      display: none;
     }
   }
 `;
