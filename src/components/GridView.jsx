@@ -5,9 +5,11 @@ import { useFilterContext } from "../context/filter-context";
 
 const GridView = () => {
   const { products } = useFilterContext();
-  if (products) {
+
+  if (!products.length) {
     return <NoProducts />;
   }
+
   return (
     <Wrapper>
       {products.map((product) => {
