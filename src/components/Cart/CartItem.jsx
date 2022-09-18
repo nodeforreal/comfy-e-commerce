@@ -14,8 +14,8 @@ const CartItem = () => {
           alt=""
         />
         <div>
-          <h5 className="name">title</h5>
-          <p className="color">
+          <h5 className="product-name">title</h5>
+          <p className="product-color">
             color : <span></span>
           </p>
         </div>
@@ -46,10 +46,11 @@ const Wrapper = styled.div`
       height: 75px;
       border-radius: var(--radius);
     }
-    .name{
-      margin: 0;
-    }
+  }
 
+  .product-name,
+  .product-color {
+    margin: 0;
   }
 `;
 export default CartItem;
