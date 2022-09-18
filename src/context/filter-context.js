@@ -14,6 +14,7 @@ import {
   SORT_NAME_ASC,
   SORT_NAME_DESC,
   SET_FILTER_CLEAR,
+  SET_PRODUCTS,
 } from "../actions";
 
 const FilterContext = createContext({});
@@ -31,9 +32,12 @@ const initialState = {
 
 const FilterContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(filterReducer, initialState);
+  const setProducts = (products) => {
+    dispatch({ type: SET_PRODUCTS, payload: products });
+  };
 
   return (
-    <FilterContext.Provider value={{ ...state }}>
+    <FilterContext.Provider value={{ ...state, setProducts }}>
       {children}
     </FilterContext.Provider>
   );
