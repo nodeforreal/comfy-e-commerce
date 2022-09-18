@@ -14,10 +14,12 @@ import {
   SORT_NAME_ASC,
   SORT_NAME_DESC,
   SET_FILTER_CLEAR,
-} from "../action";
+} from "../actions";
 
 const FilterContext = createContext({});
+
 const initialState = {
+  products: [],
   searchQuery: "",
   category: "all",
   company: "all",
@@ -28,11 +30,15 @@ const initialState = {
 };
 
 const FilterContextProvider = ({ children }) => {
-  return <FilterContext.Provider>{children}</FilterContext.Provider>;
+  const [state, dispatch] = useReducer(filterReducer, initialState);
+  return (
+    <FilterContext.Provider value={{ ...state }}>
+      {children}
+    </FilterContext.Provider>
+  );
 };
 
 const useFilterContext = () => {
-  const [state, dispatch] = useReducer(filterReducer, initialState);
   return useContext(FilterContext);
 };
 
