@@ -19,6 +19,7 @@ const CartItem = () => {
             <p>color :</p>
             <span></span>
           </div>
+          <p className="product-price-760">$500</p>
         </div>
       </div>
       <p className="product-price">$500</p>
@@ -34,6 +35,9 @@ const CartItem = () => {
 };
 
 const Wrapper = styled.div`
+  * {
+    margin: 0;
+  }
   margin: 1rem;
 
   .product {
@@ -103,6 +107,34 @@ const Wrapper = styled.div`
       width: 1rem;
       height: 1rem;
       color: var(--clr-white);
+    }
+  }
+
+  .product-price-760 {
+    display: none;
+    letter-spacing: var(--spacing);
+    color: var(--clr-primary-6);
+  }
+
+  @media screen and (max-width: 760px) {
+      
+    .product-price-760 {
+      display: block;
+    }
+    .product-price {
+      display: none;
+    }
+    .product-quantity {
+      font-size: 1.3rem;
+    }
+    .quantity-btn {
+      .icon {
+        width: 0.8rem;
+        height: 0.8rem;
+      }
+    }
+    .product-subtotal {
+      display: none;
     }
   }
 `;
