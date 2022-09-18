@@ -1,4 +1,16 @@
-import {GET_SEARCH,SET_CATEGORY} from '../action';
+import {
+  GET_SEARCH,
+  SET_CATEGORY, 
+  SET_COMPANY,
+  SET_COLOR,
+  SET_PRICE,
+  SET_SHIPPING,
+  SORT_HIGHEST,
+  SORT_LOWEST,
+  SORT_NAME_ASC,
+  SORT_NAME_DESC,
+  SET_FILTER_CLEAR
+  } from '../action';
 
 const filterReducer = (state,{type,payload})=>{    
     switch (type){
