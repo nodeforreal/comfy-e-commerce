@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components/macro";
+import styled, { css } from "styled-components/macro";
 import ProductQuantity from "../ProductQuantity";
 import { MdDelete } from "react-icons/md";
 
@@ -15,24 +15,18 @@ const CartItem = () => {
         />
         <div>
           <h5 className="product-name">title</h5>
-          <p className="product-color">
-            color :{" "}
-            <span
-              css={`
-                background-color: red;
-              `}
-            ></span>
-          </p>
+          <div className="product-color">
+            <p>color :</p>
+            <span></span>
+          </div>
         </div>
       </div>
-      <p className="price">$500</p>
-      <div className="quantity">
-        <ProductQuantity />
-      </div>
-      <p className="subtotal">$40000</p>
-      <div className="delete">
+      <p className="product-price">$500</p>
+      <ProductQuantity />
+      <p className="product-subtotal">$40000</p>
+      <div className="cart-delete">
         <button className="cart-delete-btn">
-          <MdDelete />
+          <MdDelete className="icon" />
         </button>
       </div>
     </Wrapper>
@@ -54,17 +48,61 @@ const Wrapper = styled.div`
     }
   }
 
-  .product-name,
-  .product-color {
+  .product-name {
     margin: 0;
     white-space: nowrap;
   }
 
   .product-color {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    p {
+      white-space: nowrap;
+      margin: 0;
+    }
+
     span {
       width: 1rem;
       height: 1rem;
       border-radius: var(--radius);
+      background-color: red;
+    }
+  }
+
+  .product-price {
+    letter-spacing: var(--spacing);
+    color: var(--clr-primary-6);
+  }
+
+  .product-quantity {
+    font-size: 1.6rem;
+  }
+  .quantity-btn {
+    .icon {
+      width: 1rem;
+      height: 1rem;
+    }
+  }
+
+  .product-subtotal {
+    color: var(--clr-grey-6);
+    letter-spacing: var(--spacing);
+  }
+
+  .cart-delete-btn {
+    background: var(--clr-red-light);
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: var(--radius);
+    display: grid;
+    place-content: center;
+
+    .icon {
+      width: 1rem;
+      height: 1rem;
+      color: var(--clr-white);
     }
   }
 `;
