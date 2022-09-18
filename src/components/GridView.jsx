@@ -1,10 +1,13 @@
 import styled from "styled-components";
 import ProductCard from "./ProductCard";
-import { useProductsContext } from "../context/product-context";
+import { NoProducts } from "./Products";
+import { useFilterContext } from "../context/filter-context";
 
 const GridView = () => {
-  const { products } = useProductsContext();
-
+  const { products } = useFilterContext();
+  if (products) {
+    return <NoProducts />;
+  }
   return (
     <Wrapper>
       {products.map((product) => {
