@@ -1,5 +1,7 @@
 // basic setup
 import { createContext, useReducer, useContext } from "react";
+import filterReducer from "../reducer/filter-reducer";
+
 import {
   GET_SEARCH,
   SET_CATEGORY,
@@ -30,6 +32,7 @@ const FilterContextProvider = ({ children }) => {
 };
 
 const useFilterContext = () => {
+  const [state, dispatch] = useReducer(filterReducer, initialState);
   return useContext(FilterContext);
 };
 
