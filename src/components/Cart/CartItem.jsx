@@ -54,6 +54,14 @@ const Wrapper = styled.div`
     margin: 0;
     white-space: nowrap;
   }
+    
+  .product-color {
+    span {
+      width: 1rem;
+      height: 1rem;
+      border-radius: var(--radius);
+    }
+  }
 `;
 
 export default CartItem;
