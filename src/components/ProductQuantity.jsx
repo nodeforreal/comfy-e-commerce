@@ -36,6 +36,10 @@ const Wrapper = styled.div`
     height: 1.1rem;
     color: var(--clr-grey-2);
   }
+
+  @media screen and (max-width: 760px) {
+    gap: 0.5rem;
+  }
 `;
 
 export default ProductQuantity;
