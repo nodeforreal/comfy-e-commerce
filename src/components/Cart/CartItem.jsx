@@ -83,6 +83,7 @@ const Wrapper = styled.div`
   .product-quantity {
     font-size: 1.6rem;
   }
+
   .quantity-btn {
     .icon {
       width: 1rem;
