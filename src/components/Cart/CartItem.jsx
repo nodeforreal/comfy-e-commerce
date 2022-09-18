@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+import styled from "styled-components/macro";
 import ProductQuantity from "../ProductQuantity";
 import { MdDelete } from "react-icons/md";
 
@@ -16,7 +16,12 @@ const CartItem = () => {
         <div>
           <h5 className="product-name">title</h5>
           <p className="product-color">
-            color : <span></span>
+            color :{" "}
+            <span
+              css={`
+                background-color: red;
+              `}
+            ></span>
           </p>
         </div>
       </div>
@@ -54,7 +59,7 @@ const Wrapper = styled.div`
     margin: 0;
     white-space: nowrap;
   }
-    
+
   .product-color {
     span {
       width: 1rem;
