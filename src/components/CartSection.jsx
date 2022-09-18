@@ -13,10 +13,12 @@ const CartSection = () => {
         <p></p>
       </div>
       <hr className="table-top-hr" />
+
       <CartItem />
       <CartItem />
       <CartItem />
       <CartItem />
+
       <hr className="table-bottom-hr" />
       <div className="shopping-btns-container">
         <FlatButton
@@ -48,8 +50,7 @@ const Wrapper = styled.div`
   .table-column-grid {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 100px;
-    justify-items: center;
-    align-items: center;
+    place-items: center;
   }
 
   .cart-table-head {
