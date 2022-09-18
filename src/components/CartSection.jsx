@@ -1,5 +1,6 @@
-import styled from "styled-components";
+import styled from "styled-components/macro";
 import { CartItem } from "./Cart";
+import FlatButton from "./FlatButton";
 
 const CartSection = () => {
   return (
@@ -17,6 +18,24 @@ const CartSection = () => {
       <CartItem />
       <CartItem />
       <hr className="table-bottom-hr" />
+      <div className="shopping-btns-container">
+        <FlatButton
+          css={`
+            background-color: var(--clr-primary-5);
+            color: var(--clr-white);
+          `}
+        >
+          continue shopping
+        </FlatButton>
+        <FlatButton
+          css={`
+            background-color: var(--clr-black);
+            color: var(--clr-white);
+          `}
+        >
+          clear shopping cart
+        </FlatButton>
+      </div>
     </Wrapper>
   );
 };
@@ -36,6 +55,11 @@ const Wrapper = styled.div`
       color: var(--clr-grey-6);
       letter-spacing: var(--spacing);
     }
+  }
+
+  .shopping-btn-container {
+    display: flex;
+    justify-items: space-between;
   }
 
   @media screen and (max-width: 760px) {
