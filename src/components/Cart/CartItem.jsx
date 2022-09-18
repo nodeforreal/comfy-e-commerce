@@ -38,7 +38,7 @@ const Wrapper = styled.div`
   * {
     margin: 0;
   }
-  margin: 1rem;
+  margin: 1rem 0;
 
   .product {
     display: flex;
@@ -117,7 +117,6 @@ const Wrapper = styled.div`
   }
 
   @media screen and (max-width: 760px) {
-      
     .product-price-760 {
       display: block;
     }
