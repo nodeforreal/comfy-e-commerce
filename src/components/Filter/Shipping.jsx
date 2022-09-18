@@ -5,7 +5,7 @@ const Shipping = () => {
   return (
     <Wrapper>
       <p>
-        <label for="shipping-filter">free shipping</label>
+        <label htmlFor="shipping-filter">free shipping</label>
       </p>
       <input id="shipping-filter" type="checkbox" />
     </Wrapper>
