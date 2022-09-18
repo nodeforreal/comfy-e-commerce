@@ -1,5 +1,5 @@
 import React from "react";
-import styled, { css } from "styled-components/macro";
+import styled from "styled-components/macro";
 import ProductQuantity from "../ProductQuantity";
 import { MdDelete } from "react-icons/md";
 
@@ -43,6 +43,7 @@ const Wrapper = styled.div`
   .product {
     display: flex;
     align-items: center;
+    justify-self: flex-start;
     gap: 1rem;
 
     img {
