@@ -1,8 +1,11 @@
 // basic setup
-import {createContext, useReducer ,useContext } from 'react';
+import { createContext, useReducer, useContext } from "react";
+import filterReducer from "../reducer/filter-reducer";
+import { useProductsContext } from "../context/product-context";
+
 import {
   GET_SEARCH,
-  SET_CATEGORY, 
+  SET_CATEGORY,
   SET_COMPANY,
   SET_COLOR,
   SET_PRICE,
@@ -11,27 +14,39 @@ import {
   SORT_LOWEST,
   SORT_NAME_ASC,
   SORT_NAME_DESC,
-  SET_FILTER_CLEAR
-  } from '../action';
+  SET_FILTER_CLEAR,
+} from "../actions";
 
-const FilterContext = createContext({})
+const FilterContext = createContext({});
+
 const initialState = {
-    searchQuery : '',
-    category: 'all'
-    company: 'all',
-    color: 'all',
-    price: 1500,
-    freeShipping: false,
-    sortBy : SORT_LOWEST
-}
+  products: [],
+  searchQuery: "",
+  category: "all",
+  company: "all",
+  color: "all",
+  price: 1500,
+  freeShipping: false,
+  sortBy: SORT_LOWEST,
+};
 
-const FilterContextProvider = ({children})=>{
-    
-    return <FilterContext.Provider>{children}</FilterContext.Provider>
-}
+const FilterContextProvider = ({ children }) => {
+  const { products } = useProductsContext();
+  console.log(products);
+  const [state, dispatch] = useReducer(filterReducer, {
+    ...initialState,
+    products,
+  });
 
-const useFilterContext = ()=>{
-    return useContext(FilterContext);
-}
+  return (
+    <FilterContext.Provider value={{ ...state }}>
+      {children}
+    </FilterContext.Provider>
+  );
+};
 
-export {FilterContextProvider, }
+const useFilterContext = () => {
+  return useContext(FilterContext);
+};
+
+export { FilterContextProvider, useFilterContext };
