@@ -1,5 +1,5 @@
 import styled from "styled-components";
-
+import { CartItem } from "./Cart";
 
 const CartSection = () => {
   return (
@@ -12,14 +12,14 @@ const CartSection = () => {
         <p></p>
       </div>
       <hr />
-      
+      <CartItem />
     </Wrapper>
   );
 };
 
 const Wrapper = styled.div`
   margin-top: 2rem;
-  .table-column-grid{
+  .table-column-grid {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 100px;
     justify-items: center;
@@ -27,7 +27,7 @@ const Wrapper = styled.div`
   }
 
   .cart-table-head {
-    p{
+    p {
       text-transform: capitalize;
       color: var(--clr-grey-6);
       letter-spacing: var(--spacing);
