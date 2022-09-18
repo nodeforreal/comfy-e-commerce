@@ -39,7 +39,7 @@ const Wrapper = styled.div`
 
   @media screen and (max-width: 760px) {
     .table-column-grid {
-      grid-template-columns: auto auto auto;
+      grid-template-columns: 200px auto auto;
     }
     .head-price,
     .head-subtotal {
