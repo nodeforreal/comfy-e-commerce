@@ -51,6 +51,7 @@ const Wrapper = styled.div`
   .product-name,
   .product-color {
     margin: 0;
+    white-space: nowrap;
   }
 `;
 export default CartItem;
