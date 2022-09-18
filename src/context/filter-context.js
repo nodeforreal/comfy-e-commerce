@@ -16,7 +16,13 @@ import {
 
 const FilterContext = createContext({})
 const initialState = {
-    searchQuery : ''
+    searchQuery : '',
+    category: 'all'
+    company: 'all',
+    color: 'all',
+    price: 1500,
+    freeShipping: false,
+    sortBy : SORT_LOWEST
 }
 
 const FilterContextProvider = ({children})=>{
