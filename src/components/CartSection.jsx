@@ -1,5 +1,5 @@
 import styled from "styled-components/macro";
-import { CartItem } from "./Cart";
+import { CartItem, Checkout } from "./Cart";
 import FlatButton from "./FlatButton";
 
 const CartSection = () => {
@@ -36,6 +36,9 @@ const CartSection = () => {
           clear shopping cart
         </FlatButton>
       </div>
+      <div className="checkout-card-wrapper">
+        <Checkout />
+      </div>
     </Wrapper>
   );
 };
@@ -61,6 +64,13 @@ const Wrapper = styled.div`
     margin: 1.2rem 0 0;
     display: flex;
     justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .checkout-card-wrapper {
+    margin: 2.5rem 0 3rem;
+    display: flex;
+    flex-direction: row-reverse;
   }
 
   @media screen and (max-width: 760px) {
