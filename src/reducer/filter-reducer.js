@@ -15,16 +15,40 @@ import {
 const filterReducer = (state,{type,payload})=>{    
     switch (type){
         case GET_SEARCH:
-        return {...state, searchQuery: payload}
+            return {...state, searchQuery: payload}
         
         case SET_CATEGORY:
-        return {...state, searchQuery: payload}
+            return {...state, searchQuery: payload}
         
-        case 'SET_COMPANY':
-        return {...state, searchQuery: payload}
+        case SET_COMPANY:
+            return {...state, searchQuery: payload}
+        
+        case SET_COLOR:
+            return {...state, searchQuery: payload}
+        
+        case SET_PRICE:
+            return {...state, searchQuery: payload}
+        
+        case SET_SHIPPING:
+            return {...state, searchQuery: payload}
+        
+        case SORT_HIGHEST:
+            return {...state, searchQuery: payload}
+        
+        case SORT_LOWEST:
+            return {...state, searchQuery: payload}
+
+        case SORT_NAME_ASC:
+            return {...state, searchQuery: payload}
+        
+        case SORT_NAME_DESC:
+            return {...state, searchQuery: payload}
+        
+        case SET_FILTER_CLEAR:
+            return {...state, searchQuery: payload}
         
         default :
-        throw new Error("Filter reducer - action.type doesn't match.")
+            throw new Error("Filter reducer - action.type doesn't match.")
     }
 }
 
