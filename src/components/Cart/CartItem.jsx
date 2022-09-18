@@ -54,4 +54,5 @@ const Wrapper = styled.div`
     white-space: nowrap;
   }
 `;
+
 export default CartItem;
