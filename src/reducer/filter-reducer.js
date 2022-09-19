@@ -16,6 +16,7 @@ import {
 } from "../actions";
 
 const filterReducer = (state, { type, payload }) => {
+  // product counts
   switch (type) {
     case SET_FILTER_BEGIN:
       return { ...state, filter_begin: payload };
@@ -35,7 +36,7 @@ const filterReducer = (state, { type, payload }) => {
       const searchFilter = state.products.filter(({ name }) => {
         return name.startsWith(payload);
       });
-      
+
       return {
         ...state,
         searchQuery: payload,
@@ -58,7 +59,7 @@ const filterReducer = (state, { type, payload }) => {
       const companyFilter = state.products.filter(({ company }) => {
         return payload === company;
       });
-      
+
       return {
         ...state,
         filtered_products: companyFilter,
