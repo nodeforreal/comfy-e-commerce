@@ -36,12 +36,16 @@ const FilterContextProvider = ({ children }) => {
   const { products } = useProductsContext();
   const [state, dispatch] = useReducer(filterReducer, initialState);
 
+  const getSearch = (query) => {
+    dispatch({ type: GET_SEARCH, payload: query });
+  };
+
   useEffect(() => {
     dispatch({ type: SET_PRODUCTS, payload: products });
   }, [products]);
 
   return (
-    <FilterContext.Provider value={{ ...state }}>
+    <FilterContext.Provider value={{ ...state, getSearch }}>
       {children}
     </FilterContext.Provider>
   );
