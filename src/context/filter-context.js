@@ -16,6 +16,7 @@ import {
   SORT_NAME_DESC,
   SET_FILTER_CLEAR,
   SET_PRODUCTS,
+  SET_FILTER_LIST,
 } from "../actions";
 
 const FilterContext = createContext({});
@@ -37,11 +38,41 @@ const FilterContextProvider = ({ children }) => {
   const { products } = useProductsContext();
   const [state, dispatch] = useReducer(filterReducer, initialState);
 
+  const setFilterlists = (products) => {
+    // catogories in products
+    let categories = {};
+    products.forEach(({ category }) => {
+      categories[category] = category;
+    });
+    categories = Object.values(categories);
+
+    // companies in products
+    let companies = {};
+    products.forEach(({ company }) => {
+      companies[company] = company;
+    });
+    companies = Object.values(companies);
+
+    // colors in products
+    let colors = {};
+    products.forEach(({ colors: colorsArr }) => {
+      colorsArr.forEach((color) => {
+        colors[color] = color;
+      });
+    });
+
+    colors = Object.values(products);
+
+    console.log(colors);
+
+    dispatch({ type: SET_FILTER_LIST, payload: "" });
+  };
   const getSearch = (query) => {
     dispatch({ type: GET_SEARCH, payload: query });
   };
 
   useEffect(() => {
+    setFilterlists(products);
     dispatch({ type: SET_PRODUCTS, payload: products });
   }, [products]);
 
