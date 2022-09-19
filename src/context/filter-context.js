@@ -55,14 +55,14 @@ const FilterContextProvider = ({ children }) => {
     companies = Object.values(companies);
 
     // colors in products
-    let colors = { all: "all" };
+    let colors = {};
     products.forEach(({ colors: colorsArr }) => {
       colorsArr.forEach((color) => {
         colors[color] = color;
       });
     });
-
     colors = Object.values(products);
+
     // min,max price of products
     const minPrice = products.reduce((final, { price }) => {
       return Math.min(final, price);
