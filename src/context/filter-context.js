@@ -23,6 +23,7 @@ const FilterContext = createContext({});
 
 const initialState = {
   filter_begin: false,
+  filter: {},
   products: [1, 2, 3],
   filtered_products: [],
   searchQuery: "",
