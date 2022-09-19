@@ -7,7 +7,7 @@ import {
   SET_COMPANY,
   SET_COLOR,
   SET_PRICE_RANGE,
-  SET_SHIPPING,
+  SET_FREE_SHIPPING,
   SORT_HIGHEST,
   SORT_LOWEST,
   SORT_NAME_ASC,
@@ -73,12 +73,12 @@ const filterReducer = (state, { type, payload }) => {
       return { ...state, filtered_products: colorFilter, color: payload };
 
     case SET_PRICE_RANGE:
-      const priceFilter = state.products.fitler(({ price }) => {
+      const priceFilter = state.products.filter(({ price }) => {
         return price <= payload;
       });
-      return { ...state, priceRange: priceFilter };
+      return { ...state, priceRange: payload, filtered_products: priceFilter };
 
-    case SET_SHIPPING:
+    case SET_FREE_SHIPPING:
       return { ...state, searchQuery: payload };
 
     case SORT_HIGHEST:
