@@ -20,7 +20,9 @@ const filterReducer = (state, { type, payload }) => {
     case FILTER_BEGIN:
       return { ...state, filter_begin: payload };
     case SET_FILTER_LIST:
-      return { ...state, filter: payload, filter_begin: false };
+      const priceRange = payload.maxPrice / 2;
+      return { ...state, priceRange, filter: payload, filter_begin: false };
+      
     case SET_PRODUCTS:
       return {
         ...state,
@@ -45,7 +47,7 @@ const filterReducer = (state, { type, payload }) => {
       return { ...state, searchQuery: payload };
 
     case SET_PRICE:
-      return { ...state, searchQuery: payload };
+      return { ...state, priceRange: payload };
 
     case SET_SHIPPING:
       return { ...state, searchQuery: payload };
