@@ -9,9 +9,7 @@ const Products = () => {
     return (
       <>
         <PageHero title="products" />
-        <section className="section-center page">
-          <Spinner />
-        </section>
+        <section className="section-center page"></section>
       </>
     );
   }
