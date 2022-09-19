@@ -1,6 +1,5 @@
 import { createContext, useContext, useReducer, useEffect } from "react";
 import { productsReducer } from "../reducer/product-reducer";
-import { useFilterContext } from "./filter-context";
 
 import {
   PRODUCTS_FETCH_BEGIN,
@@ -29,14 +28,12 @@ const initialState = {
 
 const ProductsContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(productsReducer, initialState);
-  const { setProducts } = useFilterContext();
 
   const fetchProducts = async () => {
     dispatch({ type: PRODUCTS_FETCH_BEGIN, payload: true });
     try {
       const { data } = await axios(products_api);
       dispatch({ type: PRODUCTS_FETCH_SUCCESS, payload: data });
-      setProducts(data);
     } catch (error) {
       dispatch({ type: PRODUCTS_FETCH_ERROR });
     }
