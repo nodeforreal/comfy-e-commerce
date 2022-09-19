@@ -24,6 +24,7 @@ const FilterBar = () => {
 };
 
 const Wrapper = styled.aside`
+  padding-top: 1.2rem;
   display: flex;
   flex-direction: column;
   gap: 1.6rem;
@@ -50,7 +51,6 @@ const Wrapper = styled.aside`
     position: sticky;
     top: 0;
     flex-grow: 0;
-
     align-self: flex-start;
 
     width: 260px;

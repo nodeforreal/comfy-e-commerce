@@ -3,8 +3,11 @@ import styled from "styled-components";
 import { useFilterContext } from "../../context/filter-context";
 
 const Category = () => {
-  const { filter: { categories } } = useFilterContext();
-  const [selection, setSelection] = useState("all");
+  const {
+    filter: { categories },
+    setCategory,
+    category: selectionCategory,
+  } = useFilterContext();
 
   return (
     <Wrapper>
@@ -15,9 +18,9 @@ const Category = () => {
             <li key={index}>
               <button
                 className={`${
-                  selection === category && "selected"
+                  selectionCategory === category && "selected"
                 } filter-text-secondary`}
-                onClick={() => setSelection(category)}
+                onClick={() => setCategory(category)}
               >
                 {category}
               </button>

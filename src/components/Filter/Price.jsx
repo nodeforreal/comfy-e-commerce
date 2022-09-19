@@ -13,7 +13,7 @@ const Price = () => {
       <h5>price</h5>
       <p>${priceRange}</p>
       <input
-        value={maxPrice / 2}
+        value={priceRange}
         type="range"
         min={minPrice}
         step="10000"

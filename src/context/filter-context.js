@@ -3,7 +3,7 @@ import { createContext, useReducer, useContext, useEffect } from "react";
 import filterReducer from "../reducer/filter-reducer";
 import { useProductsContext } from "./product-context";
 import {
-  FILTER_BEGIN,
+  SET_FILTER_BEGIN,
   GET_SEARCH,
   SET_CATEGORY,
   SET_COMPANY,
@@ -86,16 +86,24 @@ const FilterContextProvider = ({ children }) => {
     dispatch({ type: GET_SEARCH, payload: query });
   };
 
+  const setCategory = (category) => {
+    dispatch({ type: SET_CATEGORY, payload: category });
+  };
+
   const setPriceRange = (price) => {
     dispatch({ type: SET_PRICE, payload: price });
   };
+
   useEffect(() => {
     setFilterlists(products);
     dispatch({ type: SET_PRODUCTS, payload: products });
+    dispatch({ type: SET_FILTER_BEGIN });
   }, [products]);
 
   return (
-    <FilterContext.Provider value={{ ...state, getSearch, setPriceRange }}>
+    <FilterContext.Provider
+      value={{ ...state, getSearch, setCategory, setPriceRange }}
+    >
       {children}
     </FilterContext.Provider>
   );

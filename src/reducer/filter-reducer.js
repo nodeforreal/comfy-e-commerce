@@ -1,5 +1,5 @@
 import {
-  FILTER_BEGIN,
+  SET_FILTER_BEGIN,
   SET_FILTER_LIST,
   SET_PRODUCTS,
   GET_SEARCH,
@@ -17,28 +17,38 @@ import {
 
 const filterReducer = (state, { type, payload }) => {
   switch (type) {
-    case FILTER_BEGIN:
+    case SET_FILTER_BEGIN:
       return { ...state, filter_begin: payload };
+
     case SET_FILTER_LIST:
       const priceRange = payload.maxPrice / 2;
-      return { ...state, priceRange, filter: payload, filter_begin: false };
-      
+      return { ...state, priceRange, filter: payload };
+
     case SET_PRODUCTS:
       return {
         ...state,
         products: payload,
-        filter_begin: false,
         filtered_products: payload,
       };
 
     case GET_SEARCH:
-      const products = state.products.filter(({ name }) => {
+      const searchFilter = state.products.filter(({ name }) => {
         return name.startsWith(payload);
       });
-      return { ...state, searchQuery: payload, filtered_products: products };
+      return {
+        ...state,
+        searchQuery: payload,
+        filtered_products: searchFilter,
+      };
 
     case SET_CATEGORY:
-      return { ...state, searchQuery: payload };
+      if (payload === "all") {
+        return { ...state, filtered_products: state.products, category: "all" };
+      }
+      const categoryFilter = state.products.filter(({ category }) => {
+        return category === payload;
+      });
+      return { ...state, filtered_products: categoryFilter, category: payload };
 
     case SET_COMPANY:
       return { ...state, searchQuery: payload };

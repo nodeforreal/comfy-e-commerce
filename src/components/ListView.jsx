@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import { ProductItem } from "./Products";
-import { useProductsContext } from "../context/product-context";
+import { useFilterContext } from "../context/filter-context";
 
 const ListView = () => {
-  const { products } = useProductsContext();
+  const { filtered_products: products } = useFilterContext();
   return (
     <Wrapper>
       {products.map((product) => {

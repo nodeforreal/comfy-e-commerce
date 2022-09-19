@@ -14,8 +14,11 @@ const ProductsSection = () => {
     </Wrapper>
   );
 };
+
 const Wrapper = styled.section`
+  padding-top: 1.2rem;
   flex-grow: 1;
   flex-basis: 100%;
 `;
+
 export default ProductsSection;
