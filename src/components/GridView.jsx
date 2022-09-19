@@ -6,7 +6,6 @@ import { useFilterContext } from "../context/filter-context";
 const GridView = () => {
   const { products } = useFilterContext();
   
-  console.log("grid-view" + products.length);
   if (products.length === 0) {
     return <NoProducts />;
   }
