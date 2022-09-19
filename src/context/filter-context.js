@@ -102,6 +102,10 @@ const FilterContextProvider = ({ children }) => {
     dispatch({ type: SET_PRICE_RANGE, payload: price });
   };
 
+  const setFreeShipping = () => {
+    dispatch({ type: SET_FREE_SHIPPING, payload: !state.isFreeShipping });
+  };
+
   useEffect(() => {
     setFilterlists(products);
     dispatch({ type: SET_PRODUCTS, payload: products });
@@ -117,6 +121,7 @@ const FilterContextProvider = ({ children }) => {
         setCompany,
         setPriceRange,
         setColor,
+        setFreeShipping,
       }}
     >
       {children}
