@@ -79,7 +79,7 @@ const filterReducer = (state, { type, payload }) => {
       return { ...state, priceRange: payload, filtered_products: priceFilter };
 
     case SET_FREE_SHIPPING:
-      return { ...state, searchQuery: payload };
+      return { ...state, isFreeShipping: payload };
 
     case SORT_HIGHEST:
       return { ...state, searchQuery: payload };
