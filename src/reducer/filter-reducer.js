@@ -73,6 +73,7 @@ const filterReducer = (state, { type, payload }) => {
       return { ...state, filtered_products: colorFilter, color: payload };
 
     case SET_PRICE:
+    
       return { ...state, priceRange: payload };
 
     case SET_SHIPPING:
