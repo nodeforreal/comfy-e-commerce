@@ -1,7 +1,12 @@
 import React from "react";
 import styled from "styled-components";
-const companies = ["ikea", "mongo", "javscript", "node js"];
+import { useFilterContext } from "../../context/filter-context";
+
 const Company = () => {
+  const {
+    filter: { companies },
+  } = useFilterContext();
+
   return (
     <Wrapper>
       <h5>company</h5>

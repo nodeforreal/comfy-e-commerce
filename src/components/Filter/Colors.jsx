@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import styled from "styled-components/macro";
 import { FaCheck } from "react-icons/fa";
-
-const colors = ["red", "green", "blue", "yellow"];
+import { useFilterContext } from "../../context/filter-context";
 
 const Colors = () => {
+  const {
+    filter: { colors },
+  } = useFilterContext();
+
   const [selection, setSelection] = useState("all");
 
   return (
