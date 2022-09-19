@@ -5,8 +5,9 @@ import { useFilterContext } from "../../context/filter-context";
 const Category = () => {
   const {
     filter: { categories },
+    setCategory,
+    category: selectionCategory,
   } = useFilterContext();
-  const [selection, setSelection] = useState("all");
 
   return (
     <Wrapper>
@@ -17,9 +18,9 @@ const Category = () => {
             <li key={index}>
               <button
                 className={`${
-                  selection === category && "selected"
+                  selectionCategory === category && "selected"
                 } filter-text-secondary`}
-                onClick={() => setSelection(category)}
+                onClick={() => setCategory(category)}
               >
                 {category}
               </button>
