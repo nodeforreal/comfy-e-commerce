@@ -37,6 +37,9 @@ const Category = () => {
 };
 
 const Wrapper = styled.div`
+  li {
+    margin-top: 0.25rem;
+  }
   button {
     padding-bottom: 0.25rem;
     background: transparent;
