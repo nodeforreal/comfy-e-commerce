@@ -65,12 +65,12 @@ const filterReducer = (state, { type, payload }) => {
 
     case SET_COLOR:
       if (payload === "all") {
-        return { ...state, filtered_products: state.products, colors: "all" };
+        return { ...state, filtered_products: state.products, color: "all" };
       }
       const colorFilter = state.products.filter(({ colors }) => {
         return colors.includes(payload);
       });
-      return { ...state, filterd_products: colorFilter, color: payload };
+      return { ...state, filtered_products: colorFilter, color: payload };
 
     case SET_PRICE:
       return { ...state, priceRange: payload };
