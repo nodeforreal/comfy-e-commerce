@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import styled from "styled-components/macro";
 import { FaCheck } from "react-icons/fa";
 import { useFilterContext } from "../../context/filter-context";
@@ -20,8 +19,9 @@ const Colors = () => {
           }`}
         >
           <button
+            value="all"
             className="filter-text-secondary"
-            onClick={() => setColor("all")}
+            onClick={(e) => setColor(e.currentTarget.value)}
           >
             All
           </button>
