@@ -12,7 +12,6 @@ const Shipping = () => {
       <input
         id="shipping-filter"
         type="checkbox"
-        checked={isFreeShipping}
         onChange={() => setFreeShipping()}
       />
     </Wrapper>
