@@ -35,6 +35,7 @@ const filterReducer = (state, { type, payload }) => {
       const searchFilter = state.products.filter(({ name }) => {
         return name.startsWith(payload);
       });
+      
       return {
         ...state,
         searchQuery: payload,
