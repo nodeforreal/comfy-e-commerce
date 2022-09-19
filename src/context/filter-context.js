@@ -32,13 +32,11 @@ const initialState = {
 
 const FilterContextProvider = ({ children }) => {
   const { products } = useProductsContext();
-  const [state, dispatch] = useReducer(filterReducer, {
-    ...initialState,
-    products,
-  });
-
-  console.log("filter-products " + products.length);
-
+  const [state, dispatch] = useReducer(filterReducer, initialState);
+  
+  useEffect(()=>{
+    dispatch({type:SET_PRODUCTS, payload:products})
+  },[products])
   return (
     <FilterContext.Provider value={{ ...state }}>
       {children}
