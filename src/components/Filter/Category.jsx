@@ -3,7 +3,9 @@ import styled from "styled-components";
 import { useFilterContext } from "../../context/filter-context";
 
 const Category = () => {
-  const { filter: { categories } } = useFilterContext();
+  const {
+    filter: { categories },
+  } = useFilterContext();
   const [selection, setSelection] = useState("all");
 
   return (
