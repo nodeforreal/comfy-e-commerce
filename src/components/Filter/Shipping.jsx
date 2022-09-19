@@ -3,16 +3,21 @@ import styled from "styled-components";
 import { useFilterContext } from "../../context/filter-context";
 
 const Shipping = () => {
-    const { } = useFilterContext()
+  const { setFreeShipping } = useFilterContext();
   return (
     <Wrapper>
       <p>
         <label htmlFor="shipping-filter">free shipping</label>
       </p>
-      <input id="shipping-filter" type="checkbox" />
+      <input
+        id="shipping-filter"
+        type="checkbox"
+        onChange={() => setFreeShipping()}
+      />
     </Wrapper>
   );
 };
+
 const Wrapper = styled.div`
   display: flex;
   align-items: center;
