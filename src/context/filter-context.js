@@ -62,10 +62,23 @@ const FilterContextProvider = ({ children }) => {
     });
 
     colors = Object.values(products);
-
-    console.log(colors);
-
-    dispatch({ type: SET_FILTER_LIST, payload: "" });
+    // min,max price of products
+    const minPrice = products.reduce((final, { price }) => {
+      return Math.min(final, price);
+    }, Infinity);
+    const maxPrice = products.reduce((final, { price }) => {
+      return Math.max(final, price);
+    }, -Infinity);
+    console.log(minPrice, maxPrice);
+    const filter_lists = {
+      categories,
+      companies,
+      colors,
+      minPrice,
+      maxPrice
+    }
+  
+    dispatch({ type: SET_FILTER_LIST, payload: filter_lists });
   };
   const getSearch = (query) => {
     dispatch({ type: GET_SEARCH, payload: query });
