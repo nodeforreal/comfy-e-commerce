@@ -41,21 +41,21 @@ const FilterContextProvider = ({ children }) => {
 
   const setFilterlists = (products) => {
     // catogories in products
-    let categories = {};
+    let categories = { all: "all" };
     products.forEach(({ category }) => {
       categories[category] = category;
     });
     categories = Object.values(categories);
 
     // companies in products
-    let companies = {};
+    let companies = { all: "all" };
     products.forEach(({ company }) => {
       companies[company] = company;
     });
     companies = Object.values(companies);
 
     // colors in products
-    let colors = {};
+    let colors = { all: "all" };
     products.forEach(({ colors: colorsArr }) => {
       colorsArr.forEach((color) => {
         colors[color] = color;
