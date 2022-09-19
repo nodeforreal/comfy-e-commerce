@@ -1,7 +1,9 @@
 import React from "react";
 import styled from "styled-components";
+import { useFilterContext } from "../../context/filter-context";
 
 const Shipping = () => {
+    
   return (
     <Wrapper>
       <p>
