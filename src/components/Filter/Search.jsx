@@ -1,13 +1,23 @@
 import React from "react";
 import styled from "styled-components";
+import { useFilterContext } from "../../context/filter-context";
 
 const Search = () => {
+  const { getSearch, searchQuery } = useFilterContext();
+
   return (
     <Wrapper>
-      <input type="text" placeholder="Seacrch" className="filter-input" />
+      <input
+        type="text"
+        placeholder="Seacrch"
+        className="filter-input"
+        value={searchQuery}
+        onChange={(e) => getSearch(e.currentTarget.value)}
+      />
     </Wrapper>
   );
 };
+
 const Wrapper = styled.div`
   input {
     width: 220px;
