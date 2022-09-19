@@ -4,17 +4,21 @@ import { NoProducts } from "./Products";
 import { useFilterContext } from "../context/filter-context";
 
 const GridView = () => {
-  const { products } = useFilterContext();
+  const { filtered_products: products, filter_begin: isReady } =
+    useFilterContext();
 
-  if (!products.length) {
+  if (isReady) {
+    return null;
+  }
+
+  if (products.length === 0) {
     return <NoProducts />;
   }
 
   return (
     <Wrapper>
-      {products.map((product) => {
-        const { id } = product;
-        return <ProductCard key={id} {...product} />;
+      {products.map((product, index) => {
+        return <ProductCard key={index} {...product} />;
       })}
     </Wrapper>
   );

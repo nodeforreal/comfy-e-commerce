@@ -1,4 +1,7 @@
 import {
+  FILTER_BEGIN,
+  SET_FILTER_LIST,
+  SET_PRODUCTS,
   GET_SEARCH,
   SET_CATEGORY,
   SET_COMPANY,
@@ -14,8 +17,23 @@ import {
 
 const filterReducer = (state, { type, payload }) => {
   switch (type) {
+    case FILTER_BEGIN:
+      return { ...state, filter_begin: payload };
+    case SET_FILTER_LIST:
+      return { ...state, filter: payload, filter_begin: false };
+    case SET_PRODUCTS:
+      return {
+        ...state,
+        products: payload,
+        filter_begin: false,
+        filtered_products: payload,
+      };
+
     case GET_SEARCH:
-      return { ...state, searchQuery: payload };
+      const products = state.products.filter(({ name }) => {
+        return name.startsWith(payload);
+      });
+      return { ...state, searchQuery: payload, filtered_products: products };
 
     case SET_CATEGORY:
       return { ...state, searchQuery: payload };

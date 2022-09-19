@@ -1,8 +1,18 @@
 import React from "react";
 import styled from "styled-components";
-import { PageHero, FilterBar, ProductsSection } from "../components";
+import { PageHero, FilterBar, ProductsSection, Spinner } from "../components";
+import { useFilterContext } from "../context/filter-context";
 
 const Products = () => {
+  const { filter_begin: isReady } = useFilterContext();
+  if (isReady) {
+    return (
+      <>
+        <PageHero title="products" />
+        <section className="section-center page"></section>
+      </>
+    );
+  }
   return (
     <>
       <PageHero title="products" />

@@ -1,18 +1,11 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-
-const categories = [
-  "All",
-  "office",
-  "living room",
-  "kitchen",
-  "bedroom",
-  "dinnig",
-  "kids",
-];
+import { useFilterContext } from "../../context/filter-context";
 
 const Category = () => {
-  const [selection, setSelection] = useState("All");
+  const { filter: { categories } } = useFilterContext();
+  const [selection, setSelection] = useState("all");
+
   return (
     <Wrapper>
       <h5 className="filter-title">category</h5>
@@ -37,6 +30,9 @@ const Category = () => {
 };
 
 const Wrapper = styled.div`
+  li {
+    margin-top: 0.25rem;
+  }
   button {
     padding-bottom: 0.25rem;
     background: transparent;
