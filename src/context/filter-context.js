@@ -37,7 +37,7 @@ const FilterContextProvider = ({ children }) => {
     products,
   });
 
-  console.log("filter-products " + state.products.length);
+  console.log("filter-products " + products.length);
 
   return (
     <FilterContext.Provider value={{ ...state }}>
