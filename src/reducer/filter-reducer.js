@@ -6,8 +6,8 @@ import {
   SET_CATEGORY,
   SET_COMPANY,
   SET_COLOR,
-  SET_PRICE,
-  SET_SHIPPING,
+  SET_PRICE_RANGE,
+  SET_FREE_SHIPPING,
   SORT_HIGHEST,
   SORT_LOWEST,
   SORT_NAME_ASC,
@@ -16,6 +16,7 @@ import {
 } from "../actions";
 
 const filterReducer = (state, { type, payload }) => {
+  // product counts
   switch (type) {
     case SET_FILTER_BEGIN:
       return { ...state, filter_begin: payload };
@@ -35,6 +36,7 @@ const filterReducer = (state, { type, payload }) => {
       const searchFilter = state.products.filter(({ name }) => {
         return name.startsWith(payload);
       });
+
       return {
         ...state,
         searchQuery: payload,
@@ -57,6 +59,7 @@ const filterReducer = (state, { type, payload }) => {
       const companyFilter = state.products.filter(({ company }) => {
         return payload === company;
       });
+
       return {
         ...state,
         filtered_products: companyFilter,
@@ -72,11 +75,28 @@ const filterReducer = (state, { type, payload }) => {
       });
       return { ...state, filtered_products: colorFilter, color: payload };
 
-    case SET_PRICE:
-      return { ...state, priceRange: payload };
+    case SET_PRICE_RANGE:
+      const priceFilter = state.products.filter(({ price }) => {
+        return price <= payload;
+      });
+      return { ...state, priceRange: payload, filtered_products: priceFilter };
 
-    case SET_SHIPPING:
-      return { ...state, searchQuery: payload };
+    case SET_FREE_SHIPPING:
+      if (!payload) {
+        return {
+          ...state,
+          isFreeShipping: payload,
+          filtered_products: state.products,
+        };
+      }
+      const freeShippingFilter = state.products.filter(({ shipping }) => {
+        return shipping;
+      });
+      return {
+        ...state,
+        isFreeShipping: payload,
+        filtered_products: freeShippingFilter,
+      };
 
     case SORT_HIGHEST:
       return { ...state, searchQuery: payload };

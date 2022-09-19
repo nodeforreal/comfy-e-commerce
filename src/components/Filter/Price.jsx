@@ -16,7 +16,6 @@ const Price = () => {
         value={priceRange}
         type="range"
         min={minPrice}
-        step="10000"
         max={maxPrice}
         onChange={(e) => setPriceRange(e.currentTarget.value)}
       />
@@ -29,4 +28,5 @@ const Wrapper = styled.div`
     margin-bottom: 0.4rem;
   }
 `;
+
 export default Price;

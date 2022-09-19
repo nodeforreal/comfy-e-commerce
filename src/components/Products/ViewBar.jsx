@@ -1,12 +1,17 @@
 import styled from "styled-components";
 import ViewButtons from "./ViewButtons";
 import SortBy from "./SortBy";
+import { useFilterContext } from "../../context/filter-context";
 
-const ViewBar = ({}) => {
+const ViewBar = () => {
+  const { filtered_products } = useFilterContext();
   return (
     <Wrapper>
       <ViewButtons />
-      <p className="products-count">{23} products found</p>
+
+      <p className="products-count">
+        {filtered_products.length} products found
+      </p>
       <hr />
       <SortBy />
     </Wrapper>

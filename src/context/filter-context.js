@@ -8,8 +8,8 @@ import {
   SET_CATEGORY,
   SET_COMPANY,
   SET_COLOR,
-  SET_PRICE,
-  SET_SHIPPING,
+  SET_PRICE_RANGE,
+  SET_FREE_SHIPPING,
   SORT_HIGHEST,
   SORT_LOWEST,
   SORT_NAME_ASC,
@@ -30,7 +30,7 @@ const initialState = {
   category: "all",
   company: "all",
   color: "all",
-  price: 1500,
+  priceRange: 1500,
   freeShipping: false,
   sortBy: SORT_LOWEST,
 };
@@ -99,7 +99,11 @@ const FilterContextProvider = ({ children }) => {
   };
 
   const setPriceRange = (price) => {
-    dispatch({ type: SET_PRICE, payload: price });
+    dispatch({ type: SET_PRICE_RANGE, payload: price });
+  };
+
+  const setFreeShipping = () => {
+    dispatch({ type: SET_FREE_SHIPPING, payload: !state.isFreeShipping });
   };
 
   useEffect(() => {
@@ -117,6 +121,7 @@ const FilterContextProvider = ({ children }) => {
         setCompany,
         setPriceRange,
         setColor,
+        setFreeShipping,
       }}
     >
       {children}
