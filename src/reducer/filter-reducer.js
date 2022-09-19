@@ -19,8 +19,8 @@ const filterReducer = (state, { type, payload }) => {
   switch (type) {
     case FILTER_BEGIN:
       return { ...state, filter_begin: payload };
-       case SET_FILTER_LIST:
-      return { ...state, filter_list: payload };
+    case SET_FILTER_LIST:
+      return { ...state, filter: payload };
     case SET_PRODUCTS:
       return { ...state, products: payload, filtered_products: payload };
 
