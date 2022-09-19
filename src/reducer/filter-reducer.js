@@ -20,9 +20,9 @@ const filterReducer = (state, { type, payload }) => {
     case FILTER_BEGIN:
       return { ...state, filter_begin: payload };
     case SET_FILTER_LIST:
-      return { ...state, filter: payload };
+      return { ...state, filter: payload, filter_begin: false };
     case SET_PRODUCTS:
-      return { ...state, products: payload, filtered_products: payload };
+      return { ...state, products: payload, filter_begin: false };
 
     case GET_SEARCH:
       const products = state.products.filter(({ name }) => {
