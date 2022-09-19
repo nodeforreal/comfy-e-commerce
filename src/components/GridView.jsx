@@ -4,7 +4,12 @@ import { NoProducts } from "./Products";
 import { useFilterContext } from "../context/filter-context";
 
 const GridView = () => {
-  const { filtered_products: products } = useFilterContext();
+  const { filtered_products: products, filter_begin: isReady } =
+    useFilterContext();
+
+  if (isReady) {
+    return null;
+  }
 
   if (products.length === 0) {
     return <NoProducts />;
