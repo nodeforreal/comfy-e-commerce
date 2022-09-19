@@ -6,7 +6,7 @@ import {
   SET_CATEGORY,
   SET_COMPANY,
   SET_COLOR,
-  SET_PRICE,
+  SET_PRICE_RANGE,
   SET_SHIPPING,
   SORT_HIGHEST,
   SORT_LOWEST,
@@ -72,7 +72,7 @@ const filterReducer = (state, { type, payload }) => {
       });
       return { ...state, filtered_products: colorFilter, color: payload };
 
-    case SET_PRICE:
+    case SET_PRICE_RANGE:
       const priceFilter = state.products.fitler(({ price }) => {
         return price <= payload;
       });

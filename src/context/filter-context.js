@@ -8,8 +8,8 @@ import {
   SET_CATEGORY,
   SET_COMPANY,
   SET_COLOR,
-  SET_PRICE,
-  SET_SHIPPING,
+  SET_PRICE_RANGE,
+  SET_FREE_SHIPPING,
   SORT_HIGHEST,
   SORT_LOWEST,
   SORT_NAME_ASC,
@@ -99,7 +99,7 @@ const FilterContextProvider = ({ children }) => {
   };
 
   const setPriceRange = (price) => {
-    dispatch({ type: SET_PRICE, payload: price });
+    dispatch({ type: SET_PRICE_RANGE, payload: price });
   };
 
   useEffect(() => {
