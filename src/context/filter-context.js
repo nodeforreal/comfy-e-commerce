@@ -3,6 +3,7 @@ import { createContext, useReducer, useContext, useEffect } from "react";
 import filterReducer from "../reducer/filter-reducer";
 import { useProductsContext } from "./product-context";
 import {
+  FILTER_BEGIN,
   GET_SEARCH,
   SET_CATEGORY,
   SET_COMPANY,
@@ -20,6 +21,7 @@ import {
 const FilterContext = createContext({});
 
 const initialState = {
+  filter_begin: false,
   products: [1, 2, 3],
   searchQuery: "",
   category: "all",
@@ -33,10 +35,10 @@ const initialState = {
 const FilterContextProvider = ({ children }) => {
   const { products } = useProductsContext();
   const [state, dispatch] = useReducer(filterReducer, initialState);
-  
-  useEffect(()=>{
-    dispatch({type:SET_PRODUCTS, payload:products})
-  },[products])
+
+  useEffect(() => {
+    dispatch({ type: SET_PRODUCTS, payload: products });
+  }, [products]);
   return (
     <FilterContext.Provider value={{ ...state }}>
       {children}
