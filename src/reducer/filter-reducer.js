@@ -1,5 +1,5 @@
 import {
-  FILTER_BEGIN,
+  SET_FILTER_BEGIN,
   SET_FILTER_LIST,
   SET_PRODUCTS,
   GET_SEARCH,
@@ -17,17 +17,17 @@ import {
 
 const filterReducer = (state, { type, payload }) => {
   switch (type) {
-    case FILTER_BEGIN:
+    case SET_FILTER_BEGIN:
       return { ...state, filter_begin: payload };
+
     case SET_FILTER_LIST:
       const priceRange = payload.maxPrice / 2;
-      return { ...state, priceRange, filter: payload, filter_begin: false };
-      
+      return { ...state, priceRange, filter: payload };
+
     case SET_PRODUCTS:
       return {
         ...state,
         products: payload,
-        filter_begin: false,
         filtered_products: payload,
       };
 
