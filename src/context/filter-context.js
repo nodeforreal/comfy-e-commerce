@@ -3,7 +3,7 @@ import { createContext, useReducer, useContext, useEffect } from "react";
 import filterReducer from "../reducer/filter-reducer";
 import { useProductsContext } from "./product-context";
 import {
-  FILTER_BEGIN,
+  SET_FILTER_BEGIN,
   GET_SEARCH,
   SET_CATEGORY,
   SET_COMPANY,
@@ -92,6 +92,7 @@ const FilterContextProvider = ({ children }) => {
   useEffect(() => {
     setFilterlists(products);
     dispatch({ type: SET_PRODUCTS, payload: products });
+    dispatch({type:SET_FILTER_BEGIN})
   }, [products]);
 
   return (
