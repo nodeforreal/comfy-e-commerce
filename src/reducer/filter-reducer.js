@@ -58,6 +58,7 @@ const filterReducer = (state, { type, payload }) => {
       const companyFilter = state.products.filter(({ company }) => {
         return payload === company;
       });
+      
       return {
         ...state,
         filtered_products: companyFilter,
