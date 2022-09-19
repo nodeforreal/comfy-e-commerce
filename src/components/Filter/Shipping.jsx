@@ -10,6 +10,7 @@ const Shipping = () => {
         <label htmlFor="shipping-filter">free shipping</label>
       </p>
       <input
+        checked={isFreeShipping ? true : false}
         id="shipping-filter"
         type="checkbox"
         onChange={() => setFreeShipping()}
