@@ -49,6 +49,7 @@ const ProductsContextProvider = ({ children }) => {
       dispatch({ type: SINGLE_PRODUCT_FETCH_ERROR });
     }
   };
+  console.log("products  " + state.products.length);
 
   useEffect(() => {
     fetchProducts();
