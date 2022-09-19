@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import styled from "styled-components/macro";
 import { FaCheck } from "react-icons/fa";
 import { useFilterContext } from "../../context/filter-context";
@@ -6,18 +5,23 @@ import { useFilterContext } from "../../context/filter-context";
 const Colors = () => {
   const {
     filter: { colors },
+    setColor,
+    color: colorSelection,
   } = useFilterContext();
-
-  const [selection, setSelection] = useState("all");
 
   return (
     <Wrapper>
       <h5>colors</h5>
       <ul>
-        <li className={`${selection === "all" ? "filter-text-underline" : ""}`}>
+        <li
+          className={`${
+            colorSelection === "all" ? "filter-text-underline" : ""
+          }`}
+        >
           <button
+            value="all"
             className="filter-text-secondary"
-            onClick={() => setSelection("all")}
+            onClick={(e) => setColor(e.currentTarget.value)}
           >
             All
           </button>
@@ -26,13 +30,14 @@ const Colors = () => {
           return (
             <li key={index}>
               <button
+                value={color}
                 className="color-btn"
-                onClick={() => setSelection(color)}
+                onClick={(e) => setColor(e.currentTarget.value)}
                 css={`
                   background-color: ${color};
                 `}
               >
-                {color === selection && <FaCheck className="icon" />}
+                {colorSelection === color && <FaCheck className="icon" />}
               </button>
             </li>
           );

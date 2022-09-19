@@ -51,10 +51,26 @@ const filterReducer = (state, { type, payload }) => {
       return { ...state, filtered_products: categoryFilter, category: payload };
 
     case SET_COMPANY:
-      return { ...state, searchQuery: payload };
+      if (payload === "all") {
+        return { ...state, filtered_products: state.products, company: "all" };
+      }
+      const companyFilter = state.products.filter(({ company }) => {
+        return payload === company;
+      });
+      return {
+        ...state,
+        filtered_products: companyFilter,
+        company: payload,
+      };
 
     case SET_COLOR:
-      return { ...state, searchQuery: payload };
+      if (payload === "all") {
+        return { ...state, filtered_products: state.products, color: "all" };
+      }
+      const colorFilter = state.products.filter(({ colors }) => {
+        return colors.includes(payload);
+      });
+      return { ...state, filtered_products: colorFilter, color: payload };
 
     case SET_PRICE:
       return { ...state, priceRange: payload };

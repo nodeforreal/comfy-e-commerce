@@ -90,6 +90,14 @@ const FilterContextProvider = ({ children }) => {
     dispatch({ type: SET_CATEGORY, payload: category });
   };
 
+  const setCompany = (company) => {
+    dispatch({ type: SET_COMPANY, payload: company });
+  };
+
+  const setColor = (color) => {
+    dispatch({ type: SET_COLOR, payload: color });
+  };
+
   const setPriceRange = (price) => {
     dispatch({ type: SET_PRICE, payload: price });
   };
@@ -102,7 +110,14 @@ const FilterContextProvider = ({ children }) => {
 
   return (
     <FilterContext.Provider
-      value={{ ...state, getSearch, setCategory, setPriceRange }}
+      value={{
+        ...state,
+        getSearch,
+        setCategory,
+        setCompany,
+        setPriceRange,
+        setColor,
+      }}
     >
       {children}
     </FilterContext.Provider>
