@@ -22,7 +22,7 @@ import {
 const FilterContext = createContext({});
 
 const initialState = {
-  filter_begin: false,
+  filter_begin: true,
   filter: {},
   products: [1, 2, 3],
   filtered_products: [],
