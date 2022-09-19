@@ -29,4 +29,5 @@ const Wrapper = styled.div`
     margin-bottom: 0.4rem;
   }
 `;
+
 export default Price;
