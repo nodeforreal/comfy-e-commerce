@@ -61,7 +61,7 @@ const FilterContextProvider = ({ children }) => {
         colors[color] = color;
       });
     });
-    colors = Object.values(products);
+    colors = Object.values(colors);
 
     // min,max price of products
     const minPrice = products.reduce((final, { price }) => {
@@ -81,17 +81,21 @@ const FilterContextProvider = ({ children }) => {
 
     dispatch({ type: SET_FILTER_LIST, payload: filter });
   };
+
   const getSearch = (query) => {
     dispatch({ type: GET_SEARCH, payload: query });
   };
 
+  const setPriceRange = (price) => {
+    dispatch({ type: SET_PRICE, payload: price });
+  };
   useEffect(() => {
     setFilterlists(products);
     dispatch({ type: SET_PRODUCTS, payload: products });
   }, [products]);
 
   return (
-    <FilterContext.Provider value={{ ...state, getSearch }}>
+    <FilterContext.Provider value={{ ...state, getSearch, setPriceRange }}>
       {children}
     </FilterContext.Provider>
   );

@@ -1,23 +1,24 @@
-import React, { useState } from "react";
 import styled from "styled-components";
 import { useFilterContext } from "../../context/filter-context";
 
 const Price = () => {
-  const [price, setPrice] = useState(1245);
   const {
     filter: { minPrice, maxPrice },
+    setPriceRange,
+    priceRange,
   } = useFilterContext();
 
   return (
     <Wrapper>
       <h5>price</h5>
-      <p>${price}</p>
+      <p>${priceRange}</p>
       <input
-        value={maxPrice}
+        value={maxPrice / 2}
         type="range"
         min={minPrice}
+        step="10000"
         max={maxPrice}
-        onChange={(e) => setPrice(e.currentTarget.value)}
+        onChange={(e) => setPriceRange(e.currentTarget.value)}
       />
     </Wrapper>
   );
