@@ -20,7 +20,7 @@ import {
 const FilterContext = createContext({});
 
 const initialState = {
-  products: [],
+  products: [1, 2, 3],
   searchQuery: "",
   category: "all",
   company: "all",
@@ -34,8 +34,10 @@ const FilterContextProvider = ({ children }) => {
   const { products } = useProductsContext();
   const [state, dispatch] = useReducer(filterReducer, {
     ...initialState,
-    products: products,
+    products,
   });
+
+  console.log("filter-products " + state.products.length);
 
   return (
     <FilterContext.Provider value={{ ...state }}>
