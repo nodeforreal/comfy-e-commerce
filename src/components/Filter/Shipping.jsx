@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useFilterContext } from "../../context/filter-context";
 
 const Shipping = () => {
-    
+    const { } = useFilterContext()
   return (
     <Wrapper>
       <p>
