@@ -30,7 +30,7 @@ const initialState = {
   category: "all",
   company: "all",
   color: "all",
-  price: 1500,
+  priceRange: 1500,
   freeShipping: false,
   sortBy: SORT_LOWEST,
 };
