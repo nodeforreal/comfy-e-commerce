@@ -1,7 +1,5 @@
 import {
   FILTER_BEGIN,
-  FILTER_SUCCESS,
-  FILTER_ERROR,
   SET_PRODUCTS,
   GET_SEARCH,
   SET_CATEGORY,
@@ -19,14 +17,8 @@ import {
 const filterReducer = (state, { type, payload }) => {
   switch (type) {
     case FILTER_BEGIN:
-      return { ...state, products: payload };
-      
-    case FILTER_SUCCESS:
-      return { ...state, products: payload };
-      
-    case FILTER_ERROR:
-      return { ...state, products: payload };
-      
+      return { ...state, filter_begin: payload };
+
     case SET_PRODUCTS:
       return { ...state, products: payload };
 
