@@ -69,16 +69,16 @@ const FilterContextProvider = ({ children }) => {
     const maxPrice = products.reduce((final, { price }) => {
       return Math.max(final, price);
     }, -Infinity);
-    console.log(minPrice, maxPrice);
-    const filter_lists = {
+
+    const filter = {
       categories,
       companies,
       colors,
       minPrice,
-      maxPrice
-    }
-  
-    dispatch({ type: SET_FILTER_LIST, payload: filter_lists });
+      maxPrice,
+    };
+
+    dispatch({ type: SET_FILTER_LIST, payload: filter });
   };
   const getSearch = (query) => {
     dispatch({ type: GET_SEARCH, payload: query });
