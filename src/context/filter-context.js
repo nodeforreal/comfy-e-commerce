@@ -39,6 +39,7 @@ const FilterContextProvider = ({ children }) => {
   useEffect(() => {
     dispatch({ type: SET_PRODUCTS, payload: products });
   }, [products]);
+
   return (
     <FilterContext.Provider value={{ ...state }}>
       {children}
