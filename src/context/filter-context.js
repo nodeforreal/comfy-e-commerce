@@ -1,7 +1,7 @@
 // basic setup
-import { createContext, useReducer, useContext } from "react";
+import { createContext, useReducer, useContext, useEffect } from "react";
 import filterReducer from "../reducer/filter-reducer";
-
+import { useProductsContext } from "./product-context";
 import {
   GET_SEARCH,
   SET_CATEGORY,
@@ -31,13 +31,14 @@ const initialState = {
 };
 
 const FilterContextProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(filterReducer, initialState);
-  const setProducts = (products) => {
-    dispatch({ type: SET_PRODUCTS, payload: products });
-  };
+  const { products } = useProductsContext();
+  const [state, dispatch] = useReducer(filterReducer, {
+    ...initialState,
+    products: products,
+  });
 
   return (
-    <FilterContext.Provider value={{ ...state, setProducts }}>
+    <FilterContext.Provider value={{ ...state }}>
       {children}
     </FilterContext.Provider>
   );
