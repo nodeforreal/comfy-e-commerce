@@ -16,8 +16,8 @@ import {
 const filterReducer = (state, { type, payload }) => {
   switch (type) {
     case SET_PRODUCTS:
-      console.log(type, payload);
       return { ...state, products: payload };
+
     case GET_SEARCH:
       return { ...state, searchQuery: payload };
 
