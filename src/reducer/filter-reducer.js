@@ -32,13 +32,23 @@ const filterReducer = (state, { type, payload }) => {
       };
 
     case GET_SEARCH:
-      const products = state.products.filter(({ name }) => {
+      const searchFilter = state.products.filter(({ name }) => {
         return name.startsWith(payload);
       });
-      return { ...state, searchQuery: payload, filtered_products: products };
+      return {
+        ...state,
+        searchQuery: payload,
+        filtered_products: searchFilter,
+      };
 
     case SET_CATEGORY:
-      return { ...state, searchQuery: payload };
+      if (payload === "all") {
+        return { ...state, filtered_products: state.products, category: "all" };
+      }
+      const categoryFilter = state.products.filter(({ category }) => {
+        return category === payload;
+      });
+      return { ...state, filtered_products: categoryFilter, category: payload };
 
     case SET_COMPANY:
       return { ...state, searchQuery: payload };
