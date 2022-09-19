@@ -79,8 +79,15 @@ const filterReducer = (state, { type, payload }) => {
       return { ...state, priceRange: payload, filtered_products: priceFilter };
 
     case SET_FREE_SHIPPING:
-      const freeShippingFilter = state.products.filter(({ freeShipping }) => {
-        return freeShipping === payload;
+      if (!payload) {
+        return {
+          ...state,
+          isFreeShipping: payload,
+          filtered_products: state.products,
+        };
+      }
+      const freeShippingFilter = state.products.filter(({ shipping }) => {
+        return shipping;
       });
       return {
         ...state,
