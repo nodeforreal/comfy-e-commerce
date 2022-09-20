@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useFilterContext } from "../../context/filter-context";
 
 const Shipping = () => {
-  const { setFreeShipping, freeShipping } = useFilterContext();
+  const { updateFilter, freeShipping } = useFilterContext();
   return (
     <Wrapper>
       <p>
@@ -13,7 +13,7 @@ const Shipping = () => {
         checked={freeShipping ? true : false}
         id="shipping-filter"
         type="checkbox"
-        onChange={() => setFreeShipping()}
+        onClick={() => updateFilter({ freeShipping: !freeShipping })}
       />
     </Wrapper>
   );
