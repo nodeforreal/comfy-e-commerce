@@ -12,7 +12,7 @@ const Search = () => {
         placeholder="Seacrch"
         className="filter-input"
         value={searchQuery}
-        onClick={(e) => updateFilter({ searchQuery: e.currentTarget.value })}
+        onChange={(e) => updateFilter({ searchQuery: e.currentTarget.value })}
       />
     </Wrapper>
   );

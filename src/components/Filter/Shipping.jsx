@@ -13,7 +13,7 @@ const Shipping = () => {
         checked={freeShipping ? true : false}
         id="shipping-filter"
         type="checkbox"
-        onClick={() => updateFilter({ freeShipping: !freeShipping })}
+        onChange={() => updateFilter({ freeShipping: !freeShipping })}
       />
     </Wrapper>
   );

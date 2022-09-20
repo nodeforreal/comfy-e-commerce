@@ -15,6 +15,7 @@ import {
 const FilterContext = createContext({});
 
 const initialState = {
+  isReady: false,
   filter: {},
   products: [],
   filtered_products: [],

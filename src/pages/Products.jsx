@@ -4,8 +4,8 @@ import { PageHero, FilterBar, ProductsSection, Spinner } from "../components";
 import { useFilterContext } from "../context/filter-context";
 
 const Products = () => {
-  const { filter_begin: isReady } = useFilterContext();
-  if (isReady) {
+  const { isReady } = useFilterContext();
+  if (!isReady) {
     return (
       <>
         <PageHero title="products" />
@@ -13,6 +13,7 @@ const Products = () => {
       </>
     );
   }
+  
   return (
     <>
       <PageHero title="products" />
