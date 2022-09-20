@@ -24,7 +24,6 @@ const Wrapper = styled.div`
     height: 2rem;
     padding-left: 0.5rem;
     border-radius: var(--radius);
-    outline-offset: 0;
     border: 0;
     background-color: var(--clr-grey-10);
     font-size: 0.8rem;
