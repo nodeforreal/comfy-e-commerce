@@ -26,77 +26,25 @@ const filterReducer = (state, { type, payload }) => {
       return { ...state, priceRange, filter: payload };
 
     case SET_PRODUCTS:
-      return {
-        ...state,
-        products: payload,
-        filtered_products: payload,
-      };
+      return { ...state, products: payload };
 
     case GET_SEARCH:
-      const searchFilter = state.products.filter(({ name }) => {
-        return name.startsWith(payload);
-      });
-
-      return {
-        ...state,
-        searchQuery: payload,
-        filtered_products: searchFilter,
-      };
+      return { ...state, searchQuery: payload };
 
     case SET_CATEGORY:
-      if (payload === "all") {
-        return { ...state, filtered_products: state.products, category: "all" };
-      }
-      const categoryFilter = state.products.filter(({ category }) => {
-        return category === payload;
-      });
-      return { ...state, filtered_products: categoryFilter, category: payload };
+      return { ...state, category: payload };
 
     case SET_COMPANY:
-      if (payload === "all") {
-        return { ...state, filtered_products: state.products, company: "all" };
-      }
-      const companyFilter = state.products.filter(({ company }) => {
-        return payload === company;
-      });
-
-      return {
-        ...state,
-        filtered_products: companyFilter,
-        company: payload,
-      };
+      return { ...state, company: payload };
 
     case SET_COLOR:
-      if (payload === "all") {
-        return { ...state, filtered_products: state.products, color: "all" };
-      }
-      const colorFilter = state.products.filter(({ colors }) => {
-        return colors.includes(payload);
-      });
-      return { ...state, filtered_products: colorFilter, color: payload };
+      return { ...state, color: payload };
 
     case SET_PRICE_RANGE:
-      const priceFilter = state.products.filter(({ price }) => {
-        return price <= payload;
-      });
-      return { ...state, priceRange: payload, filtered_products: priceFilter };
+      return { ...state, priceRange: payload };
 
     case SET_FREE_SHIPPING:
-      if (!payload) {
-        return {
-          ...state,
-          isFreeShipping: payload,
-          filtered_products: state.products,
-        };
-      }
-      const freeShippingFilter = state.products.filter(({ shipping }) => {
-        return shipping;
-      });
-      return {
-        ...state,
-        isFreeShipping: payload,
-        filtered_products: freeShippingFilter,
-      };
+      return { ...state, freeShipping: payload };
 
     case SORT_HIGHEST:
       return { ...state, searchQuery: payload };
