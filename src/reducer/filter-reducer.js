@@ -3,6 +3,11 @@ import { UPDATE_FILTER, SET_PRODUCTS, SORT_PRODUCTS } from "../actions";
 const filterReducer = (state, { type, payload }) => {
   if (type === SET_PRODUCTS) {
     const { products } = payload;
+
+    if (!products) {
+      return { ...state };
+    }
+
     // catogories in products
     let categories = { all: "all" };
     products.forEach(({ category }) => {
@@ -90,7 +95,7 @@ const filterReducer = (state, { type, payload }) => {
   if (type === SORT_PRODUCTS) {
     return { ...state };
   }
-  throw new Error("...action type - mis-match...");
+  throw new Error("Action type - mis-matched." + type);
 };
 
 export default filterReducer;
