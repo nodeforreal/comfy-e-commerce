@@ -1,121 +1,36 @@
-import {
-  SET_FILTER_BEGIN,
-  SET_FILTER_LIST,
-  SET_PRODUCTS,
-  GET_SEARCH,
-  SET_CATEGORY,
-  SET_COMPANY,
-  SET_COLOR,
-  SET_PRICE_RANGE,
-  SET_FREE_SHIPPING,
-  SORT_HIGHEST,
-  SORT_LOWEST,
-  SORT_NAME_ASC,
-  SORT_NAME_DESC,
-  SET_FILTER_CLEAR,
-} from "../actions";
+import { UPDATE_FILTER } from "../actions";
 
 const filterReducer = (state, { type, payload }) => {
-  // product counts
-  switch (type) {
-    case SET_FILTER_BEGIN:
-      return { ...state, filter_begin: payload };
-
-    case SET_FILTER_LIST:
-      const priceRange = payload.maxPrice / 2;
-      return { ...state, priceRange, filter: payload };
-
-    case SET_PRODUCTS:
-      return {
-        ...state,
-        products: payload,
-        filtered_products: payload,
-      };
-
-    case GET_SEARCH:
-      const searchFilter = state.products.filter(({ name }) => {
-        return name.startsWith(payload);
-      });
-
-      return {
-        ...state,
-        searchQuery: payload,
-        filtered_products: searchFilter,
-      };
-
-    case SET_CATEGORY:
-      if (payload === "all") {
-        return { ...state, filtered_products: state.products, category: "all" };
-      }
-      const categoryFilter = state.products.filter(({ category }) => {
-        return category === payload;
-      });
-      return { ...state, filtered_products: categoryFilter, category: payload };
-
-    case SET_COMPANY:
-      if (payload === "all") {
-        return { ...state, filtered_products: state.products, company: "all" };
-      }
-      const companyFilter = state.products.filter(({ company }) => {
-        return payload === company;
-      });
-
-      return {
-        ...state,
-        filtered_products: companyFilter,
-        company: payload,
-      };
-
-    case SET_COLOR:
-      if (payload === "all") {
-        return { ...state, filtered_products: state.products, color: "all" };
-      }
-      const colorFilter = state.products.filter(({ colors }) => {
-        return colors.includes(payload);
-      });
-      return { ...state, filtered_products: colorFilter, color: payload };
-
-    case SET_PRICE_RANGE:
-      const priceFilter = state.products.filter(({ price }) => {
-        return price <= payload;
-      });
-      return { ...state, priceRange: payload, filtered_products: priceFilter };
-
-    case SET_FREE_SHIPPING:
-      if (!payload) {
-        return {
-          ...state,
-          isFreeShipping: payload,
-          filtered_products: state.products,
-        };
-      }
-      const freeShippingFilter = state.products.filter(({ shipping }) => {
+  if (type === UPDATE_FILTER) {
+    const filtered_products = state.products
+      .filter(({ name }) => {
+        if (state.searchQuery === "") return true;
+        return name.startsWith(state.searchQuery);
+      })
+      .filter(({ category }) => {
+        if (state.category === "all") return true;
+        return category === state.category;
+      })
+      .filter(({ company }) => {
+        if (state.company === "all") return true;
+        return company === state.company;
+      })
+      .filter(({ colors }) => {
+        if (state.color === "all") return true;
+        return colors.includes(state.color);
+      })
+      .filter(({ price }) => {
+        return price <= state.priceRange;
+      })
+      .filter(({ shipping }) => {
+        if (!state.freeShipping) {
+          return true;
+        }
         return shipping;
       });
-      return {
-        ...state,
-        isFreeShipping: payload,
-        filtered_products: freeShippingFilter,
-      };
-
-    case SORT_HIGHEST:
-      return { ...state, searchQuery: payload };
-
-    case SORT_LOWEST:
-      return { ...state, searchQuery: payload };
-
-    case SORT_NAME_ASC:
-      return { ...state, searchQuery: payload };
-
-    case SORT_NAME_DESC:
-      return { ...state, searchQuery: payload };
-
-    case SET_FILTER_CLEAR:
-      return { ...state, searchQuery: payload };
-
-    default:
-      throw new Error("Filter reducer - action.type doesn't match.");
+    return { ...state, filtered_products };
   }
+  throw new Error("...action type - mis-match...");
 };
 
 export default filterReducer;
