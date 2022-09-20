@@ -1,5 +1,7 @@
 import { UPDATE_FILTER, SET_PRODUCTS, SORT_PRODUCTS } from "../actions";
 
+let filtered_products = [];
+
 const filterReducer = (state, { type, payload }) => {
   if (type === SET_PRODUCTS) {
     const products = payload;
@@ -46,50 +48,43 @@ const filterReducer = (state, { type, payload }) => {
       minPrice,
       maxPrice,
     };
-
-    return { ...state, products, filter, isReady: true };
+    const priceRange = filter.maxPrice;
+    return {
+      ...state,
+      products,
+      filtered_products: products,
+      filter,
+      isReady: true,
+      priceRange,
+    };
   }
 
   if (type === UPDATE_FILTER) {
-    const { searchQuery, category, company, color, priceRange, freeShipping } =
-      payload;
-
     const filtered_products = state.products
       .filter(({ name }) => {
-        if (state.searchQuery === "") return true;
-        return name.startsWith(state.searchQuery);
+        const searchQuery = payload.searchQuery || state.searchQuery;
+        if (searchQuery === "") return true;
+        return name.startsWith(searchQuery);
       })
       .filter(({ category }) => {
-        if (state.category === "all") return true;
-        return category === state.category;
+        const _category = payload.category || state.category;
+        if (_category === "all") return true;
+        return _category === category;
       })
       .filter(({ company }) => {
-        if (state.company === "all") return true;
-        return company === state.company;
+        const _company = payload.company || state.company;
+        if (_company === "all") return true;
+        return _company === company;
       })
       .filter(({ colors }) => {
-        if (state.color === "all") return true;
-        return colors.includes(state.color);
-      })
-      .filter(({ price }) => {
-        return price <= state.priceRange;
-      })
-      .filter(({ shipping }) => {
-        if (!state.freeShipping) {
-          return true;
-        }
-        return shipping;
+        const color = payload.color || state.color;
+        if (color === "all") return true;
+        return colors.includes(color);
       });
-
     return {
       ...state,
       filtered_products,
-      searchQuery,
-      category,
-      company,
-      color,
-      priceRange,
-      freeShipping,
+      ...payload,
     };
   }
 

@@ -23,7 +23,7 @@ const initialState = {
   category: "all",
   company: "all",
   color: "all",
-  priceRange: 0,
+  priceRange: "100%",
   freeShipping: false,
   sortBy: SORT_LOWEST,
 };
@@ -33,6 +33,7 @@ const FilterContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(filterReducer, initialState);
   //  search and update filter
   const updateFilter = (filter) => {
+    console.log(filter);
     dispatch({ type: UPDATE_FILTER, payload: filter });
   };
   //   sort filter
@@ -40,7 +41,7 @@ const FilterContextProvider = ({ children }) => {
 
   useEffect(() => {
     //   set products
-    
+    console.log("useEffect");
     dispatch({ type: SET_PRODUCTS, payload: products });
   }, [products]);
 
