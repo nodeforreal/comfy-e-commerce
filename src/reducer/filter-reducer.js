@@ -122,11 +122,35 @@ const filterReducer = (state, { type, payload }) => {
     if (payload === SORT_HIGHEST) {
       filtered_products = filtered_products.sort((a, b) => b.price - a.price);
     }
+
     if (payload === SORT_NAME_ASC) {
-      filtered_products = filtered_products.sort();
+      filtered_products = filtered_products.sort((a, b) => {
+        let nameA = a.name.toLowerCase();
+        let nameB = b.name.toLowerCase();
+        if (nameA > nameB) {
+          return 1;
+        }
+        if (nameA > nameB) {
+          return -1;
+        }
+        // name equal
+        return 0;
+      });
     }
+
     if (payload === SORT_NAME_DESC) {
-      filtered_products = filtered_products.reverse();
+      filtered_products = filtered_products.reverse((a, b) => {
+        let nameA = a.name.toLowerCase();
+        let nameB = b.name.toLowerCase();
+        if (nameA > nameB) {
+          return 1;
+        }
+        if (nameA > nameB) {
+          return -1;
+        }
+        // name equal
+        return 0;
+      });
     }
     return { ...state, filtered_products };
   }
