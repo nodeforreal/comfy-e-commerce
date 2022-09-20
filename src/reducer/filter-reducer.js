@@ -130,7 +130,7 @@ const filterReducer = (state, { type, payload }) => {
         if (nameA > nameB) {
           return 1;
         }
-        if (nameA > nameB) {
+        if (nameA < nameB) {
           return -1;
         }
         // name equal
@@ -145,7 +145,7 @@ const filterReducer = (state, { type, payload }) => {
         if (nameA > nameB) {
           return 1;
         }
-        if (nameA > nameB) {
+        if (nameA < nameB) {
           return -1;
         }
         // name equal
