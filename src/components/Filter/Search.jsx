@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useFilterContext } from "../../context/filter-context";
 
 const Search = () => {
-  const { getSearch, searchQuery } = useFilterContext();
+  const { getSearch, searchQuery, updateFilter } = useFilterContext();
 
   return (
     <Wrapper>
@@ -12,7 +12,7 @@ const Search = () => {
         placeholder="Seacrch"
         className="filter-input"
         value={searchQuery}
-        onChange={(e) => getSearch(e.currentTarget.value)}
+        onClick={(e) => updateFilter({ searchQuery: e.currentTarget.value })}
       />
     </Wrapper>
   );
