@@ -4,7 +4,7 @@ import { useFilterContext } from "../../context/filter-context";
 const Price = () => {
   const {
     filter: { minPrice, maxPrice },
-    setPriceRange,
+    updateFilter,
     priceRange,
   } = useFilterContext();
 
@@ -17,7 +17,7 @@ const Price = () => {
         type="range"
         min={minPrice}
         max={maxPrice}
-        onChange={(e) => setPriceRange(e.currentTarget.value)}
+        onClick={(e) => updateFilter({ priceRange: e.currentTarget.value })}
       />
     </Wrapper>
   );
