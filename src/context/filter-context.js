@@ -5,6 +5,7 @@ import { useProductsContext } from "./product-context";
 import {
   SET_PRODUCTS,
   UPDATE_FILTER,
+  CLEAR_FILTER,
   SORT_PRODUCTS,
   SORT_LOWEST,
   SORT_HIGHEST,
@@ -23,7 +24,7 @@ const initialState = {
   category: "all",
   company: "all",
   color: "all",
-  priceRange: "100%",
+  priceRange: "0",
   freeShipping: false,
   sortBy: SORT_LOWEST,
 };
@@ -33,20 +34,30 @@ const FilterContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(filterReducer, initialState);
   //  search and update filter
   const updateFilter = (filter) => {
-    console.log(filter);
     dispatch({ type: UPDATE_FILTER, payload: filter });
   };
-  //   sort filter
+
   // clear filter
+  const clearFilter = () => {
+    const reset = {
+      searchQuery: "",
+      category: "all",
+      company: "all",
+      color: "all",
+      freeShipping: false,
+    };
+
+    dispatch({ type: CLEAR_FILTER, payload: reset });
+  };
+  //   sort filter
 
   useEffect(() => {
     //   set products
-    console.log("useEffect");
     dispatch({ type: SET_PRODUCTS, payload: products });
   }, [products]);
 
   return (
-    <FilterContext.Provider value={{ ...state, updateFilter }}>
+    <FilterContext.Provider value={{ ...state, updateFilter, clearFilter }}>
       {children}
     </FilterContext.Provider>
   );

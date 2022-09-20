@@ -1,6 +1,9 @@
-import { UPDATE_FILTER, SET_PRODUCTS, SORT_PRODUCTS } from "../actions";
-
-let filtered_products = [];
+import {
+  UPDATE_FILTER,
+  SET_PRODUCTS,
+  SORT_PRODUCTS,
+  CLEAR_FILTER,
+} from "../actions";
 
 const filterReducer = (state, { type, payload }) => {
   if (type === SET_PRODUCTS) {
@@ -80,18 +83,34 @@ const filterReducer = (state, { type, payload }) => {
         const color = payload.color || state.color;
         if (color === "all") return true;
         return colors.includes(color);
+      })
+      .filter(({ price }) => {
+        const _priceRange = payload.priceRange || state.priceRange;
+        if (_priceRange === "all") return true;
+        return price <= _priceRange;
+      })
+      .filter(({ shipping }) => {
+        const freeShipping = payload.freeShipping;
+        if (!freeShipping) return true;
+        return shipping;
       });
+
     return {
       ...state,
       filtered_products,
       ...payload,
     };
   }
+  if (type === CLEAR_FILTER) {
+    const filtered_products = [...state.products];
+    const priceRange = state.filter.maxPrice;
+    return { ...state, filtered_products, priceRange, ...payload };
+  }
 
   if (type === SORT_PRODUCTS) {
     return { ...state };
   }
-  throw new Error("Action type - mis-matched." + type);
+  throw new Error("Action type mis-match :" + type);
 };
 
 export default filterReducer;

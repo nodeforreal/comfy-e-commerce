@@ -17,7 +17,7 @@ const Price = () => {
         type="range"
         min={minPrice}
         max={maxPrice}
-        onClick={(e) => updateFilter({ priceRange: e.currentTarget.value })}
+        onChange={(e) => updateFilter({ priceRange: e.currentTarget.value })}
       />
     </Wrapper>
   );
