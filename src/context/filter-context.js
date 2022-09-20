@@ -2,7 +2,15 @@
 import { createContext, useReducer, useContext, useEffect } from "react";
 import filterReducer from "../reducer/filter-reducer";
 import { useProductsContext } from "./product-context";
-import { SET_PRODUCTS, UPDATE_FILTER, SORT_PRODUCTS } from "../actions";
+import {
+  SET_PRODUCTS,
+  UPDATE_FILTER,
+  SORT_PRODUCTS,
+  SORT_LOWEST,
+  SORT_HIGHEST,
+  SORT_NAME_ASC,
+  SORT_NAME_DESC,
+} from "../actions";
 
 const FilterContext = createContext({});
 
