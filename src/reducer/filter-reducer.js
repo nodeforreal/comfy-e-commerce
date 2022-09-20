@@ -1,9 +1,21 @@
-import { UPDATE_FILTER, SET_PRODUCTS, SORT_PRODUCTS } from "../actions";
+import {
+  UPDATE_FILTER,
+  SET_PRODUCTS,
+  SORT_PRODUCTS,
+  CLEAR_FILTER,
+} from "../actions";
+import {
+  SORT_HIGHEST,
+  SORT_LOWEST,
+  SORT_NAME_ASC,
+  SORT_NAME_DESC,
+} from "../utils/constants";
 
+// FILTER REDUCER
 const filterReducer = (state, { type, payload }) => {
   if (type === SET_PRODUCTS) {
-    const { products } = payload;
-    console.log("set-products");
+    const products = payload;
+
     if (!products) {
       return { ...state };
     }
@@ -46,57 +58,103 @@ const filterReducer = (state, { type, payload }) => {
       minPrice,
       maxPrice,
     };
-    console.log(categories);
-    return { ...state, products, filter };
+    const priceRange = filter.maxPrice;
+    return {
+      ...state,
+      products,
+      filtered_products: products,
+      filter,
+      isReady: true,
+      priceRange,
+    };
   }
 
   if (type === UPDATE_FILTER) {
-    const { searchQuery, category, company, color, priceRange, freeShipping } =
-      payload;
-
     const filtered_products = state.products
       .filter(({ name }) => {
-        if (state.searchQuery === "") return true;
-        return name.startsWith(state.searchQuery);
+        const searchQuery = payload.searchQuery || state.searchQuery;
+        if (searchQuery === "") return true;
+        return name.toLowerCase().startsWith(searchQuery.toLowerCase());
       })
       .filter(({ category }) => {
-        if (state.category === "all") return true;
-        return category === state.category;
+        const _category = payload.category || state.category;
+        if (_category === "all") return true;
+        return _category === category;
       })
       .filter(({ company }) => {
-        if (state.company === "all") return true;
-        return company === state.company;
+        const _company = payload.company || state.company;
+        if (_company === "all") return true;
+        return _company === company;
       })
       .filter(({ colors }) => {
-        if (state.color === "all") return true;
-        return colors.includes(state.color);
+        const color = payload.color || state.color;
+        if (color === "all") return true;
+        return colors.includes(color);
       })
       .filter(({ price }) => {
-        return price <= state.priceRange;
+        const _priceRange = payload.priceRange || state.priceRange;
+        if (_priceRange === "all") return true;
+        return price <= _priceRange;
       })
       .filter(({ shipping }) => {
-        if (!state.freeShipping) {
-          return true;
-        }
+        const freeShipping = payload.freeShipping;
+        if (!freeShipping) return true;
         return shipping;
       });
 
     return {
       ...state,
       filtered_products,
-      searchQuery,
-      category,
-      company,
-      color,
-      priceRange,
-      freeShipping,
+      ...payload,
     };
+  }
+  if (type === CLEAR_FILTER) {
+    const filtered_products = [...state.products];
+    const priceRange = state.filter.maxPrice;
+    return { ...state, filtered_products, priceRange, ...payload };
   }
 
   if (type === SORT_PRODUCTS) {
-    return { ...state };
+    let filtered_products = [...state.filtered_products];
+    if (payload === SORT_LOWEST) {
+      filtered_products = filtered_products.sort((a, b) => a.price - b.price);
+    }
+    if (payload === SORT_HIGHEST) {
+      filtered_products = filtered_products.sort((a, b) => b.price - a.price);
+    }
+
+    if (payload === SORT_NAME_ASC) {
+      filtered_products = filtered_products.sort((a, b) => {
+        let nameA = a.name.toLowerCase();
+        let nameB = b.name.toLowerCase();
+        if (nameA > nameB) {
+          return 1;
+        }
+        if (nameA < nameB) {
+          return -1;
+        }
+        // name equal
+        return 0;
+      });
+    }
+
+    if (payload === SORT_NAME_DESC) {
+      filtered_products = filtered_products.reverse((a, b) => {
+        let nameA = a.name.toLowerCase();
+        let nameB = b.name.toLowerCase();
+        if (nameA > nameB) {
+          return 1;
+        }
+        if (nameA < nameB) {
+          return -1;
+        }
+        // name equal
+        return 0;
+      });
+    }
+    return { ...state, filtered_products };
   }
-  throw new Error("Action type - mis-matched." + type);
+  throw new Error("Action type mis-match :" + type);
 };
 
 export default filterReducer;

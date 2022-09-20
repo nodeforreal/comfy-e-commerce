@@ -34,6 +34,7 @@ const ProductsContextProvider = ({ children }) => {
     try {
       const { data } = await axios(products_api);
       dispatch({ type: PRODUCTS_FETCH_SUCCESS, payload: data });
+      
     } catch (error) {
       dispatch({ type: PRODUCTS_FETCH_ERROR });
     }
