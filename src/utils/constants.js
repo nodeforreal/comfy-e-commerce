@@ -60,7 +60,15 @@ export const testimonialItems = [
     title: "History",
   },
 ];
-
+// api
 export const products_api = "https://course-api.com/react-store-products";
 
 export const single_product_api = `https://course-api.com/react-store-single-product?id=`;
+
+// sort constants
+const SORT_HIGHEST = "SORT_HIGHEST";
+const SORT_LOWEST = "SORT_LOWEST";
+const SORT_NAME_ASC = "SORT_NAME_ASC";
+const SORT_NAME_DESC = "SORT_NAME_DESC";
+
+export { SORT_HIGHEST, SORT_LOWEST, SORT_NAME_ASC, SORT_NAME_DESC };

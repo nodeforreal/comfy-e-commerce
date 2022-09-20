@@ -4,7 +4,14 @@ import {
   SORT_PRODUCTS,
   CLEAR_FILTER,
 } from "../actions";
+import {
+  SORT_HIGHEST,
+  SORT_LOWEST,
+  SORT_NAME_ASC,
+  SORT_NAME_DESC,
+} from "../utils/constants";
 
+// FILTER REDUCER
 const filterReducer = (state, { type, payload }) => {
   if (type === SET_PRODUCTS) {
     const products = payload;
@@ -108,7 +115,20 @@ const filterReducer = (state, { type, payload }) => {
   }
 
   if (type === SORT_PRODUCTS) {
-    return { ...state };
+    let filtered_products = [...state.filtered_products];
+    if (payload === SORT_LOWEST) {
+      filtered_products = filtered_products.sort((a, b) => a.price - b.price);
+    }
+    if (payload === SORT_HIGHEST) {
+      filtered_products = filtered_products.sort((a, b) => b.price - a.price);
+    }
+    if (payload === SORT_NAME_ASC) {
+      filtered_products = filtered_products.sort();
+    }
+    if (payload === SORT_NAME_DESC) {
+      filtered_products = filtered_products.reverse();
+    }
+    return { ...state, filtered_products };
   }
   throw new Error("Action type mis-match :" + type);
 };

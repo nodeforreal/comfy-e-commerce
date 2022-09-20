@@ -50,14 +50,19 @@ const FilterContextProvider = ({ children }) => {
     dispatch({ type: CLEAR_FILTER, payload: reset });
   };
   //   sort filter
-
+  const sortProducts = (type) => {
+    console.log(type);
+    dispatch({ type: SORT_PRODUCTS, payload: type });
+  };
   useEffect(() => {
     //   set products
     dispatch({ type: SET_PRODUCTS, payload: products });
   }, [products]);
 
   return (
-    <FilterContext.Provider value={{ ...state, updateFilter, clearFilter }}>
+    <FilterContext.Provider
+      value={{ ...state, updateFilter, clearFilter, sortProducts }}
+    >
       {children}
     </FilterContext.Provider>
   );
