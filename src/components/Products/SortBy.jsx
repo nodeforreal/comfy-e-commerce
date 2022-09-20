@@ -64,7 +64,7 @@ const Wrapper = styled.div`
     padding: 0.35rem;
     border-radius: var(--radius);
     border: 0;
-    backgroun-color: var(--clr-primary-10);
+    background-color: var(--clr-grey-10);
     font-size: 1rem;
     text-transform: capitalize;
   }
