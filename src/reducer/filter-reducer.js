@@ -73,8 +73,8 @@ const filterReducer = (state, { type, payload }) => {
     const filtered_products = state.products
       .filter(({ name }) => {
         const searchQuery = payload.searchQuery || state.searchQuery;
-        if (searchQuery.toLowerCase() === "") return true;
-        return name.toLowerCase().startsWith(searchQuery);
+        if (searchQuery === "") return true;
+        return name.toLowerCase().startsWith(searchQuery.toLowerCase());
       })
       .filter(({ category }) => {
         const _category = payload.category || state.category;
