@@ -5,8 +5,8 @@ import { useFilterContext } from "../../context/filter-context";
 const Colors = () => {
   const {
     filter: { colors },
-    setColor,
-    color: colorSelection,
+    updateFilter,
+    color: selectedColor,
   } = useFilterContext();
 
   return (
@@ -15,13 +15,13 @@ const Colors = () => {
       <ul>
         <li
           className={`${
-            colorSelection === "all" ? "filter-text-underline" : ""
+            selectedColor === "all" ? "filter-text-underline" : ""
           }`}
         >
           <button
             value="all"
             className="filter-text-secondary"
-            onClick={(e) => setColor(e.currentTarget.value)}
+            onClick={(e) => updateFilter({ color: e.currentTarget.value })}
           >
             All
           </button>
@@ -32,12 +32,12 @@ const Colors = () => {
               <button
                 value={color}
                 className="color-btn"
-                onClick={(e) => setColor(e.currentTarget.value)}
+                onClick={(e) => updateFilter({ color: e.currentTarget.value })}
                 css={`
                   background-color: ${color};
                 `}
               >
-                {colorSelection === color && <FaCheck className="icon" />}
+                {selectedColor === color && <FaCheck className="icon" />}
               </button>
             </li>
           );

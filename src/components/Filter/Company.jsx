@@ -5,16 +5,16 @@ import { useFilterContext } from "../../context/filter-context";
 const Company = () => {
   const {
     filter: { companies },
-    setCompany,
-    company: selectionCompany,
+    updateFilter,
+    company: selectedCompany,
   } = useFilterContext();
 
   return (
     <Wrapper>
       <h5>company</h5>
       <select
-        value={selectionCompany}
-        onChange={(e) => setCompany(e.currentTarget.value)}
+        value={selectedCompany}
+        onClick={(e) => updateFilter({ company: e.currentTarget.value })}
       >
         {companies.map((company, index) => {
           return (

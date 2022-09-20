@@ -15,6 +15,7 @@ import {
 const FilterContext = createContext({});
 
 const initialState = {
+  isReady: false,
   filter: {},
   products: [],
   filtered_products: [],
@@ -31,6 +32,9 @@ const FilterContextProvider = ({ children }) => {
   const { products } = useProductsContext();
   const [state, dispatch] = useReducer(filterReducer, initialState);
   //  search and update filter
+  const updateFilter = (filter) => {
+    dispatch({ type: UPDATE_FILTER, payload: filter });
+  };
   //   sort filter
   // clear filter
 
@@ -40,7 +44,7 @@ const FilterContextProvider = ({ children }) => {
   }, [products]);
 
   return (
-    <FilterContext.Provider value={{ ...state }}>
+    <FilterContext.Provider value={{ ...state, updateFilter }}>
       {children}
     </FilterContext.Provider>
   );
