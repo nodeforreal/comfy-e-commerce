@@ -40,6 +40,7 @@ const FilterContextProvider = ({ children }) => {
 
   useEffect(() => {
     //   set products
+    
     dispatch({ type: SET_PRODUCTS, payload: products });
   }, [products]);
 

@@ -2,8 +2,8 @@ import { UPDATE_FILTER, SET_PRODUCTS, SORT_PRODUCTS } from "../actions";
 
 const filterReducer = (state, { type, payload }) => {
   if (type === SET_PRODUCTS) {
-    const { products } = payload;
-    console.log("set-products");
+    const products = payload;
+
     if (!products) {
       return { ...state };
     }
@@ -46,8 +46,8 @@ const filterReducer = (state, { type, payload }) => {
       minPrice,
       maxPrice,
     };
-    console.log(categories);
-    return { ...state, products, filter };
+
+    return { ...state, products, filter, isReady: true };
   }
 
   if (type === UPDATE_FILTER) {

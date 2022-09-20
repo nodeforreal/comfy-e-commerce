@@ -14,7 +14,7 @@ const Company = () => {
       <h5>company</h5>
       <select
         value={selectedCompany}
-        onClick={(e) => updateFilter({ company: e.currentTarget.value })}
+        onChange={(e) => updateFilter({ company: e.currentTarget.value })}
       >
         {companies.map((company, index) => {
           return (
