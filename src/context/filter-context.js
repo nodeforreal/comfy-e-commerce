@@ -2,35 +2,19 @@
 import { createContext, useReducer, useContext, useEffect } from "react";
 import filterReducer from "../reducer/filter-reducer";
 import { useProductsContext } from "./product-context";
-import {
-  SET_FILTER_BEGIN,
-  GET_SEARCH,
-  SET_CATEGORY,
-  SET_COMPANY,
-  SET_COLOR,
-  SET_PRICE_RANGE,
-  SET_FREE_SHIPPING,
-  SORT_HIGHEST,
-  SORT_LOWEST,
-  SORT_NAME_ASC,
-  SORT_NAME_DESC,
-  SET_FILTER_CLEAR,
-  SET_PRODUCTS,
-  SET_FILTER_LIST,
-} from "../actions";
+import { SET_PRODUCTS, UPDATE_FILTER, SORT_PRODUCTS } from "../actions";
 
 const FilterContext = createContext({});
 
 const initialState = {
-  filter_begin: true,
   filter: {},
-  products: [1, 2, 3],
+  products: [],
   filtered_products: [],
   searchQuery: "",
   category: "all",
   company: "all",
   color: "all",
-  priceRange: 1500,
+  priceRange: 0,
   freeShipping: false,
   sortBy: SORT_LOWEST,
 };
@@ -38,8 +22,12 @@ const initialState = {
 const FilterContextProvider = ({ children }) => {
   const { products } = useProductsContext();
   const [state, dispatch] = useReducer(filterReducer, initialState);
-  
+  //  search and update filter
+  //   sort filter
+  // clear filter
+
   useEffect(() => {
+    //   set products
     dispatch({ type: SET_PRODUCTS, payload: products });
   }, [products]);
 
