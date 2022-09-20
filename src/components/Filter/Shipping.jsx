@@ -3,14 +3,14 @@ import styled from "styled-components";
 import { useFilterContext } from "../../context/filter-context";
 
 const Shipping = () => {
-  const { setFreeShipping, isFreeShipping } = useFilterContext();
+  const { setFreeShipping, freeShipping } = useFilterContext();
   return (
     <Wrapper>
       <p>
         <label htmlFor="shipping-filter">free shipping</label>
       </p>
       <input
-        checked={isFreeShipping ? true : false}
+        checked={freeShipping ? true : false}
         id="shipping-filter"
         type="checkbox"
         onChange={() => setFreeShipping()}

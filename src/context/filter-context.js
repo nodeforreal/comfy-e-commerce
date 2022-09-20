@@ -103,7 +103,7 @@ const FilterContextProvider = ({ children }) => {
   };
 
   const setFreeShipping = () => {
-    dispatch({ type: SET_FREE_SHIPPING, payload: !state.isFreeShipping });
+    dispatch({ type: SET_FREE_SHIPPING, payload: !state.freeShipping });
   };
 
   useEffect(() => {
