@@ -5,8 +5,8 @@ import { useFilterContext } from "../../context/filter-context";
 const Category = () => {
   const {
     filter: { categories },
-    setCategory,
-    category: selectionCategory,
+    category: selectedCategory,
+    updateFilter,
   } = useFilterContext();
 
   return (
@@ -17,10 +17,13 @@ const Category = () => {
           return (
             <li key={index}>
               <button
+                value={category}
                 className={`${
-                  selectionCategory === category && "selected"
+                  selectedCategory === category && "selected"
                 } filter-text-secondary`}
-                onClick={() => setCategory(category)}
+                onClick={(e) =>
+                  updateFilter({ category: e.currentTarget.value })
+                }
               >
                 {category}
               </button>
