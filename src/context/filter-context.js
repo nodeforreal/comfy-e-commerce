@@ -38,92 +38,13 @@ const initialState = {
 const FilterContextProvider = ({ children }) => {
   const { products } = useProductsContext();
   const [state, dispatch] = useReducer(filterReducer, initialState);
-
-  const setFilterlists = (products) => {
-    // catogories in products
-    let categories = { all: "all" };
-    products.forEach(({ category }) => {
-      categories[category] = category;
-    });
-    categories = Object.values(categories);
-
-    // companies in products
-    let companies = { all: "all" };
-    products.forEach(({ company }) => {
-      companies[company] = company;
-    });
-    companies = Object.values(companies);
-
-    // colors in products
-    let colors = {};
-    products.forEach(({ colors: colorsArr }) => {
-      colorsArr.forEach((color) => {
-        colors[color] = color;
-      });
-    });
-    colors = Object.values(colors);
-
-    // min,max price of products
-    const minPrice = products.reduce((final, { price }) => {
-      return Math.min(final, price);
-    }, Infinity);
-    const maxPrice = products.reduce((final, { price }) => {
-      return Math.max(final, price);
-    }, -Infinity);
-
-    const filter = {
-      categories,
-      companies,
-      colors,
-      minPrice,
-      maxPrice,
-    };
-
-    dispatch({ type: SET_FILTER_LIST, payload: filter });
-  };
-
-  const getSearch = (query) => {
-    dispatch({ type: GET_SEARCH, payload: query });
-  };
-
-  const setCategory = (category) => {
-    dispatch({ type: SET_CATEGORY, payload: category });
-  };
-
-  const setCompany = (company) => {
-    dispatch({ type: SET_COMPANY, payload: company });
-  };
-
-  const setColor = (color) => {
-    dispatch({ type: SET_COLOR, payload: color });
-  };
-
-  const setPriceRange = (price) => {
-    dispatch({ type: SET_PRICE_RANGE, payload: price });
-  };
-
-  const setFreeShipping = () => {
-    dispatch({ type: SET_FREE_SHIPPING, payload: !state.freeShipping });
-  };
-
+  
   useEffect(() => {
-    setFilterlists(products);
     dispatch({ type: SET_PRODUCTS, payload: products });
-    dispatch({ type: SET_FILTER_BEGIN });
   }, [products]);
 
   return (
-    <FilterContext.Provider
-      value={{
-        ...state,
-        getSearch,
-        setCategory,
-        setCompany,
-        setPriceRange,
-        setColor,
-        setFreeShipping,
-      }}
-    >
+    <FilterContext.Provider value={{ ...state }}>
       {children}
     </FilterContext.Provider>
   );
