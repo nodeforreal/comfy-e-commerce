@@ -7,6 +7,7 @@ import {
   REMOVE_ITEM_QUANTITY,
   REMOVE_CART_ITEM,
   CLEAR_CART,
+  CHECKOUT_TOTAL,
 } from "../actions";
 
 const CartContext = createContext({});
@@ -40,7 +41,12 @@ const CartContextProvider = ({ children }) => {
   };
 
   const clearCart = () => {
+    console.log("clear - cart.");
     dispatch({ type: CLEAR_CART, payload: initialState });
+  };
+
+  const subTotal = () => {
+    dispatch({ type: CHECKOUT_TOTAL });
   };
 
   return (
@@ -52,6 +58,7 @@ const CartContextProvider = ({ children }) => {
         removeItemQuantity,
         removeCartItem,
         clearCart,
+        subTotal,
       }}
     >
       {children}

@@ -5,7 +5,7 @@ import FlattenLinkButton from "./FlattenLinkButton";
 import { useCartContext } from "../context/cart-context";
 
 const CartSection = () => {
-  const { cart_items } = useCartContext();
+  const { cart_items, clearCart } = useCartContext();
   return (
     <Wrapper className="section-center">
       <div className="cart-table-head table-column-grid">
@@ -35,6 +35,7 @@ const CartSection = () => {
             background-color: var(--clr-black);
             color: var(--clr-white);
           `}
+          onClick={() => clearCart()}
         >
           clear shopping cart
         </FlatButton>

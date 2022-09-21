@@ -85,7 +85,7 @@ const cartReducer = (state, { type, payload }) => {
   }
 
   if (type === CLEAR_CART) {
-    return { ...state, ...payload };
+    return { ...payload };
   }
 
   throw new Error("Action type - mis-match. " + type);

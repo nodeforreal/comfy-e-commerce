@@ -13,8 +13,7 @@ const CartItem = ({
   selectedQuantity,
   subTotal,
 }) => {
-  const { addItemQuantity, removeItemQuantity, removeCartItem } =
-    useCartContext();
+  const { addItemQuantity, removeItemQuantity, removeCartItem } = useCartContext();
   return (
     <Wrapper className="table-column-grid">
       <div className="product">
