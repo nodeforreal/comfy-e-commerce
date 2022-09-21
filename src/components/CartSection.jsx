@@ -46,8 +46,6 @@ const CartSection = () => {
   );
 };
 
-console.log(FlatButton);
-
 const Wrapper = styled.div`
   margin-top: 2rem;
   .table-column-grid {
@@ -80,7 +78,9 @@ const Wrapper = styled.div`
   @media screen and (max-width: 760px) {
     .table-column-grid {
       grid-template-columns: 200px auto auto;
+      gap: 1rem;
     }
+    
     .head-price,
     .head-subtotal {
       display: none;

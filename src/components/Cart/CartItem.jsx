@@ -3,7 +3,14 @@ import styled from "styled-components/macro";
 import ProductQuantity from "../ProductQuantity";
 import { MdDelete } from "react-icons/md";
 
-const CartItem = ({ image, name, price, selectedColor, selectedQuantity, subTotal }) => {
+const CartItem = ({
+  image,
+  name,
+  price,
+  selectedColor,
+  selectedQuantity,
+  subTotal,
+}) => {
   return (
     <Wrapper className="table-column-grid">
       <div className="product">
@@ -22,7 +29,7 @@ const CartItem = ({ image, name, price, selectedColor, selectedQuantity, subTota
         </div>
       </div>
       <p className="product-price">{price}</p>
-      <ProductQuantity count={selectedQuantity}/>
+      <ProductQuantity count={selectedQuantity} />
       <p className="product-subtotal">{subTotal}</p>
       <div className="cart-delete">
         <button className="cart-delete-btn">
@@ -115,7 +122,14 @@ const Wrapper = styled.div`
     letter-spacing: var(--spacing);
     color: var(--clr-primary-6);
   }
-
+  @media screen and (max-width:560px){
+    .product{
+          img {
+              width: 75px;
+              height: 65px;
+          }
+    }
+    
   @media screen and (max-width: 760px) {
     .product-price-760 {
       display: block;
