@@ -23,12 +23,18 @@ const SingleProduct = () => {
 
   //   cart quantity handler
   const countLeft = () => {
+    const selectedQuantity = cart.selectedQuantity - 1;
+    const subTotal = cart.price * selectedQuantity;
+
     if (cart.selectedQuantity === 1) return;
-    setCart({ ...cart, selectedQuantity: cart.selectedQuantity - 1 });
+    setCart({ ...cart, selectedQuantity, subTotal });
   };
+
   const countRight = () => {
     // if(cart.selectedQuantity ) return;
-    setCart({ ...cart, selectedQuantity: cart.selectedQuantity + 1 });
+    const selectedQuantity = cart.selectedQuantity + 1;
+    const subTotal = cart.price * selectedQuantity;
+    setCart({ ...cart, selectedQuantity, subTotal });
   };
 
   // set color
@@ -36,7 +42,7 @@ const SingleProduct = () => {
     setCart({ ...cart, selectedColor: color });
     console.log(cart);
   };
-  
+
   useEffect(() => {
     fetchSingleProduct(productId);
     return () => {};
@@ -52,7 +58,7 @@ const SingleProduct = () => {
       price: product.price,
       selectedColor: "",
       selectedQuantity: 1,
-      subtotal: 0,
+      subTotal: 0,
       quantityLimit: 0,
     });
   }, [product]);
