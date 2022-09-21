@@ -15,6 +15,8 @@ const CartContext = createContext({});
 const initialState = {
   cart_items: [],
   order_total: 0,
+  sub_total: 0,
+  shipping_fee: 5.55,
 };
 
 const CartContextProvider = ({ children }) => {
@@ -45,7 +47,7 @@ const CartContextProvider = ({ children }) => {
     dispatch({ type: CLEAR_CART, payload: initialState });
   };
 
-  const subTotal = () => {
+  const cartCheckout = () => {
     dispatch({ type: CART_CHECKOUT });
   };
 
@@ -58,7 +60,7 @@ const CartContextProvider = ({ children }) => {
         removeItemQuantity,
         removeCartItem,
         clearCart,
-        subTotal,
+        cartCheckout,
       }}
     >
       {children}

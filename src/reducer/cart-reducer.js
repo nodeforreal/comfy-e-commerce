@@ -4,10 +4,16 @@ import {
   REMOVE_ITEM_QUANTITY,
   REMOVE_CART_ITEM,
   CLEAR_CART,
+  CART_CHECKOUT,
 } from "../actions";
 
 // CART REDUCER
 const cartReducer = (state, { type, payload }) => {
+  state.sub_total = state.cart_items.reduce(
+    (total, { subTotal }) => total + subTotal,
+    0
+  );
+
   if (type === ADD_TO_CART) {
     //   initial set up.
     if (state.cart_items.length === 0) {
@@ -24,7 +30,7 @@ const cartReducer = (state, { type, payload }) => {
     }
 
     // if exist with same itemId.
-    const updatedCart = state.cart_items.map((cartItem) => {
+    const cart_items = state.cart_items.map((cartItem) => {
       let { itemId, selectedColor, price } = cartItem;
 
       if (
@@ -39,8 +45,7 @@ const cartReducer = (state, { type, payload }) => {
 
       return cartItem;
     });
-
-    return { ...state, cart_items: [...updatedCart] };
+    return { ...state, cart_items };
   }
 
   if (type === ADD_ITEM_QUANTITY) {
@@ -88,6 +93,9 @@ const cartReducer = (state, { type, payload }) => {
     return { ...payload };
   }
 
+  if (type === CART_CHECKOUT) {
+    return { ...state };
+  }
   throw new Error("Action type - mis-match. " + type);
 };
 

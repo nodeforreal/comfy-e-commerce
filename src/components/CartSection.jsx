@@ -6,6 +6,7 @@ import { useCartContext } from "../context/cart-context";
 
 const CartSection = () => {
   const { cart_items, clearCart } = useCartContext();
+  
   return (
     <Wrapper className="section-center">
       <div className="cart-table-head table-column-grid">
