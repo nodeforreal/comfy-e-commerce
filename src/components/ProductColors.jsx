@@ -3,7 +3,7 @@ import styled from "styled-components/macro";
 
 import { FaCheck } from "react-icons/fa";
 
-const ProductColors = ({ colors, cartSelectColor }) => {
+const ProductColors = ({ colors, selectItemColor }) => {
   const [selectedColor, setSelectedColor] = useState(null);
   return (
     <Wrapper>
@@ -14,7 +14,7 @@ const ProductColors = ({ colors, cartSelectColor }) => {
             key={index}
             onClick={() => {
               setSelectedColor(color);
-              cartSelectColor(color);
+              selectItemColor(color);
             }}
           >
             {color === selectedColor && <FaCheck className="icon" />}

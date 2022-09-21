@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Link, useParams } from "react-router-dom";
 import { useProductsContext } from "../context/product-context";
+import { useCartContext } from "../context/cart-context";
 
 import {
   ProductStars,
@@ -18,41 +19,49 @@ const SingleProduct = () => {
     single_product: product,
     single_product_fetch_begin: isLoading,
   } = useProductsContext();
-  const { productId } = useParams();
-  const [cart, setCart] = useState({});
+  const { addToCart } = useCartContext();
 
+  const { productId } = useParams();
+  const [cartItem, setCartItem] = useState({});
+  console.log(cartItem.color);
   //   cart quantity handler
   const countLeft = () => {
-    if (cart.selectedQuantity === 1) return;
-    setCart({ ...cart, selectedQuantity: cart.selectedQuantity - 1 });
+    const selectedQuantity = cartItem.selectedQuantity - 1;
+    const subTotal = cartItem.price * selectedQuantity;
+
+    if (cartItem.selectedQuantity === 1) return;
+    setCartItem({ ...cartItem, selectedQuantity, subTotal });
   };
+
   const countRight = () => {
     // if(cart.selectedQuantity ) return;
-    setCart({ ...cart, selectedQuantity: cart.selectedQuantity + 1 });
+    const selectedQuantity = cartItem.selectedQuantity + 1;
+    const subTotal = cartItem.price * selectedQuantity;
+    setCartItem({ ...cartItem, selectedQuantity, subTotal });
   };
 
   // set color
-  const cartSelectColor = (color) => {
-    setCart({ ...cart, selectedColor: color });
-    console.log(cart);
+  const selectItemColor = (color) => {
+    setCartItem({ ...cartItem, selectedColor: color });
   };
-  
+
   useEffect(() => {
     fetchSingleProduct(productId);
     return () => {};
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [productId]);
 
+  // default cart item state set up.
   useEffect(() => {
     if (Object.keys(product).length === 0) return;
-    setCart({
+    setCartItem({
       id: product.id,
       name: product.name,
-      image: product.images[0],
+      image: product.images[0].url,
       price: product.price,
-      selectedColor: "",
+      selectedColor: product.colors[0],
       selectedQuantity: 1,
-      subtotal: 0,
+      subTotal: product.price,
       quantityLimit: 0,
     });
   }, [product]);
@@ -102,16 +111,21 @@ const SingleProduct = () => {
               <span className="title">colors :</span>
               <ProductColors
                 colors={product.colors}
-                cartSelectColor={cartSelectColor}
+                selectItemColor={selectItemColor}
               />
             </div>
             <div className="add-cart">
               <ProductQuantity
-                count={cart.selectedQuantity}
+                count={cartItem.selectedQuantity}
                 countLeft={countLeft}
                 countRight={countRight}
               />
-              <button className="btn cart-btn">add to cart</button>
+              <button
+                className="btn cart-btn"
+                onClick={() => addToCart(cartItem)}
+              >
+                add to cart
+              </button>
             </div>
           </div>
         </div>

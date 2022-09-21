@@ -1,24 +1,24 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
-const ProductImages = ({images}) => {
+const ProductImages = ({ images }) => {
   const [imageIndex, setImageIndex] = useState(0);
-  const activeImage = images[imageIndex].url
-  
+  const activeImage = images[imageIndex].url;
+
   return (
     <Wrapper>
       <div className="product-image">
         <img src={activeImage} alt="" />
       </div>
       <div className="product-images">
-        {images.map(({url}, index) => {
+        {images.map(({ url }, index) => {
           return (
             <button
               key={index}
               className={`selection-image ${
                 imageIndex === index ? "selection-active" : ""
               }`}
-              onClick={()=>setImageIndex(index)}
+              onClick={() => setImageIndex(index)}
             >
               <img src={url} alt="" />
             </button>
@@ -49,7 +49,7 @@ const Wrapper = styled.div`
   }
 
   .selection-image {
-    height: 75px;
+    height: 55px;
     background-color: var(--clr-primary-4);
     border-radius: var(--radius);
 
@@ -57,7 +57,6 @@ const Wrapper = styled.div`
       object-fit: cover;
       border-radius: var(--radius);
     }
-
   }
 
   .selection-active {
@@ -66,13 +65,20 @@ const Wrapper = styled.div`
 
   @media screen and (min-width: 560px) {
     .product-images {
-      grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(75px, 1fr));
+    }
+    .selection-image {
+      height: 75px;
+    }
+  }
+  @media screen and (min-width: 760px) {
+    .product-images {
+      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
     }
     .selection-image {
       height: 85px;
     }
   }
-
   @media screen and (min-width: 992px) {
     .product-images {
       grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
