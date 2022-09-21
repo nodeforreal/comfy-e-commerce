@@ -42,7 +42,13 @@ const cartReducer = (state, { type, payload }) => {
 
     return { ...state, cart_items: [...updatedCart] };
   }
-
+  
+  if (type === ADD_ITEM_QUANTITY) {
+  }
+  
+  if (type === REMOVE_ITEM_QUANTITY) {
+  }
+  
   if (type === REMOVE_CART_ITEM) {
   }
   throw new Error("Action type - mis-match. " + type);
