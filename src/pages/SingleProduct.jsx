@@ -30,6 +30,16 @@ const SingleProduct = () => {
     quantityLimit: 0,
   });
 
+  //   cart quantity handler
+  const countLeft = () => {
+    if (cart.selectedQuantity === 1) return;
+    setCart({ ...cart, selectedQuantity: cart.selectedQuantity - 1 });
+  };
+  const countRight = () => {
+    // if(cart.selectedQuantity ) return;
+    setCart({ ...cart, selectedQuantity: cart.selectedQuantity + 1 });
+  };
+
   useEffect(() => {
     fetchSingleProduct(productId);
     return () => {};
@@ -81,7 +91,11 @@ const SingleProduct = () => {
               <ProductColors colors={product.colors} />
             </div>
             <div className="add-cart">
-              <ProductQuantity />
+              <ProductQuantity
+                count={cart.selectedQuantity}
+                countLeft={countLeft}
+                countRight={countRight}
+              />
               <button className="btn cart-btn">add to cart</button>
             </div>
           </div>
