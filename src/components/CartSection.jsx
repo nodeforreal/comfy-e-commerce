@@ -1,8 +1,11 @@
 import styled from "styled-components/macro";
 import { CartItem, Checkout } from "./Cart";
 import FlatButton from "./FlatButton";
+import FlattenLinkButton from "./FlattenLinkButton";
+import { useCartContext } from "../context/cart-context";
 
 const CartSection = () => {
+  const { cart_items } = useCartContext();
   return (
     <Wrapper className="section-center">
       <div className="cart-table-head table-column-grid">
@@ -13,22 +16,20 @@ const CartSection = () => {
         <p></p>
       </div>
       <hr className="table-top-hr" />
-
-      <CartItem />
-      <CartItem />
-      <CartItem />
-      <CartItem />
-
+      {cart_items.map((item) => {
+        return <CartItem key={item.id} {...item} />;
+      })}
       <hr className="table-bottom-hr" />
       <div className="shopping-btns-container">
-        <FlatButton
+        <FlattenLinkButton
+          to="/products"
           css={`
             background-color: var(--clr-primary-5);
             color: var(--clr-white);
           `}
         >
           continue shopping
-        </FlatButton>
+        </FlattenLinkButton>
         <FlatButton
           css={`
             background-color: var(--clr-black);
@@ -44,6 +45,8 @@ const CartSection = () => {
     </Wrapper>
   );
 };
+
+console.log(FlatButton);
 
 const Wrapper = styled.div`
   margin-top: 2rem;

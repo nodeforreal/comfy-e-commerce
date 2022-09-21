@@ -56,7 +56,7 @@ const SingleProduct = () => {
     setCartItem({
       id: product.id,
       name: product.name,
-      image: product.images[0],
+      image: product.images[0].url,
       price: product.price,
       selectedColor: "",
       selectedQuantity: 1,
