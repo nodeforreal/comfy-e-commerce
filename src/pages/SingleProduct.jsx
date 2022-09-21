@@ -23,7 +23,7 @@ const SingleProduct = () => {
 
   const { productId } = useParams();
   const [cartItem, setCartItem] = useState({});
-  console.log(cartItem.color);
+
   //   cart quantity handler
   const countLeft = () => {
     const selectedQuantity = cartItem.selectedQuantity - 1;
