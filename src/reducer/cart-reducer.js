@@ -6,23 +6,16 @@ const cartReducer = (state, { type, payload }) => {
     if (state.cart_items.length === 0) {
       return { ...state, cart_items: [payload] };
     }
-    //for update quality, subtotal.
-    let tempCart = [];
-    const cartItems = state.cart_items.map((cartItem) => {
-      if (cartItem.id !== payload.id) return cartItem;
-
-      if (cartItem.color !== payload.color) {
-        tempCart.push(payload);
-        return { ...cartItem };
-      }
-
-      let selectedQuantity, subTotal;
-      selectedQuantity = cartItem.selectedQuantity + payload.selectedQuantity;
-      subTotal = cartItem.price * selectedQuantity;
-      return { ...cartItem, selectedQuantity, subTotal };
+    //check cart item whether exist.
+    const currentItem = state.cart_items.filter(({ id }) => {
+      return id === payload.id;
     });
-
-    return { ...state, cart_items: [...cartItems, ...tempCart] };
+    if (currentItem.length === 0) {
+      return { ...state, cart_items: [...state.cart_items, payload] };
+    }
+    
+    
+    return { ...state };
   }
 
   throw new Error("Action type - mis-match. " + type);
