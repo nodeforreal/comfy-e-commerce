@@ -1,9 +1,10 @@
 import styled from "styled-components";
 import { useCartContext } from "../../context/cart-context";
-
+import { cartCheckout } from "../../utils/cart-checkout";
 const Checkout = () => {
-  const { sub_total } = useCartContext();
-
+  const { cart_items } = useCartContext();
+  const cart_checkout = cartCheckout(cart_items, 5.55);
+  const { sub_total, shipping_fee, order_total } = cart_checkout;
   return (
     <Wrapper>
       <div className="checkout-card">
@@ -13,12 +14,12 @@ const Checkout = () => {
         </div>
         <div className="shipping-fee flex-even">
           <p>Shipping Fee :</p>
-          <p>$5.34</p>
+          <p>${shipping_fee}</p>
         </div>
         <hr />
         <div className="order-total flex-even">
           <h4>Order Total :</h4>
-          <h4>$5000</h4>
+          <h4>${order_total}</h4>
         </div>
       </div>
       <button className="btn checkout-btn">proceed to checkout</button>

@@ -9,10 +9,6 @@ import {
 
 // CART REDUCER
 const cartReducer = (state, { type, payload }) => {
-  state.sub_total = state.cart_items.reduce(
-    (total, { subTotal }) => total + subTotal,
-    0
-  );
 
   if (type === ADD_TO_CART) {
     //   initial set up.
