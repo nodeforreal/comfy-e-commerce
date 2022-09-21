@@ -17,7 +17,7 @@ const CartSection = () => {
       </div>
       <hr className="table-top-hr" />
       {cart_items.map((item) => {
-        return <CartItem key={item.id} {...item} />;
+        return <CartItem key={item.itemId} {...item} />;
       })}
       <hr className="table-bottom-hr" />
       <div className="shopping-btns-container">
@@ -80,7 +80,7 @@ const Wrapper = styled.div`
       grid-template-columns: 200px auto auto;
       gap: 1rem;
     }
-    
+
     .head-price,
     .head-subtotal {
       display: none;
