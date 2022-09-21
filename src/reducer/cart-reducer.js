@@ -1,30 +1,50 @@
-import { ADD_TO_CART } from "../actions";
+import {
+  ADD_TO_CART,
+  ADD_ITEM_QUANTITY,
+  REMOVE_ITEM_QUANTITY,
+  REMOVE_CART_ITEM,
+  CLEAR_CART,
+} from "../actions";
 
 // CART REDUCER
 const cartReducer = (state, { type, payload }) => {
   if (type === ADD_TO_CART) {
+    //   initial set up.
     if (state.cart_items.length === 0) {
       return { ...state, cart_items: [payload] };
     }
-    //for update quality, subtotal.
-    let tempCart = [];
-    const cartItems = state.cart_items.map((cartItem) => {
-      if (cartItem.id !== payload.id) return cartItem;
 
-      if (cartItem.color !== payload.color) {
-        tempCart.push(payload);
-        return { ...cartItem };
-      }
-
-      let selectedQuantity, subTotal;
-      selectedQuantity = cartItem.selectedQuantity + payload.selectedQuantity;
-      subTotal = cartItem.price * selectedQuantity;
-      return { ...cartItem, selectedQuantity, subTotal };
+    //check itemID exist.
+    const currentItem = state.cart_items.filter(({ itemId }) => {
+      return itemId === payload.itemId;
     });
 
-    return { ...state, cart_items: [...cartItems, ...tempCart] };
+    if (currentItem.length === 0) {
+      return { ...state, cart_items: [...state.cart_items, payload] };
+    }
+
+    // if exist with same itemId.
+    const updatedCart = state.cart_items.map((cartItem) => {
+      let { itemId, selectedColor, price } = cartItem;
+
+      if (
+        itemId === payload.itemId &&
+        selectedColor === payload.selectedColor
+      ) {
+        let selectedQuantity =
+          cartItem.selectedQuantity + payload.selectedQuantity;
+        let subTotal = selectedQuantity * price;
+        return { ...cartItem, selectedQuantity, subTotal };
+      }
+
+      return cartItem;
+    });
+
+    return { ...state, cart_items: [...updatedCart] };
   }
 
+  if (type === REMOVE_CART_ITEM) {
+  }
   throw new Error("Action type - mis-match. " + type);
 };
 
