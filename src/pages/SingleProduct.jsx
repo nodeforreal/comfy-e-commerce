@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Link, useParams } from "react-router-dom";
 import { useProductsContext } from "../context/product-context";
@@ -19,6 +19,16 @@ const SingleProduct = () => {
     single_product_fetch_begin: isLoading,
   } = useProductsContext();
   const { productId } = useParams();
+  const [cart, setCart] = useState({
+    id: product.id,
+    name: product.name,
+    image: product.images[0],
+    price: product.price,
+    selectedColor: "",
+    selectedQuantity: 1,
+    subtotal: 0,
+    quantityLimit: 0,
+  });
 
   useEffect(() => {
     fetchSingleProduct(productId);
