@@ -19,16 +19,7 @@ const SingleProduct = () => {
     single_product_fetch_begin: isLoading,
   } = useProductsContext();
   const { productId } = useParams();
-  const [cart, setCart] = useState({
-    id: product.id,
-    name: product.name,
-    image: product.images[0],
-    price: product.price,
-    selectedColor: "",
-    selectedQuantity: 1,
-    subtotal: 0,
-    quantityLimit: 0,
-  });
+  const [cart, setCart] = useState({});
 
   //   cart quantity handler
   const countLeft = () => {
@@ -40,12 +31,33 @@ const SingleProduct = () => {
     setCart({ ...cart, selectedQuantity: cart.selectedQuantity + 1 });
   };
 
+  // set color
+  const cartSelectColor = (color) => {
+    setCart({ ...cart, selectedColor: color });
+    console.log(cart);
+  };
+  
   useEffect(() => {
     fetchSingleProduct(productId);
     return () => {};
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [productId]);
 
+  useEffect(() => {
+    if (Object.keys(product).length === 0) return;
+    setCart({
+      id: product.id,
+      name: product.name,
+      image: product.images[0],
+      price: product.price,
+      selectedColor: "",
+      selectedQuantity: 1,
+      subtotal: 0,
+      quantityLimit: 0,
+    });
+  }, [product]);
+
+  //   spinner
   if (isLoading) {
     return (
       <section className="page-100 content-center">
@@ -88,7 +100,10 @@ const SingleProduct = () => {
             <hr />
             <div className="product-colors">
               <span className="title">colors :</span>
-              <ProductColors colors={product.colors} />
+              <ProductColors
+                colors={product.colors}
+                cartSelectColor={cartSelectColor}
+              />
             </div>
             <div className="add-cart">
               <ProductQuantity
