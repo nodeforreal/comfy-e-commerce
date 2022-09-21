@@ -2,15 +2,18 @@ import React from "react";
 import styled from "styled-components/macro";
 import ProductQuantity from "../ProductQuantity";
 import { MdDelete } from "react-icons/md";
+import { useCartContext } from "../../context/cart-context";
 
 const CartItem = ({
   image,
+  itemId,
   name,
   price,
   selectedColor,
   selectedQuantity,
   subTotal,
 }) => {
+  const { addItemQuantity, removeItemQuantity, removeCartItem } = useCartContext();
   return (
     <Wrapper className="table-column-grid">
       <div className="product">
@@ -29,10 +32,17 @@ const CartItem = ({
         </div>
       </div>
       <p className="product-price">{price}</p>
-      <ProductQuantity count={selectedQuantity} />
+      <ProductQuantity
+        count={selectedQuantity}
+        countLeft={() => removeItemQuantity(itemId)}
+        countRight={() => addItemQuantity(itemId)}
+      />
       <p className="product-subtotal">{subTotal}</p>
       <div className="cart-delete">
-        <button className="cart-delete-btn">
+        <button
+          className="cart-delete-btn"
+          onClick={() => removeCartItem(itemId)}
+        >
           <MdDelete className="icon" />
         </button>
       </div>

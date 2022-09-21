@@ -5,7 +5,8 @@ import FlattenLinkButton from "./FlattenLinkButton";
 import { useCartContext } from "../context/cart-context";
 
 const CartSection = () => {
-  const { cart_items } = useCartContext();
+  const { cart_items, clearCart } = useCartContext();
+  
   return (
     <Wrapper className="section-center">
       <div className="cart-table-head table-column-grid">
@@ -17,7 +18,7 @@ const CartSection = () => {
       </div>
       <hr className="table-top-hr" />
       {cart_items.map((item) => {
-        return <CartItem key={item.id} {...item} />;
+        return <CartItem key={item.itemId} {...item} />;
       })}
       <hr className="table-bottom-hr" />
       <div className="shopping-btns-container">
@@ -35,6 +36,7 @@ const CartSection = () => {
             background-color: var(--clr-black);
             color: var(--clr-white);
           `}
+          onClick={() => clearCart()}
         >
           clear shopping cart
         </FlatButton>
@@ -80,7 +82,7 @@ const Wrapper = styled.div`
       grid-template-columns: 200px auto auto;
       gap: 1rem;
     }
-    
+
     .head-price,
     .head-subtotal {
       display: none;
