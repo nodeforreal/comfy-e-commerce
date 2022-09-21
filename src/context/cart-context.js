@@ -7,7 +7,7 @@ import {
   REMOVE_ITEM_QUANTITY,
   REMOVE_CART_ITEM,
   CLEAR_CART,
-  CHECKOUT_TOTAL,
+  CART_CHECKOUT,
 } from "../actions";
 
 const CartContext = createContext({});
@@ -46,7 +46,7 @@ const CartContextProvider = ({ children }) => {
   };
 
   const subTotal = () => {
-    dispatch({ type: CHECKOUT_TOTAL });
+    dispatch({ type: CART_CHECKOUT });
   };
 
   return (
