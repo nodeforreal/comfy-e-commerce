@@ -56,6 +56,7 @@ const SingleProduct = () => {
     if (Object.keys(product).length === 0) return;
     setCartItem({
       id: product.id,
+      itemid: '',
       name: product.name,
       image: product.images[0].url,
       price: product.price,
