@@ -2,14 +2,14 @@ import React from "react";
 import styled from "styled-components";
 import { FaMinus, FaPlus } from "react-icons/fa";
 
-const ProductQuantity = () => {
+const ProductQuantity = ({ count, countLeft, countRight }) => {
   return (
     <Wrapper>
-      <button className="quantity-btn">
+      <button className="quantity-btn" onClick={countLeft}>
         <FaMinus className="icon" />
       </button>
-      <h2 className="product-quantity">{1}</h2>
-      <button className="quantity-btn">
+      <h2 className="product-quantity">{count}</h2>
+      <button className="quantity-btn" onClick={countRight}>
         <FaPlus className="icon" />
       </button>
     </Wrapper>

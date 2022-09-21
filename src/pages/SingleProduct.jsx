@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Link, useParams } from "react-router-dom";
 import { useProductsContext } from "../context/product-context";
@@ -19,13 +19,45 @@ const SingleProduct = () => {
     single_product_fetch_begin: isLoading,
   } = useProductsContext();
   const { productId } = useParams();
+  const [cart, setCart] = useState({});
 
+  //   cart quantity handler
+  const countLeft = () => {
+    if (cart.selectedQuantity === 1) return;
+    setCart({ ...cart, selectedQuantity: cart.selectedQuantity - 1 });
+  };
+  const countRight = () => {
+    // if(cart.selectedQuantity ) return;
+    setCart({ ...cart, selectedQuantity: cart.selectedQuantity + 1 });
+  };
+
+  // set color
+  const cartSelectColor = (color) => {
+    setCart({ ...cart, selectedColor: color });
+    console.log(cart);
+  };
+  
   useEffect(() => {
     fetchSingleProduct(productId);
     return () => {};
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [productId]);
 
+  useEffect(() => {
+    if (Object.keys(product).length === 0) return;
+    setCart({
+      id: product.id,
+      name: product.name,
+      image: product.images[0],
+      price: product.price,
+      selectedColor: "",
+      selectedQuantity: 1,
+      subtotal: 0,
+      quantityLimit: 0,
+    });
+  }, [product]);
+
+  //   spinner
   if (isLoading) {
     return (
       <section className="page-100 content-center">
@@ -68,10 +100,17 @@ const SingleProduct = () => {
             <hr />
             <div className="product-colors">
               <span className="title">colors :</span>
-              <ProductColors colors={product.colors} />
+              <ProductColors
+                colors={product.colors}
+                cartSelectColor={cartSelectColor}
+              />
             </div>
             <div className="add-cart">
-              <ProductQuantity />
+              <ProductQuantity
+                count={cart.selectedQuantity}
+                countLeft={countLeft}
+                countRight={countRight}
+              />
               <button className="btn cart-btn">add to cart</button>
             </div>
           </div>
