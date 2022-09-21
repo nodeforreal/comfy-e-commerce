@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Link, useParams } from "react-router-dom";
 import { useProductsContext } from "../context/product-context";
+import { useCartContext } from "../context/cart-context";
 
 import {
   ProductStars,
@@ -18,29 +19,30 @@ const SingleProduct = () => {
     single_product: product,
     single_product_fetch_begin: isLoading,
   } = useProductsContext();
+  const { addToCart } = useCartContext();
+
   const { productId } = useParams();
-  const [cart, setCart] = useState({});
+  const [cartItem, setCartItem] = useState({});
 
   //   cart quantity handler
   const countLeft = () => {
-    const selectedQuantity = cart.selectedQuantity - 1;
-    const subTotal = cart.price * selectedQuantity;
+    const selectedQuantity = cartItem.selectedQuantity - 1;
+    const subTotal = cartItem.price * selectedQuantity;
 
-    if (cart.selectedQuantity === 1) return;
-    setCart({ ...cart, selectedQuantity, subTotal });
+    if (cartItem.selectedQuantity === 1) return;
+    setCartItem({ ...cartItem, selectedQuantity, subTotal });
   };
 
   const countRight = () => {
     // if(cart.selectedQuantity ) return;
-    const selectedQuantity = cart.selectedQuantity + 1;
-    const subTotal = cart.price * selectedQuantity;
-    setCart({ ...cart, selectedQuantity, subTotal });
+    const selectedQuantity = cartItem.selectedQuantity + 1;
+    const subTotal = cartItem.price * selectedQuantity;
+    setCartItem({ ...cartItem, selectedQuantity, subTotal });
   };
 
   // set color
   const cartSelectColor = (color) => {
-    setCart({ ...cart, selectedColor: color });
-    console.log(cart);
+    setCartItem({ ...cartItem, selectedColor: color });
   };
 
   useEffect(() => {
@@ -51,7 +53,7 @@ const SingleProduct = () => {
 
   useEffect(() => {
     if (Object.keys(product).length === 0) return;
-    setCart({
+    setCartItem({
       id: product.id,
       name: product.name,
       image: product.images[0],
@@ -113,11 +115,16 @@ const SingleProduct = () => {
             </div>
             <div className="add-cart">
               <ProductQuantity
-                count={cart.selectedQuantity}
+                count={cartItem.selectedQuantity}
                 countLeft={countLeft}
                 countRight={countRight}
               />
-              <button className="btn cart-btn">add to cart</button>
+              <button
+                className="btn cart-btn"
+                onClick={() => addToCart(cartItem)}
+              >
+                add to cart
+              </button>
             </div>
           </div>
         </div>
