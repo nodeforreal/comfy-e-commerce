@@ -1,5 +1,7 @@
 import { createContext, useReducer, useContext } from "react";
 import { cartReducer } from "../reducer/cart-reducer";
+import { v4 as uuidv4 } from "uuid";
+
 import {
   ADD_TO_CART,
   ADD_ITEM_QUANTITY,
@@ -19,31 +21,28 @@ const CartContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(cartReducer, initialState);
 
   const addToCart = (cartItem) => {
-    let { id, selectedColor } = cartItem;
-    // Unique item id.
-    let itemId = id + selectedColor;
     dispatch({
       type: ADD_TO_CART,
-      payload: { ...cartItem, itemId },
+      payload: { ...cartItem, itemId: uuidv4() },
     });
   };
 
   const addItemQuantity = (itemId) => {
     dispatch({ type: ADD_ITEM_QUANTITY, payload: itemId });
   };
-  
+
   const removeItemQuantity = (itemId) => {
     dispatch({ type: REMOVE_ITEM_QUANTITY, payload: itemId });
   };
-  
+
   const removeCartItem = (itemId) => {
     dispatch({ type: REMOVE_CART_ITEM, payload: itemId });
   };
-  
+
   const clearCart = () => {
     dispatch({ type: CLEAR_CART, payload: initialState });
   };
-  
+
   return (
     <CartContext.Provider
       value={{
