@@ -7,20 +7,22 @@ const cartReducer = (state, { type, payload }) => {
       return { ...state, cart_items: [payload] };
     }
     //for update quality, subtotal.
-    let tempCart = []
+    let tempCart = [];
     const cartItems = state.cart_items.map((cartItem) => {
       if (cartItem.id !== payload.id) return cartItem;
-      if(cartItem.color !== payload.color){
-          tempCart.push(payload)
+
+      if (cartItem.color !== payload.color) {
+        tempCart.push(payload);
+        return { ...cartItem };
       }
-      
+
       let selectedQuantity, subTotal;
       selectedQuantity = cartItem.selectedQuantity + payload.selectedQuantity;
       subTotal = cartItem.price * selectedQuantity;
       return { ...cartItem, selectedQuantity, subTotal };
     });
 
-    return { ...state, cart_items: cartItems };
+    return { ...state, cart_items: [...cartItems, ...tempCart] };
   }
 
   throw new Error("Action type - mis-match. " + type);
