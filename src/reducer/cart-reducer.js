@@ -42,13 +42,40 @@ const cartReducer = (state, { type, payload }) => {
 
     return { ...state, cart_items: [...updatedCart] };
   }
-  
+
   if (type === ADD_ITEM_QUANTITY) {
+    const cart_items = state.cart_items.map((cartItem) => {
+      let { itemId, price } = cartItem;
+
+      if (itemId === payload.itemId) {
+        // if (cartItem.selectedQuantity === 1) return cartItem;
+
+        let selectedQuantity = cartItem.selectedQuantity + 1;
+        let subTotal = selectedQuantity * price;
+        return { ...cartItem, selectedQuantity, subTotal };
+      }
+
+      return cartItem;
+    });
+    return { ...state, cart_items };
   }
-  
+
   if (type === REMOVE_ITEM_QUANTITY) {
+    const cart_items = state.cart_items.map((cartItem) => {
+      let { itemId, price } = cartItem;
+
+      if (itemId === payload.itemId) {
+        if (cartItem.selectedQuantity === 1) return cartItem;
+        let selectedQuantity = cartItem.selectedQuantity - 1;
+        let subTotal = selectedQuantity * price;
+        return { ...cartItem, selectedQuantity, subTotal };
+      }
+
+      return cartItem;
+    });
+    return { ...state, cart_items };
   }
-  
+
   if (type === REMOVE_CART_ITEM) {
   }
   throw new Error("Action type - mis-match. " + type);
