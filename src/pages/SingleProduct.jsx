@@ -51,6 +51,7 @@ const SingleProduct = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [productId]);
 
+  // default cart item state set up.
   useEffect(() => {
     if (Object.keys(product).length === 0) return;
     setCartItem({
@@ -58,9 +59,9 @@ const SingleProduct = () => {
       name: product.name,
       image: product.images[0].url,
       price: product.price,
-      selectedColor: "",
+      selectedColor: product.colors[0],
       selectedQuantity: 1,
-      subTotal: 0,
+      subTotal: product.price,
       quantityLimit: 0,
     });
   }, [product]);
