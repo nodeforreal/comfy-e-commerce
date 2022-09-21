@@ -1,15 +1,22 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 import styled from "styled-components/macro";
 
 import { FaCheck } from "react-icons/fa";
 
-const ProductColors = ({ colors }) => {
-  const [selectedColor,setSelectedColor] = useState(null)
+const ProductColors = ({ colors, cartSelectColor }) => {
+  const [selectedColor, setSelectedColor] = useState(null);
   return (
     <Wrapper>
       {colors.map((color, index) => {
         return (
-          <ProductColor productColor={color} key={index} onClick={()=>setSelectedColor(color)}>
+          <ProductColor
+            productColor={color}
+            key={index}
+            onClick={() => {
+              setSelectedColor(color);
+              cartSelectColor(color);
+            }}
+          >
             {color === selectedColor && <FaCheck className="icon" />}
           </ProductColor>
         );
