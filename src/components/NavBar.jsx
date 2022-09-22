@@ -10,6 +10,8 @@ import logo from "../assets/logo.svg";
 
 const NavBar = () => {
   const { openSidebar } = useUIContext();
+ 
+  
   return (
     <Wrapper>
       <div className="flex-even nav-container nav-center section-center">
