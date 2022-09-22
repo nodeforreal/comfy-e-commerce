@@ -4,9 +4,9 @@ import { userReducer } from "../reducer/user-reducer";
 const UserContext = createContext({});
 
 const initialState = {
-    isLoading: true,
-    isAuthenticated : false,
-    user: {}
+  isLoading: true,
+  isAuthenticated: false,
+  user: {},
 };
 
 const UserContextProvider = ({ children }) => {
