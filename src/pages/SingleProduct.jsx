@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { useProductsContext } from "../context/product-context";
 import { useCartContext } from "../context/cart-context";
+import { formatPrice } from "../utils/currency";
 
 import {
   ProductStars,
@@ -92,7 +93,7 @@ const SingleProduct = () => {
               <p>({product.reviews} customer reviews)</p>
             </div>
 
-            <h4 className="price">{product.price}</h4>
+            <h4 className="price">{formatPrice(product.price)}</h4>
             <p className="description">{product.description}</p>
             <p className="product-info">
               <span className="title">available :</span>

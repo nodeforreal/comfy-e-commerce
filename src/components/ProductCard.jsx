@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { FaSearch } from "react-icons/fa";
+import { formatPrice } from "../utils/currency";
 
 const ProductCard = ({ image, id: productId, name, price }) => {
   return (
@@ -18,7 +19,7 @@ const ProductCard = ({ image, id: productId, name, price }) => {
         <div className="text-ellipsis-parent">
           <p className="name text-ellipsis-child">{name}</p>
         </div>
-        <p className="price">${price}</p>
+        <p className="price">{formatPrice(price)}</p>
       </div>
     </Wrapper>
   );
@@ -29,7 +30,7 @@ const Wrapper = styled.article`
   width: 100%;
   display: flex;
   flex-direction: column;
-  
+
   .product-image {
     position: relative;
 

@@ -3,6 +3,7 @@ import styled from "styled-components/macro";
 import ProductQuantity from "../ProductQuantity";
 import { MdDelete } from "react-icons/md";
 import { useCartContext } from "../../context/cart-context";
+import { formatPrice } from "../../utils/currency";
 
 const CartItem = ({
   image,
@@ -31,16 +32,16 @@ const CartItem = ({
               `}
             ></span>
           </div>
-          <p className="product-price-760">{price}</p>
+          <p className="product-price-760">{formatPrice(price)}</p>
         </div>
       </div>
-      <p className="product-price">{price}</p>
+      <p className="product-price">{formatPrice(price)}</p>
       <ProductQuantity
         count={selectedQuantity}
         countLeft={() => removeItemQuantity(itemId)}
         countRight={() => addItemQuantity(itemId)}
       />
-      <p className="product-subtotal">{subTotal}</p>
+      <p className="product-subtotal">{formatPrice(subTotal)}</p>
       <div className="cart-delete">
         <button
           className="cart-delete-btn"
