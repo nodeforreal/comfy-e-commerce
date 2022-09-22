@@ -21,7 +21,6 @@ const initialState = {
 
 const CartContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(cartReducer, initialState);
-
   const addToCart = (cartItem) => {
     const { id, selectedColor } = cartItem;
     // unique item id.
