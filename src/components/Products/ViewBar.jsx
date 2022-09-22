@@ -10,7 +10,7 @@ const ViewBar = () => {
       <ViewButtons />
 
       <p className="products-count">
-        {filtered_products.length} products found
+        {filtered_products.length} products found.
       </p>
       <hr />
       <SortBy />
@@ -35,6 +35,7 @@ const Wrapper = styled.div`
   .products-count {
     margin: 0;
     text-transform: capitalize;
+    white-space: nowrap;
   }
 
   hr {

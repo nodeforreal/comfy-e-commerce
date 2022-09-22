@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-
+import {formatPrice} from '../../utils/currency'
 const ProductItem = ({ image, id: productId, name, price, description }) => {
   return (
     <Wrapper>
@@ -9,7 +9,7 @@ const ProductItem = ({ image, id: productId, name, price, description }) => {
       </div>
       <div className="product-content">
         <h4 className="name">{name}</h4>
-        <h5 className="price">${price}</h5>
+        <h5 className="price">{formatPrice(price)}</h5>
         <p className="description">{description.slice(0, 200)}...</p>
         <Link to={`/products/${productId}`} className="btn details-btn">
           details

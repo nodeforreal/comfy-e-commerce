@@ -9,7 +9,6 @@ import {
 
 // CART REDUCER
 const cartReducer = (state, { type, payload }) => {
-
   if (type === ADD_TO_CART) {
     //   initial set up.
     if (state.cart_items.length === 0) {
@@ -45,13 +44,11 @@ const cartReducer = (state, { type, payload }) => {
   }
 
   if (type === ADD_ITEM_QUANTITY) {
-    console.log(payload);
     const cart_items = state.cart_items.map((cartItem) => {
       let { itemId, price } = cartItem;
 
       if (itemId === payload) {
         // if (cartItem.selectedQuantity === 1) return cartItem;
-
         let selectedQuantity = cartItem.selectedQuantity + 1;
         let subTotal = selectedQuantity * price;
         return { ...cartItem, selectedQuantity, subTotal };

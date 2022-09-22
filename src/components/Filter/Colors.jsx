@@ -35,6 +35,7 @@ const Colors = () => {
                 onClick={(e) => updateFilter({ color: e.currentTarget.value })}
                 css={`
                   background-color: ${color};
+                  opacity: 0.6;
                 `}
               >
                 {selectedColor === color && <FaCheck className="icon" />}
