@@ -7,6 +7,7 @@ import { UIContextProvider } from "./context/ui-context";
 import { ProductsContextProvider } from "./context/product-context";
 import { FilterContextProvider } from "./context/filter-context";
 import { CartContextProvider } from "./context/cart-context";
+import { UserContextProvider } from "./context/user-context";
 
 import { Auth0Provider } from "@auth0/auth0-react";
 const root = reactDOM.createRoot(document.getElementById("root"));
@@ -18,15 +19,17 @@ root.render(
       clientId="FAU25KgoWeoyfagLp3WMn7lQPDH9ZDvc"
       redirectUri={window.location.origin}
     >
-      <UIContextProvider>
-        <ProductsContextProvider>
-          <FilterContextProvider>
-            <CartContextProvider>
-              <App />
-            </CartContextProvider>
-          </FilterContextProvider>
-        </ProductsContextProvider>
-      </UIContextProvider>
+      <UserContextProvider>
+        <UIContextProvider>
+          <ProductsContextProvider>
+            <FilterContextProvider>
+              <CartContextProvider>
+                <App />
+              </CartContextProvider>
+            </FilterContextProvider>
+          </ProductsContextProvider>
+        </UIContextProvider>
+      </UserContextProvider>
     </Auth0Provider>
   </React.StrictMode>
 );
