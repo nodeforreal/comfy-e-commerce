@@ -6,7 +6,7 @@ import { useCartContext } from "../context/cart-context";
 
 const CartSection = () => {
   const { cart_items, clearCart } = useCartContext();
-  
+
   return (
     <Wrapper className="section-center">
       <div className="cart-table-head table-column-grid">
@@ -50,9 +50,10 @@ const CartSection = () => {
 
 const Wrapper = styled.div`
   margin-top: 2rem;
+
   .table-column-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 100px;
+    grid-template-columns: 200px auto auto;
     place-items: center;
   }
 
@@ -62,6 +63,10 @@ const Wrapper = styled.div`
       color: var(--clr-grey-6);
       letter-spacing: var(--spacing);
     }
+  }
+  .head-price,
+  .head-subtotal {
+    display: none;
   }
 
   .shopping-btns-container {
@@ -77,15 +82,21 @@ const Wrapper = styled.div`
     flex-direction: row-reverse;
   }
 
-  @media screen and (max-width: 760px) {
+  @media screen and (min-width: 530px) {
     .table-column-grid {
-      grid-template-columns: 200px auto auto;
+      grid-template-columns: 260px auto auto;
       gap: 1rem;
     }
+  }
 
+  @media screen and (min-width: 760px) {
+    .table-column-grid {
+      grid-template-columns: 260px auto auto auto auto;
+      gap: 1rem;
+    }
     .head-price,
     .head-subtotal {
-      display: none;
+      display: block;
     }
   }
 `;
