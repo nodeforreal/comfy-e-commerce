@@ -42,7 +42,6 @@ const CartContextProvider = ({ children }) => {
   };
 
   const clearCart = () => {
-    console.log("clear - cart.");
     dispatch({ type: CLEAR_CART, payload: initialState });
   };
 
