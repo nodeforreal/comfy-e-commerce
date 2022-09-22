@@ -1,25 +1,34 @@
 import { Link } from "react-router-dom";
 import { BsFillCartCheckFill } from "react-icons/bs";
-import { RiLoginBoxFill } from "react-icons/ri";
+import { RiLoginBoxFill, RiLogoutBoxFill } from "react-icons/ri";
 import styled from "styled-components";
+import { useAuth0 } from "@auth0/auth0-react";
 
-const CartButtons = ({onClick}) => {
+const CartButtons = () => {
+  const { loginWithRedirect, logout } = useAuth0();
+
   return (
-    <Wrapper className="cart-btn-container" >
-      <Link to="cart" className="nav-btn cart-btn " onClick={onClick}>
+    <Wrapper className="cart-btn-container">
+      <Link to="cart" className="nav-btn cart-btn ">
         Cart
         <BsFillCartCheckFill className="icon" />
       </Link>
-      <button className="nav-btn" onClick={onClick}>
-        Login
-        <RiLoginBoxFill className="icon" />
-      </button>
+      {true ? (
+        <button className="nav-btn" onClick={loginWithRedirect}>
+          Login
+          <RiLoginBoxFill className="icon" />
+        </button>
+      ) : (
+        <button className="nav-btn" onClick={logout}>
+          Logout
+          <RiLogoutBoxFill className="icon" />
+        </button>
+      )}
     </Wrapper>
   );
 };
 
 const Wrapper = styled.div`
-
   .nav-btn {
     margin-right: 1.6rem;
     background-color: transparent;
@@ -62,5 +71,5 @@ const Wrapper = styled.div`
       overflow: hidden;
     }
   }
-`
-export default CartButtons
+`;
+export default CartButtons;

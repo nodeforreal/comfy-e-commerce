@@ -8,18 +8,25 @@ import { ProductsContextProvider } from "./context/product-context";
 import { FilterContextProvider } from "./context/filter-context";
 import { CartContextProvider } from "./context/cart-context";
 
+import { Auth0Provider } from "@auth0/auth0-react";
 const root = reactDOM.createRoot(document.getElementById("root"));
 
 root.render(
   <React.StrictMode>
-    <UIContextProvider>
-      <ProductsContextProvider>
-        <FilterContextProvider>
-          <CartContextProvider>
-            <App />
-          </CartContextProvider>
-        </FilterContextProvider>
-      </ProductsContextProvider>
-    </UIContextProvider>
+    <Auth0Provider
+      domain="dev-g0u3g6ew.us.auth0.com"
+      clientId="FAU25KgoWeoyfagLp3WMn7lQPDH9ZDvc"
+      redirectUri={window.location.origin}
+    >
+      <UIContextProvider>
+        <ProductsContextProvider>
+          <FilterContextProvider>
+            <CartContextProvider>
+              <App />
+            </CartContextProvider>
+          </FilterContextProvider>
+        </ProductsContextProvider>
+      </UIContextProvider>
+    </Auth0Provider>
   </React.StrictMode>
 );
