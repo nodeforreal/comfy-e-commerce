@@ -20,7 +20,9 @@ const CartItem = ({
       <div className="product">
         <img src={image} alt="" />
         <div>
-          <h5 className="product-name">{name}</h5>
+          <div className="text-ellipsis-parent">
+            <h5 className="product-name text-ellipsis-child">{name}</h5>
+          </div>
           <div className="product-color">
             <p>color :</p>
             <span
