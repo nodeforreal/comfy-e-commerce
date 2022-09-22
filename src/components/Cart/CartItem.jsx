@@ -13,7 +13,8 @@ const CartItem = ({
   selectedQuantity,
   subTotal,
 }) => {
-  const { addItemQuantity, removeItemQuantity, removeCartItem } = useCartContext();
+  const { addItemQuantity, removeItemQuantity, removeCartItem } =
+    useCartContext();
   return (
     <Wrapper className="table-column-grid">
       <div className="product">
@@ -57,7 +58,8 @@ const Wrapper = styled.div`
   margin: 1rem 0;
 
   .product {
-    display: flex;
+    display: grid;
+    grid-template-columns: auto minmax(0,1fr);
     align-items: center;
     justify-self: flex-start;
     gap: 1rem;
