@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { useProductsContext } from "../context/product-context";
 import { useCartContext } from "../context/cart-context";
 
@@ -20,10 +20,9 @@ const SingleProduct = () => {
     single_product_fetch_begin: isLoading,
   } = useProductsContext();
   const { addToCart } = useCartContext();
-
   const { productId } = useParams();
   const [cartItem, setCartItem] = useState({});
-
+  const navigate = useNavigate();
   //   cart quantity handler
   const countLeft = () => {
     const selectedQuantity = cartItem.selectedQuantity - 1;
@@ -56,7 +55,7 @@ const SingleProduct = () => {
     if (Object.keys(product).length === 0) return;
     setCartItem({
       id: product.id,
-      itemid: '',
+      itemid: "",
       name: product.name,
       image: product.images[0].url,
       price: product.price,
@@ -123,7 +122,10 @@ const SingleProduct = () => {
               />
               <button
                 className="btn cart-btn"
-                onClick={() => addToCart(cartItem)}
+                onClick={() => {
+                  addToCart(cartItem);
+                  navigate("/cart");
+                }}
               >
                 add to cart
               </button>
