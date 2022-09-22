@@ -34,7 +34,7 @@ const Wrapper = styled.div`
 
   .product-image {
     width: 100%;
-    height: 380px;
+    height: 280px;
     img {
       object-fit: cover;
       border-radius: var(--radius);
@@ -64,6 +64,9 @@ const Wrapper = styled.div`
   }
 
   @media screen and (min-width: 560px) {
+    .product-image {
+      height: 380px;
+    }
     .product-images {
       grid-template-columns: repeat(auto-fit, minmax(75px, 1fr));
     }
