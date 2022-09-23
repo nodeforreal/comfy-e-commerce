@@ -10,12 +10,12 @@ const CartButtons = () => {
   const { cart_items } = useCartContext();
   const { isAuthenticated } = useUserContext();
   const { loginWithRedirect, logout } = useAuth0();
-  
+
   const cartItemCount = cart_items.reduce(
     (total, { selectedQuantity }) => total + selectedQuantity,
     0
   );
-  
+
   return (
     <Wrapper className="cart-btn-container" cartItemCount={cartItemCount}>
       <Link to="cart" className="nav-btn cart-btn ">
@@ -28,7 +28,10 @@ const CartButtons = () => {
           <RiLoginBoxFill className="icon" />
         </button>
       ) : (
-        <button className="nav-btn" onClick={logout}>
+        <button
+          className="nav-btn"
+          onClick={() => logout({ returnTo: window.location.origin })}
+        >
           Logout
           <RiLogoutBoxFill className="icon" />
         </button>
