@@ -1,5 +1,6 @@
-import { createContext, useReducer, useContext } from "react";
-import { userReducer } from "../reducer/user-reducer";
+import { createContext, useContext, useState, useEffect } from "react";
+
+import { useAuth0 } from "@auth0/auth0-react";
 
 const UserContext = createContext({});
 
@@ -7,11 +8,16 @@ const initialState = {
   isLoading: false,
   isAuthenticated: false,
   user: {},
+  isError: false,
 };
 
 const UserContextProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(userReducer, initialState);
-    
+  const [state, setState] = useState(initialState);
+  const { isAuthenticated, user, isLoading, isError } = useAuth0();
+
+  useEffect(() => {
+    setState({ isAuthenticated, user, isLoading, isError });
+  }, [isAuthenticated, user, isLoading, isError]);
   return (
     <UserContext.Provider value={{ ...state }}>{children}</UserContext.Provider>
   );
