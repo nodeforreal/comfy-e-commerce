@@ -37,7 +37,7 @@ const Checkout = () => {
       ) : (
         <button
           className="btn login-btn"
-          onClick={() => loginWithRedirect("/checkout")}
+          onClick={loginWithRedirect}
         >
           Login
         </button>
