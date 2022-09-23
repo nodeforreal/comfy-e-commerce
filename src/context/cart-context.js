@@ -16,7 +16,7 @@ const initialState = {
   cart_items: [],
   order_total: 0,
   sub_total: 0,
-  shipping_fee: 5.55,
+  shipping_fee: 55.5,
 };
 
 const CartContextProvider = ({ children }) => {
