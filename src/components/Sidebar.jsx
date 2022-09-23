@@ -6,10 +6,10 @@ import logo from "../assets/logo.svg";
 import { navLinks } from "../utils/constants";
 import CloseButton from "./CloseButton";
 import CartButtons from "./CartButtons";
+import { useUserContext } from "../context/user-context";
 
 const Sidebar = () => {
   const { isSidebarOpen, closeSidebar } = useUIContext();
-
   return (
     <Wrapper className={isSidebarOpen ? "open-sidebar" : "close-sidebar"}>
       <div className="flex-even nav-container section-center">
@@ -19,8 +19,8 @@ const Sidebar = () => {
         <CloseButton onClick={closeSidebar} />
       </div>
       <NavLinks />
-      <div className="cart-btn-container" >
-        <CartButtons onClick={closeSidebar}/>
+      <div className="cart-btn-container">
+        <CartButtons onClick={closeSidebar} />
       </div>
     </Wrapper>
   );
@@ -28,16 +28,22 @@ const Sidebar = () => {
 
 const NavLinks = () => {
   const { closeSidebar } = useUIContext();
+  const { isAuthenticated } = useUserContext();
 
   return (
     <div className="nav-links">
-      {navLinks().map(({ path, id, label }) => {
+      {navLinks.map(({ path, id, label }) => {
         return (
           <Link to={path} key={id} className="nav-link" onClick={closeSidebar}>
             {label}
           </Link>
         );
       })}
+      {isAuthenticated && (
+        <Link to="/checkout" className="nav-link" onClick={closeSidebar}>
+          checkout
+        </Link>
+      )}
     </div>
   );
 };
