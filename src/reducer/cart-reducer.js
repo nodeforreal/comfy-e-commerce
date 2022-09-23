@@ -4,24 +4,30 @@ import {
   REMOVE_ITEM_QUANTITY,
   REMOVE_CART_ITEM,
   CLEAR_CART,
-  CART_CHECKOUT,
 } from "../actions";
+import { cartCheckout } from "../utils/cart-checkout";
 
 // CART REDUCER
 const cartReducer = (state, { type, payload }) => {
+  let finalCheckout;
   if (type === ADD_TO_CART) {
     //   initial set up.
     if (state.cart_items.length === 0) {
-      return { ...state, cart_items: [payload] };
+      finalCheckout = cartCheckout([payload], state.shipping_fee);
+      return { ...state, ...finalCheckout };
     }
 
-    //check itemID exist.
+    //check itemID is exist.
     const currentItem = state.cart_items.filter(({ itemId }) => {
       return itemId === payload.itemId;
     });
 
     if (currentItem.length === 0) {
-      return { ...state, cart_items: [...state.cart_items, payload] };
+      finalCheckout = cartCheckout(
+        [...state.cart_items, payload],
+        state.shipping_fee
+      );
+      return { ...state, ...finalCheckout };
     }
 
     // if exist with same itemId.
@@ -40,7 +46,9 @@ const cartReducer = (state, { type, payload }) => {
 
       return cartItem;
     });
-    return { ...state, cart_items };
+
+    finalCheckout = cartCheckout(cart_items, state.shipping_fee);
+    return { ...state, ...finalCheckout };
   }
 
   if (type === ADD_ITEM_QUANTITY) {
@@ -56,7 +64,8 @@ const cartReducer = (state, { type, payload }) => {
 
       return cartItem;
     });
-    return { ...state, cart_items };
+    finalCheckout = cartCheckout(cart_items, state.shipping_fee);
+    return { ...state, ...finalCheckout };
   }
 
   if (type === REMOVE_ITEM_QUANTITY) {
@@ -72,23 +81,22 @@ const cartReducer = (state, { type, payload }) => {
 
       return cartItem;
     });
-    return { ...state, cart_items };
+    finalCheckout = cartCheckout(cart_items, state.shipping_fee);
+    return { ...state, ...finalCheckout };
   }
 
   if (type === REMOVE_CART_ITEM) {
     const cart_items = state.cart_items.filter(({ itemId }) => {
       return payload !== itemId;
     });
-    return { ...state, cart_items };
+    finalCheckout = cartCheckout(cart_items, state.shipping_fee);
+    return { ...state, ...finalCheckout };
   }
 
   if (type === CLEAR_CART) {
     return { ...payload };
   }
 
-  if (type === CART_CHECKOUT) {
-    return { ...state };
-  }
   throw new Error("Action type - mis-match. " + type);
 };
 
