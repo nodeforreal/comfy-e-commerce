@@ -8,8 +8,8 @@ import { ProductsContextProvider } from "./context/product-context";
 import { FilterContextProvider } from "./context/filter-context";
 import { CartContextProvider } from "./context/cart-context";
 import { UserContextProvider } from "./context/user-context";
-
 import { Auth0Provider } from "@auth0/auth0-react";
+
 const root = reactDOM.createRoot(document.getElementById("root"));
 
 root.render(
