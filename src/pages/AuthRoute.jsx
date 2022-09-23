@@ -6,7 +6,9 @@ const AuthRoute = ({ children }) => {
   if (isLoading) {
     return <h1>Loading....</h1>;
   }
-  
+    if (isError) {
+    return <h1>Error....</h1>;
+  }
   return <>{children}</>;
 };
 
