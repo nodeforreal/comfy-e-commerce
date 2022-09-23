@@ -5,7 +5,7 @@ import Checkout from "./Checkout";
 import Cart from "./Cart";
 import SingleProduct from "./SingleProduct";
 import Error from "./Error";
-import ProtectedRoute from "./ProtectedRoute";
+import AuthRoute from "./AuthRoute";
 
 export {
   Home,
@@ -15,5 +15,5 @@ export {
   Cart,
   SingleProduct,
   Error,
-  ProtectedRoute,
+  AuthRoute,
 };
