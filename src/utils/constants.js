@@ -1,6 +1,6 @@
 import { GiCompass, GiDiamondHard, GiStabbedNote } from "react-icons/gi";
 
-export const links = [
+export const navLinks = [
   {
     id: 1,
     label: "home",
@@ -16,27 +16,9 @@ export const links = [
     label: "products",
     path: "/products",
   },
-  {
-    id: 4,
-    label: "checkout",
-    path: "/checkout",
-  },
 ];
 
-// nav links
-export const navLinks = () => {
-  const isAuthenticated = true;
-
-  const userNav = links;
-  const noneUserNav = links.filter((link) => {
-    return !["checkout"].includes(link.label);
-  });
-
-  return isAuthenticated ? userNav : noneUserNav;
-};
-
 // testimonial
-
 export const testimonialItems = [
   {
     id: 1,

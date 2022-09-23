@@ -4,14 +4,12 @@ import { Link } from "react-router-dom";
 import { navLinks } from "../utils/constants";
 import { CartButtons, HamBurgerButton } from "./index";
 import { useUIContext } from "../context/ui-context";
+import { useUserContext } from "../context/user-context";
 
 import logo from "../assets/logo.svg";
 
-
 const NavBar = () => {
   const { openSidebar } = useUIContext();
- 
-  
   return (
     <Wrapper>
       <div className="flex-even nav-container nav-center section-center">
@@ -27,16 +25,22 @@ const NavBar = () => {
 };
 
 const NavLinks = () => {
-  const links = navLinks();
+  const { isAuthenticated } = useUserContext();
+
   return (
     <div className="nav-links">
-      {links.map(({ label, id, path }) => {
+      {navLinks.map(({ label, id, path }) => {
         return (
           <Link to={path} key={id} className="nav-item">
             {label}
           </Link>
         );
       })}
+      {isAuthenticated && (
+        <Link to="/checkout" className="nav-item">
+          checkout
+        </Link>
+      )}
     </div>
   );
 };
@@ -68,7 +72,7 @@ const Wrapper = styled.nav`
       display: none;
     }
   }
-  
+
   .nav-item {
     padding: 0.45rem;
     font-size: 1.2rem;

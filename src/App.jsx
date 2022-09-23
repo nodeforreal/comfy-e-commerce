@@ -8,14 +8,14 @@ import {
   Checkout,
   SingleProduct,
   Error,
-  ProtectedRoute,
+  AuthRoute,
 } from "./pages";
 import { NavBar, SideBar, Footer } from "./components";
 
 const App = () => {
   return (
     <BrowserRouter>
-      <ProtectedRoute>
+      <AuthRoute>
         <NavBar />
         <SideBar />
         <Routes>
@@ -31,7 +31,7 @@ const App = () => {
           <Route path="*" element={<Error />}></Route>
         </Routes>
         <Footer />
-      </ProtectedRoute>
+      </AuthRoute>
     </BrowserRouter>
   );
 };

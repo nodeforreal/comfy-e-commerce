@@ -3,23 +3,35 @@ import { BsFillCartCheckFill } from "react-icons/bs";
 import { RiLoginBoxFill, RiLogoutBoxFill } from "react-icons/ri";
 import styled from "styled-components";
 import { useAuth0 } from "@auth0/auth0-react";
+import { useCartContext } from "../context/cart-context";
+import { useUserContext } from "../context/user-context";
 
 const CartButtons = () => {
+  const { cart_items } = useCartContext();
+  const { isAuthenticated } = useUserContext();
   const { loginWithRedirect, logout } = useAuth0();
 
+  const cartItemCount = cart_items.reduce(
+    (total, { selectedQuantity }) => total + selectedQuantity,
+    0
+  );
+
   return (
-    <Wrapper className="cart-btn-container">
+    <Wrapper className="cart-btn-container" cartItemCount={cartItemCount}>
       <Link to="cart" className="nav-btn cart-btn ">
         Cart
         <BsFillCartCheckFill className="icon" />
       </Link>
-      {true ? (
+      {!isAuthenticated ? (
         <button className="nav-btn" onClick={loginWithRedirect}>
           Login
           <RiLoginBoxFill className="icon" />
         </button>
       ) : (
-        <button className="nav-btn" onClick={logout}>
+        <button
+          className="nav-btn"
+          onClick={() => logout({ returnTo: window.location.origin })}
+        >
           Logout
           <RiLogoutBoxFill className="icon" />
         </button>
@@ -55,7 +67,7 @@ const Wrapper = styled.div`
       position: absolute;
       right: -0.8rem;
       top: -0.8rem;
-      content: "10";
+      content: "${({ cartItemCount }) => cartItemCount}";
       width: 1.6rem;
       height: 1.6rem;
       background-color: var(--clr-primary-5);
