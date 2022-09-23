@@ -16,7 +16,11 @@ const UserContextProvider = ({ children }) => {
   const { isAuthenticated, user, isLoading, isError } = useAuth0();
 
   useEffect(() => {
-    setState({ isAuthenticated, user, isLoading, isError });
+    if (isAuthenticated) {
+      setState({ isAuthenticated, user, isLoading, isError });
+    } else {
+      setState({ ...initialState });
+    }
   }, [isAuthenticated, user, isLoading, isError]);
   return (
     <UserContext.Provider value={{ ...state }}>{children}</UserContext.Provider>
