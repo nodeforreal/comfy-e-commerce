@@ -3,12 +3,18 @@ import { BsFillCartCheckFill } from "react-icons/bs";
 import { RiLoginBoxFill, RiLogoutBoxFill } from "react-icons/ri";
 import styled from "styled-components";
 import { useAuth0 } from "@auth0/auth0-react";
+import { useCartContext } from "../context/cart-context";
 
 const CartButtons = () => {
-  const { loginWithRedirect, logout } = useAuth0();
+  const { cart_items } = useCartContext();
 
+  const { loginWithRedirect, logout } = useAuth0();
+  const cartItemCount = cart_items.reduce(
+    (total, { selectedQuantity }) => total + selectedQuantity,
+    0
+  );
   return (
-    <Wrapper className="cart-btn-container">
+    <Wrapper className="cart-btn-container" cartItemCount={cartItemCount}>
       <Link to="cart" className="nav-btn cart-btn ">
         Cart
         <BsFillCartCheckFill className="icon" />
@@ -55,7 +61,7 @@ const Wrapper = styled.div`
       position: absolute;
       right: -0.8rem;
       top: -0.8rem;
-      content: "10";
+      content: "${({ cartItemCount }) => cartItemCount}";
       width: 1.6rem;
       height: 1.6rem;
       background-color: var(--clr-primary-5);
