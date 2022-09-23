@@ -18,6 +18,7 @@ root.render(
       domain="dev-g0u3g6ew.us.auth0.com"
       clientId="FAU25KgoWeoyfagLp3WMn7lQPDH9ZDvc"
       redirectUri={window.location.origin}
+      //   cacheLocation="memory"
     >
       <UserContextProvider>
         <UIContextProvider>
