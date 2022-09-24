@@ -25,7 +25,7 @@ export default function StripeCheckout() {
         items: [{ id: "xl-tshirt" }],
       })
       .then((data) => setClientSecret(data.clientSecret));
-  });
+  }, []);
 
   const appearance = {
     theme: "stripe",
