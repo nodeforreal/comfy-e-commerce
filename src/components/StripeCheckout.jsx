@@ -70,6 +70,7 @@ function CheckoutForm() {
       return;
     }
 
+    console.log(clientSecret);
     stripe.retrievePaymentIntent(clientSecret).then(({ paymentIntent }) => {
       switch (paymentIntent.status) {
         case "succeeded":
