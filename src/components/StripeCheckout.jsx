@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
@@ -56,12 +57,14 @@ export default function StripeCheckout() {
 function CheckoutForm() {
   const stripe = useStripe();
   const elements = useElements();
+  const navigate = useNavigate();
 
   const [message, setMessage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const { clearCart } = useCartContext();
 
   useEffect(() => {
+    let pageNavigateTimer;
     if (!stripe) {
       return;
     }
@@ -77,7 +80,10 @@ function CheckoutForm() {
     stripe.retrievePaymentIntent(clientSecret).then(({ paymentIntent }) => {
       switch (paymentIntent.status) {
         case "succeeded":
-          clearCart();
+          pageNavigateTimer = setTimeout(() => {
+            clearCart();
+            navigate("/");
+          }, 1000 * 10);
           setMessage("Payment succeeded!");
           break;
         case "processing":
@@ -144,13 +150,14 @@ function CheckoutForm() {
       </form>
       {message === "Payment succeeded!" && (
         <p className="succeed-msg">
-          Payment succeeded, see the result in your
+          Payment succeeded, see the result in your{" "}
           <a
             href="https://dashboard.stripe.com/test/payments?status[0]=successful"
             className="stripe-dashboard-link"
           >
             Stripe dashboard.
           </a>
+          Page will shorlty redirect after 10s.
         </p>
       )}
     </>

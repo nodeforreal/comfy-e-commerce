@@ -9,7 +9,7 @@ const Checkout = () => {
   const { user } = useUserContext();
   const { cart_items, order_total } = useCartContext();
 
-  if (cart_items.length !== 0) {
+  if (cart_items.length === 0) {
     return (
       <Wrapper className="page-100">
         <PageHero title="Checkout" />
