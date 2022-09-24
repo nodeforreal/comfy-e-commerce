@@ -65,12 +65,12 @@ function CheckoutForm() {
     const clientSecret = new URLSearchParams(window.location.search).get(
       "payment_intent_client_secret"
     );
+    console.log(clientSecret);
 
     if (!clientSecret) {
       return;
     }
 
-    console.log(clientSecret);
     stripe.retrievePaymentIntent(clientSecret).then(({ paymentIntent }) => {
       switch (paymentIntent.status) {
         case "succeeded":
