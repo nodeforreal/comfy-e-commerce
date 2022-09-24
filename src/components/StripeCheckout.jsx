@@ -24,7 +24,7 @@ export default function StripeCheckout() {
       .post("/.netlify/functions/create-payment-intent", {
         items: [{ id: "xl-tshirt" }],
       })
-      .then((data) => {
+      .then(({ data }) => {
         console.log(data);
         setClientSecret(data.clientSecret);
       });
