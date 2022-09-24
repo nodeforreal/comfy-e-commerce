@@ -161,7 +161,7 @@ function CheckoutForm() {
           >
             Stripe dashboard.
           </a>
-          Page will shorlty redirect after 10s.
+          Page will shorlty redirect after 30s.
         </p>
       )}
     </>
