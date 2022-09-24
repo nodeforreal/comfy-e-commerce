@@ -25,7 +25,9 @@ import Loading from "./Loading";
 import FilterBar from "./FilterBar";
 import ProductsSection from "./ProductsSection";
 
-import CartSection from './CartSection';
+import CartSection from "./CartSection";
+
+import StripeCheckout from "./StripeCheckout";
 
 export {
   NavBar,
@@ -50,5 +52,6 @@ export {
   Loading,
   FilterBar,
   ProductsSection,
-  CartSection
+  CartSection,
+  StripeCheckout,
 };
