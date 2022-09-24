@@ -83,7 +83,7 @@ function CheckoutForm() {
           pageNavigateTimer = setTimeout(() => {
             clearCart();
             navigate("/");
-          }, 1000 * 10);
+          }, 1000 * 30);
           setMessage("Payment succeeded!");
           break;
         case "processing":
@@ -97,6 +97,10 @@ function CheckoutForm() {
           break;
       }
     });
+
+    return () => {
+      clearTimeout(pageNavigateTimer);
+    };
   }, [stripe]);
 
   const handleSubmit = async (e) => {
