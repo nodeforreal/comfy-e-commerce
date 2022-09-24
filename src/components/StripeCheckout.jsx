@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import axios from "axios";
-
+import { useCartContext } from "../context/cart-context";
 import {
   PaymentElement,
   useStripe,
@@ -19,15 +19,16 @@ const stripePromise = loadStripe(
 
 export default function StripeCheckout() {
   const [clientSecret, setClientSecret] = useState("");
-
+  const { cart_items, shipping_fee, order_total } = useCartContext();
   useEffect(() => {
     // Create PaymentIntent as soon as the page loads
     axios
       .post("/.netlify/functions/create-payment-intent", {
-        items: [{ id: "xl-tshirt" }],
+        cart_items,
+        shipping_fee,
+        order_total,
       })
       .then(({ data }) => {
-        console.log(data);
         setClientSecret(data.clientSecret);
       });
   }, []);
@@ -45,7 +46,7 @@ export default function StripeCheckout() {
     <Wrapper>
       {clientSecret && (
         <Elements options={options} stripe={stripePromise}>
-          <CheckoutForm clientSecret={clientSecret} />
+          <CheckoutForm />
         </Elements>
       )}
     </Wrapper>
@@ -58,6 +59,7 @@ function CheckoutForm() {
 
   const [message, setMessage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const { clearCart } = useCartContext();
 
   useEffect(() => {
     if (!stripe) {
@@ -68,8 +70,6 @@ function CheckoutForm() {
       "payment_intent_client_secret"
     );
 
-    console.log(clientSecret);
-
     if (!clientSecret) {
       return;
     }
@@ -77,6 +77,7 @@ function CheckoutForm() {
     stripe.retrievePaymentIntent(clientSecret).then(({ paymentIntent }) => {
       switch (paymentIntent.status) {
         case "succeeded":
+          clearCart();
           setMessage("Payment succeeded!");
           break;
         case "processing":
@@ -126,35 +127,41 @@ function CheckoutForm() {
   };
 
   return (
-    <form id="payment-form" onSubmit={handleSubmit}>
-      <PaymentElement id="payment-element" />
-      <button disabled={isLoading || !stripe || !elements} id="submit">
-        <span id="button-text">
-          {isLoading ? <div className="spinner" id="spinner"></div> : "Pay now"}
-        </span>
-      </button>
-      {/* Show any error or success messages */}
-      {message && <div id="payment-message">{message}</div>}
-    </form>
+    <>
+      <form id="payment-form" onSubmit={handleSubmit}>
+        <PaymentElement id="payment-element" />
+        <button disabled={isLoading || !stripe || !elements} id="submit">
+          <span id="button-text">
+            {isLoading ? (
+              <div className="spinner" id="spinner"></div>
+            ) : (
+              "Pay now"
+            )}
+          </span>
+        </button>
+        {/* Show any error or success messages */}
+        {message && <div id="payment-message">{message}</div>}
+      </form>
+      {message === "Payment succeeded!" && (
+        <p>
+          Payment succeeded, see the result in your
+          <a
+            href="https://dashboard.stripe.com/test/payments?status[0]=successful"
+            className="stripe-dashboard-link"
+          >
+            Stripe dashboard.
+          </a>
+        </p>
+      )}
+    </>
   );
 }
 
 // StrippeCheckout
 const Wrapper = styled.section`
-  #root {
-    display: flex;
-    align-items: center;
-  }
-
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-    font-size: 16px;
-    -webkit-font-smoothing: antialiased;
-    display: flex;
-    justify-content: center;
-    align-content: center;
-    height: 100vh;
-    width: 100vw;
+  .stripe-dashboard-link {
+    font-weight: 650;
+    color: var(--clr-grey-5);
   }
 
   form {
