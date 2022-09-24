@@ -24,12 +24,16 @@ export default function StripeCheckout() {
       .post("/.netlify/functions/create-payment-intent", {
         items: [{ id: "xl-tshirt" }],
       })
-      .then((data) => setClientSecret(data.clientSecret));
+      .then((data) => {
+        console.log(data);
+        setClientSecret(data.clientSecret);
+      });
   }, []);
 
   const appearance = {
     theme: "stripe",
   };
+
   const options = {
     clientSecret,
     appearance,
