@@ -143,7 +143,7 @@ function CheckoutForm() {
         {message && <div id="payment-message">{message}</div>}
       </form>
       {message === "Payment succeeded!" && (
-        <p>
+        <p className="succeed-msg">
           Payment succeeded, see the result in your
           <a
             href="https://dashboard.stripe.com/test/payments?status[0]=successful"
@@ -159,6 +159,10 @@ function CheckoutForm() {
 
 // StrippeCheckout
 const Wrapper = styled.section`
+  .succeed-msg {
+    margin: 1rem 0;
+  }
+
   .stripe-dashboard-link {
     font-weight: 650;
     color: var(--clr-grey-5);
