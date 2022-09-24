@@ -23,13 +23,7 @@ export default function StripeCheckout() {
     axios.post("/.netlify/functions/create-payment-intent", {
       items: [{ id: "xl-tshirt" }],
     });
-
-    axios
-      .post("/.netlify/functions/create-payment-intent", {
-        body: JSON.stringify({ items: [{ id: "xl-tshirt" }] }),
-      })
-      .then((data) => setClientSecret(data.clientSecret));
-  }, []);
+  }).then((data) => setClientSecret(data.clientSecret));
 
   const appearance = {
     theme: "stripe",
