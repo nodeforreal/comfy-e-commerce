@@ -43,7 +43,7 @@ export default function StripeCheckout() {
     <Wrapper>
       {clientSecret && (
         <Elements options={options} stripe={stripePromise}>
-          <CheckoutForm />
+          <CheckoutForm clientSecret={clientSecret} />
         </Elements>
       )}
     </Wrapper>
@@ -65,6 +65,8 @@ function CheckoutForm() {
     const clientSecret = new URLSearchParams(window.location.search).get(
       "payment_intent_client_secret"
     );
+
+    console.log(clientSecret);
 
     if (!clientSecret) {
       return;
@@ -103,7 +105,7 @@ function CheckoutForm() {
       elements,
       confirmParams: {
         // Make sure to change this to your payment completion page
-        return_url: "https://comfy-store-active.netlify.app/",
+        return_url: "https://comfy-store-active.netlify.app",
       },
     });
 
