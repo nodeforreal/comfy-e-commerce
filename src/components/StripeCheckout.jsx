@@ -25,9 +25,7 @@ export default function StripeCheckout() {
     });
 
     axios
-      .post("/create-payment-intent", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+      .post("/.netlify/functions/create-payment-intent", {
         body: JSON.stringify({ items: [{ id: "xl-tshirt" }] }),
       })
       .then((data) => setClientSecret(data.clientSecret));
