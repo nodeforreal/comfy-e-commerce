@@ -119,7 +119,7 @@ function CheckoutForm() {
       elements,
       confirmParams: {
         // Make sure to change this to your payment completion page
-        return_url: "https://comfy-store-active.netlify.app/checkout",
+        // return_url: "https://comfy-store-active.netlify.app",
       },
     });
 
