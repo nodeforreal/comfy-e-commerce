@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { CartEmpty, PageHero } from "../components";
+import { CartEmpty, PageHero, StripeCheckout } from "../components";
 import { useCartContext } from "../context/cart-context";
 import { useUserContext } from "../context/user-context";
 import { formatPrice } from "../utils/currency";
@@ -25,7 +25,7 @@ const Checkout = () => {
         <div className="checkout-content">
           <h4>Hello, {user.nickname}</h4>
           <p>Your total is {formatPrice(order_total)}</p>
-          Checkout container
+          <StripeCheckout />
         </div>
       </div>
     </Wrapper>
