@@ -50,7 +50,7 @@ export default function StripeCheckout() {
   );
 }
 
-function CheckoutForm() {
+function CheckoutForm({ clientSecret }) {
   const stripe = useStripe();
   const elements = useElements();
 
@@ -61,10 +61,6 @@ function CheckoutForm() {
     if (!stripe) {
       return;
     }
-
-    const clientSecret = new URLSearchParams(window.location.search).get(
-      "payment_intent_client_secret"
-    );
 
     console.log(clientSecret);
 
