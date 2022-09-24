@@ -20,9 +20,7 @@ export default function StripeCheckout() {
 
   useEffect(() => {
     // Create PaymentIntent as soon as the page loads
-    axios.post("/.netlify/functions/create-payment-intent", {
-      items: [{ id: "xl-tshirt" }],
-    });
+    axios.post("/create-payment-intent", { items: [{ id: "xl-tshirt" }] });
     // axios.post("/create-payment-intent", {
     //   method: "POST",
     //   headers: { "Content-Type": "application/json" },
