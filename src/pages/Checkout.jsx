@@ -17,17 +17,27 @@ const Checkout = () => {
       </Wrapper>
     );
   }
+
   return (
     <Wrapper className="page-100">
       <PageHero title="Checkout" />
-
-      <div>
-        <h4>Hello, {user.nickname}</h4>
-        <p>Your total is {formatPrice(order_total)}</p>
+      <div className="checkout-content-container">
+        <div className="checkout-content">
+          <h4>Hello, {user.nickname}</h4>
+          <p>Your total is {formatPrice(order_total)}</p>
+          Checkout container
+        </div>
       </div>
     </Wrapper>
   );
 };
 
-const Wrapper = styled.section``;
+const Wrapper = styled.section`
+  .checkout-content-container {
+    display: flex;
+  }
+  .checkout-content {
+    margin: 2rem auto;
+  }
+`;
 export default Checkout;
