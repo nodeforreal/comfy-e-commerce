@@ -82,8 +82,9 @@ function CheckoutForm() {
         case "succeeded":
           pageNavigateTimer = setTimeout(() => {
             clearCart();
+            console.log("navigate-timer-30s");
             navigate("/");
-          }, 1000 * 30);
+          }, 30000);
           setMessage("Payment succeeded!");
           break;
         case "processing":
