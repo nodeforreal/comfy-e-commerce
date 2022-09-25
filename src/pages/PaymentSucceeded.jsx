@@ -1,8 +1,20 @@
-import React from "react";
+import React,{useEffect} from "react";
+import {useNavigate} from 'react-router-dom';
 import styled from "styled-components";
 import { PageHero } from "../components";
 
 const PaymentSucceeded = () => {
+    const navigate = useNavigate()
+    useEffect(()=>{
+       let navigationTimeout = setTimeout(() => {
+            clearCart();
+            console.log("navigate-timer-30s");
+            navigate("/");
+          }, 30000);
+          return ()=>{
+              clearTimeout(navigationTimeout)
+          }
+    })
   return (
     <Wrapper className="page-100">
       <PageHero title="Payment Succeeded" />
