@@ -153,9 +153,9 @@ function CheckoutForm() {
         {/* Show any error or success messages */}
         {message && <div id="payment-message">{message}</div>}
       </form>
-      {message === "Payment succeeded!" && (
+
         <p className="succeed-msg">
-          Payment succeeded, see the result in your{" "}
+         After the Payment succeeded, see the result in your{" "}
           <a
             href="https://dashboard.stripe.com/test/payments?status[0]=successful"
             className="stripe-dashboard-link"
@@ -164,7 +164,7 @@ function CheckoutForm() {
           </a>
           Page will shorlty redirect after 30s.
         </p>
-      )}
+
     </>
   );
 }
