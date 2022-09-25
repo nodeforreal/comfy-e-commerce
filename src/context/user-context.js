@@ -5,7 +5,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 const UserContext = createContext({});
 
 const initialState = {
-  isLoading: true,
+  isLoading: false,
   isAuthenticated: false,
   user: {},
   isError: false,
