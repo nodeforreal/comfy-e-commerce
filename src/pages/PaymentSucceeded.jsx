@@ -45,7 +45,7 @@ const PaymentSucceeded = () => {
 
 const Wrapper = styled.section`
   .succeed-msg {
-    margin: 1rem 0;
+    margin: 2rem 0;
   }
 
   .stripe-dashboard-link {
