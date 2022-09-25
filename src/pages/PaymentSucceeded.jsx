@@ -52,12 +52,13 @@ const Wrapper = styled.section`
     font-weight: 650;
     color: var(--clr-grey-5);
   }
-  
+
   .payment-succeeded-content-container {
     max-width: 460px;
+    margin: 2rem auto;
     display: flex;
   }
-  
+
   .payment-succeeded-content {
     margin: 2rem auto;
   }
