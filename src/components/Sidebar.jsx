@@ -20,7 +20,7 @@ const Sidebar = () => {
       </div>
       <NavLinks />
       <div className="cart-btn-container">
-        <CartButtons onClick={closeSidebar} />
+        <CartButtons closeSidebar={closeSidebar} />
       </div>
     </Wrapper>
   );
