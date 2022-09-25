@@ -26,8 +26,8 @@ const CartButtons = ({ closeSidebar }) => {
         <button
           className="nav-btn"
           onClick={() => {
-            closeSidebar();
             loginWithRedirect();
+            closeSidebar();
           }}
         >
           Login
