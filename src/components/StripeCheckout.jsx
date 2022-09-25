@@ -117,10 +117,6 @@ function CheckoutForm() {
 
     const { error } = await stripe.confirmPayment({
       elements,
-      confirmParams: {
-        // Make sure to change this to your payment completion page
-        return_url: "https://zx38r8-3000.preview.csb.app/checkout",
-      },
     });
 
     // This point will only be reached if there is an immediate error when
