@@ -64,7 +64,6 @@ function CheckoutForm() {
   const { clearCart } = useCartContext();
 
   useEffect(() => {
-    let pageNavigateTimer;
     if (!stripe) {
       return;
     }
@@ -80,11 +79,6 @@ function CheckoutForm() {
     stripe.retrievePaymentIntent(clientSecret).then(({ paymentIntent }) => {
       switch (paymentIntent.status) {
         case "succeeded":
-          pageNavigateTimer = setTimeout(() => {
-            clearCart();
-            console.log("navigate-timer-30s");
-            navigate("/");
-          }, 30000);
           setMessage("Payment succeeded!");
           break;
         case "processing":
@@ -98,10 +92,6 @@ function CheckoutForm() {
           break;
       }
     });
-
-    return () => {
-      clearTimeout(pageNavigateTimer);
-    };
   }, [stripe]);
 
   const handleSubmit = async (e) => {
