@@ -153,33 +153,12 @@ function CheckoutForm() {
         {/* Show any error or success messages */}
         {message && <div id="payment-message">{message}</div>}
       </form>
-
-        <p className="succeed-msg">
-         After the Payment succeeded, see the result in your{" "}
-          <a
-            href="https://dashboard.stripe.com/test/payments?status[0]=successful"
-            className="stripe-dashboard-link"
-          >
-            Stripe dashboard.
-          </a>
-          Page will shorlty redirect after 30s.
-        </p>
-
     </>
   );
 }
 
 // StrippeCheckout
 const Wrapper = styled.section`
-  .succeed-msg {
-    margin: 1rem 0;
-  }
-
-  .stripe-dashboard-link {
-    font-weight: 650;
-    color: var(--clr-grey-5);
-  }
-
   form {
     width: 30vw;
     min-width: 500px;
