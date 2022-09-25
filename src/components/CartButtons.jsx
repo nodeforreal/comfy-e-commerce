@@ -6,7 +6,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { useCartContext } from "../context/cart-context";
 import { useUserContext } from "../context/user-context";
 
-const CartButtons = () => {
+const CartButtons = ({ closeSidebar }) => {
   const { cart_items } = useCartContext();
   const { isAuthenticated } = useUserContext();
   const { loginWithRedirect, logout } = useAuth0();
@@ -18,19 +18,28 @@ const CartButtons = () => {
 
   return (
     <Wrapper className="cart-btn-container" cartItemCount={cartItemCount}>
-      <Link to="cart" className="nav-btn cart-btn ">
+      <Link to="cart" className="nav-btn cart-btn " onClick={closeSidebar}>
         Cart
         <BsFillCartCheckFill className="icon" />
       </Link>
       {!isAuthenticated ? (
-        <button className="nav-btn" onClick={loginWithRedirect}>
+        <button
+          className="nav-btn"
+          onClick={() => {
+            closeSidebar();
+            loginWithRedirect();
+          }}
+        >
           Login
           <RiLoginBoxFill className="icon" />
         </button>
       ) : (
         <button
           className="nav-btn"
-          onClick={() => logout({ returnTo: window.location.origin })}
+          onClick={() => {
+            closeSidebar();
+            logout({ returnTo: window.location.origin });
+          }}
         >
           Logout
           <RiLogoutBoxFill className="icon" />
