@@ -37,8 +37,8 @@ const CartButtons = ({ closeSidebar }) => {
         <button
           className="nav-btn"
           onClick={() => {
-            closeSidebar();
             logout({ returnTo: window.location.origin });
+            closeSidebar();
           }}
         >
           Logout
