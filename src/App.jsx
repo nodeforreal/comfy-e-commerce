@@ -9,6 +9,7 @@ import {
   SingleProduct,
   Error,
   AuthRoute,
+  PaymentSucceeded,
 } from "./pages";
 import { NavBar, SideBar, Footer } from "./components";
 
@@ -28,6 +29,11 @@ const App = () => {
             path="/products/:productId"
             element={<SingleProduct />}
           ></Route>
+          <Route
+            path="/checkout/payment-succeeded"
+            element={<PaymentSucceeded />}
+          ></Route>
+
           <Route path="*" element={<Error />}></Route>
         </Routes>
         <Footer />

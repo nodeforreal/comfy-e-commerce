@@ -6,6 +6,7 @@ import Cart from "./Cart";
 import SingleProduct from "./SingleProduct";
 import Error from "./Error";
 import AuthRoute from "./AuthRoute";
+import PaymentSucceeded from './PaymentSucceeded';
 
 export {
   Home,
@@ -16,4 +17,5 @@ export {
   SingleProduct,
   Error,
   AuthRoute,
+  PaymentSucceeded
 };

@@ -64,7 +64,6 @@ function CheckoutForm() {
   const { clearCart } = useCartContext();
 
   useEffect(() => {
-    let pageNavigateTimer;
     if (!stripe) {
       return;
     }
@@ -80,11 +79,6 @@ function CheckoutForm() {
     stripe.retrievePaymentIntent(clientSecret).then(({ paymentIntent }) => {
       switch (paymentIntent.status) {
         case "succeeded":
-          pageNavigateTimer = setTimeout(() => {
-            clearCart();
-            console.log("navigate-timer-30s");
-            navigate("/");
-          }, 30000);
           setMessage("Payment succeeded!");
           break;
         case "processing":
@@ -98,10 +92,6 @@ function CheckoutForm() {
           break;
       }
     });
-
-    return () => {
-      clearTimeout(pageNavigateTimer);
-    };
   }, [stripe]);
 
   const handleSubmit = async (e) => {
@@ -119,7 +109,8 @@ function CheckoutForm() {
       elements,
       confirmParams: {
         // Make sure to change this to your payment completion page
-        return_url: "https://comfy-store-active.netlify.app",
+        return_url:
+          "https://comfy-store-active.netlify.app/checkout/payment-succeeded",
       },
     });
 
@@ -153,33 +144,12 @@ function CheckoutForm() {
         {/* Show any error or success messages */}
         {message && <div id="payment-message">{message}</div>}
       </form>
-
-        <p className="succeed-msg">
-         After the Payment succeeded, see the result in your{" "}
-          <a
-            href="https://dashboard.stripe.com/test/payments?status[0]=successful"
-            className="stripe-dashboard-link"
-          >
-            Stripe dashboard.
-          </a>
-          Page will shorlty redirect after 30s.
-        </p>
-
     </>
   );
 }
 
 // StrippeCheckout
 const Wrapper = styled.section`
-  .succeed-msg {
-    margin: 1rem 0;
-  }
-
-  .stripe-dashboard-link {
-    font-weight: 650;
-    color: var(--clr-grey-5);
-  }
-
   form {
     width: 30vw;
     min-width: 500px;
