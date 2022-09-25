@@ -1,24 +1,23 @@
-import React,{useEffect} from "react";
-import {useNavigate} from 'react-router-dom';
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { PageHero } from "../components";
-import {useCartContext} from '../context/cart-context';
+import { useCartContext } from "../context/cart-context";
 
 const PaymentSucceeded = () => {
-    const navigate = useNavigate()
-    const {clearCart} = useCartContext()
-    
-    useEffect(()=>{
-       let navigationTimeout = setTimeout(() => {
-            clearCart();
-            console.log("navigate-timer-30s");
-            navigate("/");
-          }, 30000);
-        return ()=>{
-            clearTimeout(navigationTimeout)
-        }
-    })
-    
+  const navigate = useNavigate();
+  const { clearCart } = useCartContext();
+
+  useEffect(() => {
+    let navigationTimeout = setTimeout(() => {
+      clearCart();
+      navigate("/");
+    }, 10000);
+    return () => {
+      clearTimeout(navigationTimeout);
+    };
+  });
+
   return (
     <Wrapper className="page-100">
       <PageHero title="Payment Succeeded" />
@@ -36,7 +35,7 @@ const PaymentSucceeded = () => {
             >
               Stripe dashboard.
             </a>
-            Now Page will shorlty redirect after 30s.
+            Now Page will shorlty redirect after 10s.
           </p>
         </div>
       </div>
@@ -53,9 +52,12 @@ const Wrapper = styled.section`
     font-weight: 650;
     color: var(--clr-grey-5);
   }
+  
   .payment-succeeded-content-container {
+    max-width: 460px;
     display: flex;
   }
+  
   .payment-succeeded-content {
     margin: 2rem auto;
   }
